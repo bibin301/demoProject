@@ -1,0 +1,62 @@
+<!-- MENU (STATIC ON TOP -->
+<nav class="navbar navbar-default top-header" id="menu" role="navigation" scroll>
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="header-inner">
+        <div class="navbar-header">
+            <button class="navbar-toggle colored-bg" ng-click="navCollapsed = !navCollapsed" ng-init="navCollapsed = true" type="button">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand logo-desktop" ui-sref="/home">
+                <img src="images/logo.png" style="width: 28%;">
+                <h1 class="Cart-title colored hidden-xs">Cartwheel</h1>
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" ng-class="!navCollapsed && 'in'">
+            <ul class="nav navbar-nav navbar-right topMenuHeight">
+                <li class="login-btn menu-active">
+                    <a href="#top" ng-click="appModel.gotoSection('top')">Start
+                    </a>
+                </li>
+                <li class="login-btn events" ng-if="homeModel.isLogged()">
+                    <a href="#event-container" ng-click="appModel.gotoSection('event-container')" >What's New</a>
+                </li>
+                <li class="login-btn visible-lg">
+                    <a href="#applications" ng-click="appModel.gotoSection('applications')">Applications</a>
+                </li>
+                <li class="login-btn visible-lg" ng-show="homeModel.isLogged()">
+                    <a href="#departments" ng-click="appModel.gotoSection('departments')" >Departments</a>
+                </li>
+                <li class="login-btn visible-lg" ng-if="homeModel.isLogged()">
+                    <a href="#stories" ng-click="appModel.gotoSection('stories')" >Stories</a>
+                </li>
+                <li class="login-btn visible-lg">
+                    <a href="#timeline" ng-click="appModel.gotoSection('timeline')">Timeline</a>
+                </li>
+                <li class="login-btn">
+                    <a href="#about-cart" ng-click="appModel.gotoSection('about-cart')">About</a>
+                </li>
+                <li class="login-btn" ng-click="homeModel.closeNotification()" ng-hide="homeModel.isLogged()">
+                    <a class="header-btn" href="#login" ng-click="appModel.showLoginModal();">login</a>
+                </li>
+                <li class="login-btn" ng-if="homeModel.isLogged()" ui-sref="app.dashboard">
+                    <a class="header-btn" href="#">Home
+                    </a>
+                </li>
+                <li class="login-btn pointer" ng-click="appModel.displayNotifications()">
+                    <a class="header-btn">
+                        <i class="fa fa-bell fa-lg"></i>
+                        <h6 class="badge badge-sm up bg-danger colored-bg">{{appModel.sectiondata.notifi_count}}</h6>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</nav>
+
+<!-- EDO Menu Bar -->

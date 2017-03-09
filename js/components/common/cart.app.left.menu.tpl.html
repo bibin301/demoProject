@@ -1,0 +1,42 @@
+<div id="sidebar-wrap" custom-jquery>
+
+    <ul id="navigation" nav-collapse ripple  >
+
+        <li ng-class="{'dropdown':menuitem.subItems}" ui-sref-active="route-active" class="colored-bg" ng-repeat="menuitem in appModel.menus">
+            <a  ui-sref="{{menuitem.menuLink}}">
+                <i name="{{menuitem.className}}" class="{{menuitem.menuClass}}"></i>
+                <span>{{menuitem.menuName}}</span>
+            </a>
+            <ul ng-if="menuitem.menuType == 'toggle'">
+                <li ng-class="{'dropdown':subitem.menuType}" ng-repeat="subitem in menuitem.subItems" ui-sref-active="active">
+                    <a ui-sref="{{subitem.menuLink}}"><i name="{{subitem.className}}" class="{{subitem.menuClass}}"></i> {{subitem.menuName}}</a>
+                    <ul ng-if="subitem.menuType == 'toggle'">
+                        <li  ng-repeat="subitem2 in subitem.subItems" ui-sref-active="active">
+                            <a ui-sref="{{subitem2.menuLink}}">
+                                <i name="{{subitem2.className}}" class="{{subitem2.menuClass}}"></i>{{subitem2.menuName}}
+                            </a>
+                            <ul  ng-if="subitem2.menuType == 'toggle'">
+                                <li ng-repeat="subitem3 in subitem2.subItems" class="{{subitem3.menuType}}" ui-sref-active="active">
+                                    <a ui-sref="{{subitem3.menuLink}}">
+                                        <i name="{{subitem3.className}}" class="{{subitem3.menuClass}}"></i> {{subitem3.menuName}}
+                                    </a>
+                                    <ul ng-if="subitem3.menuType == 'toggle'">
+                                        <li ng-repeat="subitem4 in subitem3.subItems" class="{{subitem4.menuType}}" ui-sref-active="active" >
+                                            <a  ui-sref="{{subitem4.menuLink}}">
+                                                <i name="{{subitem4.className}}" class="{{subitem4.menuClass}}"></i>
+                                                <span >{{subitem4.menuName}}</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>
+
+
+<!-- left side end-->

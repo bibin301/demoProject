@@ -1,0 +1,123 @@
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<div class="panel panel-default animated zoomIn" ng-class="{'panel-custom-fullScreen':panelFullScreen}">
+    <div class="panel-heading panel-custom panel-heading-custom2">
+        <h2 class="panel-title">Meeting Minutes - List </h2>
+        <div class="box-icon pull-right">
+            <a class="btn btn-close btn-round btn-default" ng-click="panelFullScreen = !panelFullScreen"><i class="glyphicon" ng-class="{'glyphicon-resize-full':!panelFullScreen,'glyphicon-resize-small':panelFullScreen}" ></i></a>
+            <a class="btn btn-minimize btn-round btn-default"><i class="glyphicon" ng-class="{'glyphicon-chevron-up':!isOpened,'glyphicon-chevron-down':isOpened}" ng-click="isOpened = !isOpened"></i></a>
+            <a class="btn btn-close btn-round btn-default" ng-click="mmListModel.loadDept()"><i class="glyphicon glyphicon-refresh fa-spin-hover"></i></a>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="panel-body " ng-show="!isOpened">
+        <div class="row">
+            <div class="col-md-6" ng-class="{'full-width':appModel.tableFullWidth}">
+                <div class="panel panel-default animated zoomIn" ng-class="{'panel-custom-fullScreen':panelFullScreen}" ng-controller="panelCtrl">
+                    <div class="panel-heading panel-custom panel-heading-custom2">
+                        <h2 class="panel-title">Meeting Minutes - List </h2>
+                        <div class="box-icon pull-right">
+                            <a class="btn btn-close btn-round btn-default" ng-click="panelFullScreen = !panelFullScreen"><i class="glyphicon" ng-class="{'glyphicon-resize-full':!panelFullScreen,'glyphicon-resize-small':panelFullScreen}" ></i></a>
+                            <a class="btn btn-minimize btn-round btn-default"  ng-click="isOpened = !isOpened"><i class="glyphicon" ng-class="{'glyphicon-chevron-up':!isOpened,'glyphicon-chevron-down':isOpened}"></i></a>
+                            <a class="btn btn-close btn-round btn-default" ng-click="mmListModel.loadList()"><i class="glyphicon glyphicon-refresh fa-spin-hover"></i></a>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="panel-body " ng-show="!isOpened" ng-controller="PagenationCtrl" >
+                        <div class="dataTables_wrapper no-footer" id="dynamic-table custom_table_wrapper">
+                            <div id="dynamic-table custom_table_length" class="dataTables_length">
+                                <label>Show 
+                                    <select class="" aria-controls="dynamic-table custom_table" ng-model="pageModel.itemsPerPage">
+                                        <option value="10">10</option>
+                                        <option value="25">25</option>
+                                        <option value="50">50</option>
+                                        <option value="100">100</option>
+                                    </select> entries</label>
+                            </div>
+                            <div class="dataTables_filter" id="dynamic-table custom_table_filter">
+                                <label>Search:
+                                    <input aria-controls="dynamic-table custom_table" ng-model="sortCard" ng-change="pageModel.numberOfPages()" type="search">
+                                </label>
+                            </div>
+                            <table class="display table table-bordered table-striped" id="dynamic-table custom_table">
+                                <thead>
+                                    <tr>
+                                        <th>*</th>
+                                        <th>Department</th>
+                                        <th>Author</th>
+                                        <th>Title</th>
+                                        <th>Created Date</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody ng-repeat="meeting in mmListModel.mmList
+                                                            | cardFilter:sortCard |pagination : pageModel.currentPage * pageModel.itemsPerPage |myLimitTo : pageModel.itemsPerPage track by $index"
+                                       ng-init="pageModel.dataLengthCount(mmListModel.mmList)">
+                                    <tr >
+                                        <td ng-click="$index_val = !$index_val">
+                                            <i ng-if="meeting.sub.length != 0" class="fa colored pointer" ng-class="{'fa-plus-circle':!$index_val,'fa-minus-circle':$index_val}" ></i>
+
+                                        </td>
+                                        <td>{{meeting.deptName}} </td>
+                                        <td>{{meeting.authorName}}</td>
+                                        <td><div class="inner-div" title="{{meeting.title}}">{{meeting.title}}</div></td>
+                                        <td>{{meeting.createDate}}</td>
+                                        <td>
+                                            <button class="btn btn-xs colored-bg" ng-click="mmListModel.editMetting(meeting.meetingId)" type="button">
+                                                <i class="fa" ng-class="{'fa-eye': meeting.editable == 'No','fa-edit': meeting.editable == 'Yes'}"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr  ng-repeat="list in meeting.sub| orderBy: '-$index'"  ng-show="$index_val">
+                                        <td colspan="2" class="row-line">{{ $index + 1}}</td>
+                                        <td>{{ list.authorName}}</td>
+                                        <td>{{ list.authorId}}</td>
+                                        <td >{{list.createDate}}</td>
+                                        <td>
+                                            <button  class="btn btn-xs colored-bg" ng-click="mmListModel.editMetting(list.meetingId)" type="button">
+                                                <i class="fa" ng-class="{'fa-eye':list.createNew == 'No','fa-edit':list.createNew == 'Yes'}"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div> 
+                        <div class="col-md-6">
+                            <!--                                                    <pager total-items=4 ng-model="currentPage"></pager>-->
+                            <button class="btn btn-xs" ng-click="pageModel.currentPage = pageModel.currentPage - 1" ng-disabled="pageModel.currentPage == 0">
+                                <i class="fa fa-chevron-left"></i>
+                            </button>
+                            {{pageModel.currentPage + 1}}/{{pageModel.totalPage}}
+                            <button class="btn btn-xs" ng-click="pageModel.currentPage = pageModel.currentPage + 1" ng-disabled="pageModel.currentPage >= pageModel.dataLength / pageModel.itemsPerPage - 1">
+                                <i class="fa fa-chevron-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6" ng-class="{'full-width':appModel.tableFullWidth}">
+                <div class="panel panel-default animated zoomIn" ng-class="{'panel-custom-fullScreen':panelFullScreen}" ng-controller="panelCtrl">
+                    <div class="panel-heading panel-custom panel-heading-custom2">
+                        <h2 class="panel-title">Meeting Minutes - List </h2>
+                        <div class="box-icon pull-right">
+                            <a class="btn btn-close btn-round btn-default"  ng-click="panelFullScreen = !panelFullScreen"><i class="glyphicon" ng-class="{'glyphicon-resize-full':!panelFullScreen,'glyphicon-resize-small':panelFullScreen}"></i></a>
+                            <a class="btn btn-minimize btn-round btn-default" ng-click="isOpened = !isOpened"><i class="glyphicon" ng-class="{'glyphicon-chevron-up':!isOpened,'glyphicon-chevron-down':isOpened}"></i></a>
+                            <a class="btn btn-close btn-round btn-default" ng-click="mmListModel.loadDept()"><i class="glyphicon glyphicon-refresh fa-spin-hover"></i></a>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="panel-body " ng-show="!isOpened">
+                        <section ng-include="'js/components/mm/mm.create.tpl.html'"></section>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

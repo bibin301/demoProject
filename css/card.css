@@ -1,0 +1,297 @@
+.cards {
+    /*left: 100px;
+    top: 10px;
+    position: absolute;*/
+    perspective: 800px;
+    /*min-width: 241px;*/
+}
+.card-wrapper {
+    position: relativete;
+    /*width: 120px;*/
+    height: auto;
+    float: left;
+    margin-left: -90px;
+    z-index: 10;
+    background: #f00;
+    -webkit-transform: rotateY( 30deg);
+    transform: rotateY( 30deg);
+    -webkit-box-shadow: -10px 10px 20px 0 rgba(0, 0, 0, .4);
+    -moz-box-shadow: -10px 10px 20px 0 rgba(0, 0, 0, .4);
+    box-shadow: -10px 10px 20px 0 rgba(0, 0, 0, .4);
+    border-radius: 10px;
+}
+.card-wrapper:nth-child(1) {
+    margin-left: 0px !important;
+}
+/*.content{
+    overflow-x: scroll;
+}*/
+.expand {
+    width: 100%;
+    min-height: auto;
+    height: 30px;
+}
+.box {
+    float: left;
+    font-weight: 100;
+    background-color: #a6a6a6;
+    padding: 5px;
+    margin: 5px 0px;
+}
+.vertical-text {
+    font-size: 1.1em;
+    font-weight: 600;
+    text-align: center;
+    margin: 0;
+}
+.card-group-title {
+    background: rgba(255, 255, 255, 0.72);
+    margin-left: 30px;
+    width: 200px;
+    font-weight: 600;
+    padding: 5px 15px;
+    transform: rotate(90deg);
+    transform-origin: left top 0;
+    max-width: 200px;
+}
+.app-wrapper {
+    position: relative;
+    max-width: 475px;
+    transition: all linear 0.5s;
+    -moz-transition: all linear 0.5s;
+    -o-transition: all linear 0.5s;
+    transition: all linear 0.5s;
+}
+.app-wrapper.app-wrapper-expand{
+    width : 50px;
+}
+.app-wrapper-expand .card-container{
+    display:none;
+    transition: all linear 0.5s;
+    -moz-transition: all linear 0.5s;
+    -o-transition: all linear 0.5s;
+    transition: all linear 0.5s;
+}
+.card_scroll {
+    max-width: 350px;
+    overflow-x: auto;
+    padding: 10px 0px;
+}
+.card-container {
+    position: relative;
+    min-height: 180px;
+    transition: all linear 0.5s;
+    -moz-transition: all linear 0.5s;
+    -o-transition: all linear 0.5s;
+    transition: all linear 0.5s;
+}
+.card-wrapper:hover{
+    transform: scale(0.7);
+    z-index: 99;
+    margin-top: -20px;
+}
+
+.selected-card {
+    transform: scale(0.7);
+    z-index: 99;
+    margin-top: -20px;
+    z-index: 10;
+}
+.card-control {
+    padding: 15px;
+}
+
+.sticky-card{
+    padding: 0px;
+}
+.sticky-card li a {
+    text-decoration: none;
+    color: #000;
+    background: #ffc;
+    display: block;
+    height: 10em;
+    padding: 0.4em;
+    z-index: 0;
+}
+.sticky-card li {
+    margin: 0.5em;
+}
+
+@keyframes popIn {
+	0%,
+	50% { transform: scale(1) }
+}
+.animate-show{
+    transition: all linear 0.5s;
+    -moz-transition: all linear 0.5s;
+    -o-transition: all linear 0.5s;
+    transition: all linear 0.5s;
+}
+.animate-show1 {
+  -webkit-transition: all 1s ease;
+     -moz-transition: all 1s ease;
+       -o-transition: all 1s ease;
+      -ms-transition: all 1s ease;
+          transition: all 1s ease;
+}
+
+.animate-show2 {
+/* Webkit for Chrome and Safari */
+  -webkit-transform: scale(1.2, 1.2);
+  -webkit-transition-duration: 500ms;
+  -webkit-transition-timing-function: ease-out;
+ 
+  /* Webkit for Mozila Firefox */
+  -moz-transform: scale(1.2, 1.2);
+  -moz-transition-duration: 500ms;
+  -moz-transition-timing-function: ease-out;
+ 
+  /* Webkit for IE( Version: 11, 10 ) */
+  -ms-transform: scale(1.20, 1.20);
+  -ms-transition-duration: 500ms;
+  -ms-transition-timing-function: ease-out;
+}
+.single-card {
+    box-shadow: 0px 0px 15px #000;
+    font-size:0.7em;
+    float: left;
+	transition: all .2s ease-in-out;
+}
+.card-heading {
+    padding: 0.4em;
+}
+
+.info-count {
+    background-color: #000;
+}
+.card-notification{
+    transform: rotate(-90deg);
+}
+.viewed-card{
+    background: #ddce30;
+}
+@media only screen and (min-width: 730px) {
+
+    .card-container-inner{
+        min-width: 450px;
+        max-width: 450px;
+    }
+}
+/*@media only screen and (min-width: 6200px) {
+
+    .card-container-inner{
+        min-width: 450px;
+    }
+}
+*/
+
+/*Card flip css*/
+.cards_sm ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.cards_sm li {
+    border-bottom: 1px solid #ccc;
+}
+
+
+
+.cards_sm li a {
+    text-decoration: none;
+    color: #000;
+    -webkit-transition: font-size 0.3s ease, background-color 0.3s ease;
+    -moz-transition: font-size 0.3s ease, background-color 0.3s ease;
+    -o-transition: font-size 0.3s ease, background-color 0.3s ease;
+    -ms-transition: font-size 0.3s ease, background-color 0.3s ease;
+    transition: font-size 0.3s ease, background-color 0.3s ease;
+    display: block;
+    cursor: pointer;
+}
+
+.cards_sm li a:hover {
+    background: #f6f6f6;
+    font-size : 15px;
+}
+
+.panel-flip {
+
+    margin: auto;
+    position: relative;
+    height :120px;
+    margin-top: 10px;
+}
+
+.card-flip {
+    width: 100%;
+    height: 100%;
+    -o-transition: all .5s;
+    -ms-transition: all .5s;
+    -moz-transition: all .5s;
+    -webkit-transition: all .5s;
+    transition: all .5s;
+    -webkit-backface-visibility: hidden;
+    -ms-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    backface-visibility: hidden;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+.front, .back{
+     box-shadow: 14px 2px 15px 2px rgba(0, 0, 0, 0.4);
+}
+.front {
+    z-index: 2;
+}
+.back {
+    z-index: 1;
+    -webkit-transform: rotateY(-180deg);
+    -ms-transform: rotateY(-180deg);
+    -moz-transform: rotateY(-180deg);
+    transform: rotateY(-180deg);
+    background-color: #bb3ff;
+    position : relative;
+    overflow : hidden;
+
+}
+.inner-panel-flip {
+    position: absolute;
+    left : 0;
+    top : 100px;
+    z-index:4;
+    background : rgba(0, 0, 0, 0.38);
+    width:100%;
+    -o-transition: all .5s;
+    -ms-transition: all .5s;
+    -moz-transition: all .5s;
+    -webkit-transition: all .5s;
+    transition: all .5s;
+
+}
+.inner-panel-flip:hover{
+    -o-transition: all .5s;
+    -ms-transition: all .5s;
+    -moz-transition: all .5s;
+    -webkit-transition: all .5s;
+    transition: all .5s;
+    top : 0px;
+}
+
+.panle-fliped-front {
+    z-index: 1;
+    -webkit-transform: rotateY(180deg);
+    -ms-transform: rotateY(180deg);
+    -moz-transform: rotateY(180deg);
+    transform: rotateY(180deg);
+}
+
+.panle-fliped-back {
+    z-index: 2;
+    -webkit-transform: rotateY(0deg);
+    -ms-transform: rotateY(0deg);
+    -moz-transform: rotateY(0deg);
+    transform: rotateY(0deg);
+}
+/*End of Flip Card*/

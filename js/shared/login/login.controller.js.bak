@@ -1,0 +1,77 @@
+/* Cartwheel App creation:
+ *  This defines the Angular application which defines the dependent modules.
+ *  This app depends on the following:
+ *  -
+ * Dependencies: This needs to be called after angular.js is included and first
+ *               js of the cartwheel specific js code
+ *               jquery.js
+ *               angular.js
+ *               cartwheel_app.js
+ */
+
+/* Home controller : index.html */
+
+(function() {
+    'use strict';
+
+    angular.module(cartAppObj.id)
+        .controller('LoginCtrl', LoginCtrl);
+
+
+    //////////////////////////  login controller /////////////////////////////////
+    /*
+     * This section provides the services for login functionlity.
+     * - Connects the view (login.modal.tpl.html) to the service (CartAuthServ)
+     * - Functionality to manage the UI: closeDialog
+     */
+
+    LoginCtrl.$inject = ['$rootScope', '$scope', '$modalInstance', '$localStorage', '$window', '$location', 'CartAuthSrv'];
+
+    function LoginCtrl($rootScope, $scope, $modalInstance, $localStorage, $window, $location, CartAuthSrv) {
+
+
+        $scope.loginModel = {};
+
+        $scope.loginModel.msgText = '';
+        $scope.loginModel.userData = {};
+        $scope.loginModel.userData.username = '';
+        $scope.loginModel.userData.password = '';
+        $scope.loginModel.newLogin;
+        $scope.loginModel.cartLogin = cartLogin;
+        $scope.loginModel.loginSuccess = loginSuccess;
+        $scope.loginModel.loginFailed = loginFailed;
+        $scope.loginModel.cartTimeoutLogin = cartTimeoutLogin;
+        $scope.loginModel.reloginSuccess = reloginSuccess;
+        $scope.loginModel.closeModalDialog = closeModalDialog;
+
+        function cartLogin(userData) {
+			console.log(userData);
+            userData.token = '';
+            CartAuthSrv.login(userData, $scope.loginModel.loginSuccess, $scope.loginModel.loginFailed);
+        }
+
+        function loginSuccess(userData) {
+            $scope.loginModel.closeModalDialog();
+            $location.path("/CartwheelApp");
+        }
+
+        function loginFailed() {
+            $scope.loginModel.msgText = "Invalid username and/or password";
+        }
+
+        function reloginSuccess(userData) {
+            $scope.loginModel.closeModalDialog();
+        }
+
+        function cartTimeoutLogin(userData) {
+            userData.token = '';
+            CartAuthSrv.loginCart(userData, $scope.loginModel.reloginSuccess(userData), $scope.loginModel.loginFailed);
+        }
+
+
+        function closeModalDialog() {
+            $modalInstance.dismiss('cancel');
+        }
+
+    }
+})();

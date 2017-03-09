@@ -1,0 +1,399 @@
+<style type="text/css">
+  .addressContainer{
+    white-space: nowrap;
+height:500px;
+overflow-y:scroll;
+
+    
+    
+  }
+  
+.save-action{
+  position: relative;
+  left: 50%;
+  padding:  10px 20px 10px 20px;
+}
+.has-error {
+    color: #e12d2d;
+    position: absolute;
+    right : 0;
+    margin-bottom: 5px;
+}
+
+
+
+</style>
+
+
+<div class="panel panel-default">
+  <div class="panel-body">
+
+  <h3 class="text-center">User Form </h3>
+  <hr>
+    <div class="addressContainer col-md-12">
+
+<form class="form-horizontal" name="userForm" novalidate="">
+
+
+
+<div class="col-sm-12">
+<div class="form-group col-sm-6">
+    <label for="inputEmail3" class="col-sm-4 control-label">EmployeeAddress1</label>
+    <div class="col-sm-8">
+      <input type="text" class="form-control" name="ad1"ng-model="addressModel.user.add1" id="inputEmail3" placeholder="addressModel"  required>
+      <div class="has-error" ng-show="(userForm.ad1.$error.required && userForm.ad1.$touched)||(userForm.$submitted && userForm.ad1.$error.required)">this field is required </div>
+    </div>
+  </div>
+  <div class="form-group col-sm-6">
+    <label for="inputEmail3" class="col-sm-4 control-label">EmployeeAddress2</label>
+    <div class="col-sm-8">
+      <input type="text" class="form-control" name="ad2" ng-model="addressModel.user.add2" id="inputEmail3" placeholder="EmployeeAddress2" required>
+ <div class="has-error" ng-show="(userForm.ad2.$error.required && userForm.ad2.$touched)||(userForm.$submitted && userForm.ad2.$error.required)">this field is required</div>
+
+    </div>
+  </div>
+
+</div>
+
+
+
+
+<div class="col-sm-12">
+<div class="form-group col-sm-6">
+    <label for="inputEmail3" class="col-sm-4 control-label">EmployeeBloodGroup</label>
+    
+    <div class="col-sm-8">
+     
+
+
+      <select  type="text" class="form-control" name="blood" ng-model="addressModel.user.bg" ng-options="user.gn for user in addressModel.bloogGroup" required>
+      <option value=""> select blood group</option>
+</select>
+<div class="has-error" ng-show="(userForm.blood.$error.required && userForm.blood.$touched)||(userForm.$submitted && userForm.blood.$error.required)">this field is required</div>
+    </div>
+  </div>
+  <div class="form-group col-sm-6">
+    <label for="inputEmail3" class="col-sm-4 control-label">EmployeeBranchId</label>
+    <div class="col-sm-8">
+      <input type="text" class="form-control" ng-model="addressModel.user.empBranchid"  id="inputEmail3" placeholder="EmployeeBranchId" name="empbranch" required>
+      <div class="has-error" ng-show="(userForm.empbranch.$error.required && userForm.empbranch.$touched)||(userForm.$submitted && userForm.empbranch.$error.required)">this field is required</div>
+    </div>
+  </div>
+
+</div>
+
+  
+
+
+
+  <div class="col-sm-12">
+<div class="form-group col-sm-6">
+    <label for="inputEmail3" class="col-sm-4 control-label">EmployeeCityId</label>
+    <div class="col-sm-8">
+      <input type="text" class="form-control" ng-model="addressModel.user.empCityId"  id="inputEmail3" placeholder="EmployeeCityId" name="empcity" required>
+      <div class="has-error" ng-show="(userForm.empcity.$error.required && userForm.empcity.$touched)||(userForm.$submitted && userForm.empcity.$error.required)">this field is required</div>
+    </div>
+  </div>
+  <div class="form-group col-sm-6">
+    <label for="inputEmail3" class="col-sm-4 control-label">EmployeeDOB</label>
+    <div class="col-sm-8">
+      <!-- <input type="text" class="form-control" ng-model="addressModel.user.empDob" id="inputEmail3" placeholder="EmployeeDOB" name="dob" required> -->
+
+       <input type="date" class="form-control" uib-datepicker-popup ng-model="addressModel.user.empDob" is-open="popup2.opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)"  name="dob" close-text="Close"  required/>
+
+      <div class="has-error" ng-show="(userForm.dob.$error.required && userForm.dob.$touched)||(userForm.$submitted && userForm.dob.$error.required)">this field is required</div>
+
+    </div>
+  </div>
+
+</div>
+
+
+
+
+<div class="col-sm-12">
+<div class="form-group col-sm-6">
+    <label for="inputEmail3" class="col-sm-4 control-label">EmployeeDealership</label>
+    <div class="col-sm-8">
+      <select name="empDealer" type="text" class="form-control" ng-model="addressModel.user.empdealship"  required>
+      <option value=""> select Dealership</option>
+      <option value="CASHIER"> Cashier</option>
+      <option value="OTHER">Other</option>
+</select>
+<div class="has-error" ng-show="(userForm.empDealer.$error.required && userForm.empDealer.$touched)||(userForm.$submitted && userForm.empDealer.$error.required)">this field is required</div>
+
+    </div>
+  </div>
+  <div class="form-group col-sm-6">
+    <label for="inputEmail3" class="col-sm-4 control-label">EmpEmerContact</label>
+    <div class="col-sm-8">
+      <input type="text" class="form-control"  onkeypress="return isNumberKey(event)" ng-model="addressModel.user.empEmerContactNo" id="inputEmail3" name="contactNo" placeholder="EmpEmerContact" required>
+      <div class="has-error" ng-show="(userForm.contactNo.$error.required && userForm.contactNo.$touched)||(userForm.$submitted && userForm.contactNo.$error.required)">this field is required</div>
+
+
+    </div>
+  </div>
+
+</div>
+
+
+
+
+<div class="col-sm-12">
+<div class="form-group col-sm-6">
+    <label for="inputEmail3" class="col-sm-4 control-label">EmployeeGender</label>
+    <div class="col-sm-8">
+      <select ng-model="addressModel.user.empgen"  name="gender" type="text" class="form-control"  required>
+      <option value="">select gender</option>
+      <option value="M">Male</option>
+      <option value="F">Female</option>
+      <option value="O">Other</option>
+      </select>
+         <div class="has-error" ng-show="(userForm.gender.$error.required && userForm.gender.$touched)||(userForm.$submitted && userForm.gender.$error.required)">this field is required</div>
+    </div>
+  </div>
+  <div class="form-group col-sm-6">
+    <label for="inputEmail3" class="col-sm-4 control-label">EmployeeMobileNo</label>
+    <div class="col-sm-8">
+      <input type="text" ng-model="addressModel.user.empmobileno" class="form-control" id="inputEmail3" placeholder="EmployeeMobileNo" name="mobile" required>
+      <div class="has-error" ng-show="(userForm.mobile.$error.required && userForm.mobile.$touched)||(userForm.$submitted && userForm.mobile.$error.required)">this field is required</div>
+    </div>
+
+  </div>
+
+</div>
+
+
+<div class="col-sm-12">
+<div class="form-group col-sm-6">
+    <label for="inputEmail3" class="col-sm-4 control-label">EmployeeName</label>
+    <div class="col-sm-8">
+      <input type="text" ng-model="addressModel.user.empName" name="empname" class="form-control" id="inputEmail3" name="empName" placeholder="EmployeeName" required>
+      <div class="has-error" ng-show="(userForm.$error.required && userForm.$touched)||(userForm.$submitted && userForm.empname.$error.required)">this field is required</div>
+    </div>
+  </div>
+  <div class="form-group col-sm-6">
+    <label for="inputEmail3" class="col-sm-4 control-label">AccountNumber</label>
+    <div class="col-sm-8">
+      <input type="text" class="form-control" id="inputEmail3" ng-model="addressModel.user.accNum" placeholder="accountNumber" name="accNo" required>
+       <div class="has-error" ng-show="(userForm.accNo.$error.required && userForm.accNo.$touched)||(userForm.$submitted && userForm.accNo.$error.required)">this field is required</div>
+    </div>
+  </div>
+
+</div>
+
+<div class="col-sm-12">
+<div class="form-group col-sm-6">
+    <label for="inputEmail3" class="col-sm-4 control-label">Bankname</label>
+    <div class="col-sm-8">
+      <input type="text" ng-model="addressModel.user.bankName" class="form-control" id="inputEmail3" placeholder="Bankname" name="bank" required>
+       <div class="has-error" ng-show="(userForm.bank.$error.required && userForm.bank.$touched)||(userForm.$submitted && userForm.bank.$error.required)">this field is required</div>
+    </div>
+  </div>
+  <div class="form-group col-sm-6">
+    <label for="inputEmail3" class="col-sm-4 control-label">Dateofjoining</label>
+    <div class="col-sm-8">
+      <!-- <input type="text" class="form-control" ng-model="addressModel.user.doj" id="inputEmail3" placeholder="dateofjoining" name="doj"> -->
+         <input type="date" class="form-control" uib-datepicker-popup ng-model="addressModel.user.doj" is-open="popup2.opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)"  name="doj" close-text="Close"  required/>
+
+        <div class="has-error" ng-show="(userForm.doj.$error.required && userForm.doj.$touched)||(userForm.$submitted && userForm.doj.$error.required)">this field is required</div>
+    </div>
+  </div>
+
+</div>
+
+
+
+<div class="col-sm-12">
+<div class="form-group col-sm-6">
+    <label for="inputEmail3" class="col-sm-4 control-label">eduQulaification</label>
+    <div class="col-sm-8">
+    <select class="form-control" type="text" name="eduqual" ng-model="addressModel.user.eduQ" ng-options="edu.edu for edu in addressModel.eduQualification" required>
+      <option value="">select education</option>
+    </select>
+
+       <div class="has-error" ng-show="(userForm.eduqual.$error.required && userForm.eduqual.$touched)||(userForm.$submitted && userForm.eduqual.$error.required)">this field is required</div>
+     
+    </div>
+  </div>
+  <div class="form-group col-sm-6">
+    <label for="inputEmail3" type="text" class="col-sm-4 control-label">Maritalstatus</label>
+    <div class="col-sm-8">
+      <select class="form-control" name="marital" ng-model="addressModel.user.Maritalstatus" required>
+      <option value="">select marital status</option>
+      <option value="married">married</option>
+      <option value="single">single</option>
+      
+    </select>
+
+
+       <div class="has-error" ng-show="(userForm.marital.$error.required && userForm.marital.$touched)||(userForm.$submitted && userForm.marital.$error.required)">this field is required</div>
+    </div>
+  </div>
+
+</div>
+
+
+<div class="col-sm-12">
+<div class="form-group col-sm-6">
+    <label for="inputEmail3" class="col-sm-4 control-label">Nomineename</label>
+    <div class="col-sm-8">
+      <input type="text" class="form-control" name="nomine" ng-model="addressModel.user.nomineename" id="inputEmail3" placeholder="nomineename">
+      <div class="has-error" ng-show="(userForm.nomine.$error.required && userForm.nomine.$touched)||(userForm.$submitted && userForm.nomine.$error.required)">this field is required</div>
+    </div>
+  </div>
+  <div class="form-group col-sm-6">
+    <label for="inputEmail3" class="col-sm-4 control-label">Noofchildrenboys</label>
+    <div class="col-sm-8">
+      <input type="text" class="form-control" name="Noofchildrenboys"ng-model="addressModel.user.boychild" id="inputEmail3" placeholder="Noofchildrenboys" required>
+       <div class="has-error" ng-show="(userForm.Noofchildrenboys.$error.required && userForm.Noofchildrenboys.$touched)||(userForm.$submitted && userForm.Noofchildrenboys.$error.required)">this field is required</div>
+    </div>
+  </div>
+
+</div>
+  
+  <div class="col-sm-12">
+<div class="form-group col-sm-6">
+    <label for="inputEmail3" class="col-sm-4 control-label">Noofchildrengirls</label>
+    <div class="col-sm-8">
+      <input type="text" class="form-control" id="inputEmail3" ng-model="addressModel.user.girlchild" placeholder="Noofchildrengirls" name="Noofchildrengirls" required>
+      <div class="has-error" ng-show="(userForm.Noofchildrengirls.$error.required && userForm.Noofchildrengirls.$touched)||(userForm.$submitted &&userForm. Noofchildrengirls.$error.required)">this field is required</div>
+    </div>
+  </div>
+  <div class="form-group col-sm-6">
+    <label for="inputEmail3" class="col-sm-4 control-label">pancard</label>
+    <div class="col-sm-8">
+      <input type="text" class="form-control" name="pancard" id="inputEmail3" ng-model="addressModel.user.pancard" placeholder="pancard" required>
+         <div class="has-error" ng-show="(userForm.pancard.$error.required && userForm.pancard.$touched)||(userForm.$submitted &&userForm.pancard.$error.required)">this field is required</div>
+    </div>
+  </div>
+
+</div>
+
+
+
+  <div class="col-sm-12">
+<div class="form-group col-sm-6">
+    <label for="inputEmail3" class="col-sm-6 control-label">Pminsuranceschemesubscribed</label>
+    <div class="col-sm-6">
+    <!--   <input type="text" class="form-control" id="inputEmail3" placeholder="Pminsuranceschemesubscribed"> -->
+    <select class="form-control" type="text" name="Pminsuranceschemesubscribed" ng-model="addressModel.user.pmsubcribed" required>
+      <option value="">select status</option>
+       <option value="Yes">Yes</option>
+        <option value="No">No</option>
+    </select>
+
+    <div class="has-error" ng-show="(userForm.Pminsuranceschemesubscribed.$error.required && userForm.Pminsuranceschemesubscribed.$touched)||(userForm.$submitted && userForm.Pminsuranceschemesubscribed.$error.required)">this field is required</div>
+    </div>
+  </div>
+  <div class="form-group col-sm-6">
+    <label for="inputEmail3" class="col-sm-6 control-label">Pradhanmantrijandhanyojana</label>
+    <div class="col-sm-6">
+      <select class="form-control" type="text"  name="Pradhanmantrijandhanyojana" ng-model="addressModel.user.Pradhanmantrijandhanyojana" required>
+      <option value="">select status</option>
+       <option value="Yes">Yes</option>
+        <option value="No">No</option>
+    </select>
+     <div class="has-error" ng-show="(userForm.Pradhanmantrijandhanyojana.$error.required && userForm.Pradhanmantrijandhanyojana.$touched)||(userForm.$submitted && userForm.Pradhanmantrijandhanyojanaemp.$error.required)">this field is required</div>
+    </div>
+  </div>
+
+</div>
+
+
+  <div class="col-sm-12">
+<div class="form-group col-sm-6">
+    <label for="inputEmail3" class="col-sm-7 control-label">pradhanmantrijeevanjyotibimayojana</label>
+    <div class="col-sm-5">
+         <select class="form-control" type="text" name="pradhanmantrijeevanjyotibimayojana" ng-model="addressModel.user.pradhanmantrijeevanjyotibimayojana" required>
+      <option value=""> select status</option>
+       <option value="Yes">Yes</option>
+        <option value="No">No</option>
+    </select>
+    <div class="has-error" ng-show="(userForm.pradhanmantrijeevanjyotibimayojana.$error.required && userForm.pradhanmantrijeevanjyotibimayojana.$touched)||(userForm.$submitted && userForm.pradhanmantrijeevanjyotibimayojana.$error.required)">this field is
+    </div>
+    </div>
+  </div>
+  <div class="form-group col-sm-6">
+    <label for="inputEmail3" class="col-sm-6 control-label">Shirtsize</label>
+    <div class="col-sm-6">
+      <input type="text" class="form-control" ng-model="addressModel.user.shirtsize" id="inputEmail3" placeholder="shirtsize" name="shirtsize" required>
+       <div class="has-error" ng-show="(userForm.shirtsize.$error.required && userForm.shirtsize.$touched)||(userForm.$submitted && userForm.shirtsize.$error.required)">this field is required
+    </div> 
+    </div>
+  </div>
+  </div>
+
+
+
+
+ <div class="col-sm-12">
+<div class="form-group col-sm-6">
+    <label for="inputEmail3" class="col-sm-4 control-label">safetytraining</label>
+    <div class="col-sm-8">
+      <!-- <input type="text" date-picker class="form-control" name="sdate"id="inputEmail3" placeholder="safetytraining"> -->
+      <input type="date" class="form-control" uib-datepicker-popup is-open="popup2.opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-model="addressModel.user.safetytraining" name="sdate" close-text="Close"  required/>
+
+       <div class="has-error" ng-show="(userForm.sdate.$error.required && userForm.sdate.$touched)||(userForm.$submitted && userForm.sdate.$error.required)">this field is required
+    </div>
+  </div>
+  </div>
+  <div class="form-group col-sm-6">
+    <label for="inputEmail3" date-picker  class="col-sm-4 control-label">servicetraining</label>
+    <div class="col-sm-8">
+     
+       <input type="date" class="form-control" uib-datepicker-popup ng-model="addressModel.user.servicetraining" is-open="popup2.opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)"  name="serdate" close-text="Close"  required/>
+      <div class="has-error" ng-show="(userForm.serdate.$error.required && userForm.serdate.$touched)||(userForm.$submitted && userForm.serdate.$error.required)">this field is required
+    </div>
+    </div>
+  </div>
+
+</div>
+
+
+ <div class="col-sm-12">
+<div class="form-group col-sm-6">
+    <label for="inputEmail3" class="col-sm-4 control-label">EmployeePhoto</label>
+    <div class="col-sm-8">
+       <input class="ng-pristine ng-untouched form-control ng-valid" ng-model="addressModel.user.EmployeePhoto" onchange="angular.element(this).scope().photoChanged(this.files)" type="file" required>
+    </div>
+  </div>
+  <div class="form-group col-sm-6">
+    <label for="inputEmail3" class="col-sm-4 control-label">EmployeeIDProof</label>
+    <div class="col-sm-8">
+    <input class="ng-pristine ng-untouched form-control ng-valid" ng-model="addressModel.user.EmployeeIDProof" onchange="angular.element(this).scope().photoChanged(this.files)" type="file" required>
+      <!-- <input type="text" class="form-control" id="inputEmail3" placeholder="EmployeeIDProof"> -->
+    </div>
+  </div>
+
+</div>
+
+ <div class="col-sm-12">
+<div class="form-group col-sm-6">
+    <label for="inputEmail3" class="col-sm-4 control-label">shoesize</label>
+    <div class="col-sm-8">
+    <select class="form-control" name="shoes" type="text" ng-model="addressModel.user.shoesize" required>
+    <option value=""> select size</option>
+    <option value="lg"> Large</option>
+    </select>
+     <div class="has-error" ng-show="(userForm.shoes.$error.required && userForm.shoes.$touched)||(userForm.$submitted && userForm.shoes.$error.required)">this field is required
+    </div>
+      
+    </div>
+  </div>
+  
+
+</div>
+<div class="clearfix"></div>
+
+<button type="button" class="btn btn-primary save-action" ng-click="addressModel.getUserData(addressModel.user)">Save</button>
+ 
+ 
+</form>
+
+
+
+
+</div>
+  </div>
+</div>

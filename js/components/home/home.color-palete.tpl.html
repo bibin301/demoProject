@@ -1,0 +1,90 @@
+<style>
+    .theme-color {
+        position: fixed;
+        right: -170px;
+        bottom: 50px;
+        background: #e3e3e3;
+        z-index: 3;
+        -webkit-transition: all 0.4s ease-in;
+        -moz-transition: all 0.4s ease-in;
+        -ms-transition: all 0.4s ease-in;
+        -o-transition: all 0.4s ease-in;
+        transition: all 0.4s ease-in;
+    }
+
+    .theme-color-expand {
+        right: 0;
+    }
+
+    .pallete-wrapper {
+
+        padding: 5px;
+        border: 1px solid #a6a6a6;
+    }
+
+    .colors {
+        height: 30px;
+        width: 30px;
+        margin: 5px;
+        float: left;
+    }
+
+    .red.colors {
+        background-color: #e12d2d;
+    }
+
+    .blue.colors {
+        background-color: #5a73b9;
+    }
+
+    .green.colors {
+        background-color: #789637;
+    }
+
+    .purple.colors {
+        background-color: #872891;
+    }
+
+    .pallete-heading {
+        background: #e3e3e3;
+        padding: 6px 3px;
+        border-color: #000;
+        border-left-width: 0;
+        font-size: 15px;
+    }
+
+    .pallete-icon {
+        position: absolute;
+        left: -25px;
+        padding: 6px;
+        font-size: 15px;
+        background: #e3e3e3;
+        top: 0;
+        border-color: #000;
+        border-right-width: 0;
+    }
+</style>
+
+
+<span class="pallete-icon pointer" ng-click="appModel.themeExpand = !appModel.themeExpand">
+    <i class="fa fa-gear fa-spin"></i>
+</span>
+<div class="pallete-heading">Select Colors</div>
+<div class="pallete-wrapper">
+    <div class="colors red" ng-click="appModel.setThemeColor('red')"> </div>
+    <div class="colors blue" ng-click="appModel.setThemeColor('blue')"> </div>
+    <div class="colors green" ng-click="appModel.setThemeColor('green')"> </div>
+    <div class="colors purple" ng-click="appModel.setThemeColor('purple')"></div>
+    <div class="clearfix"></div>
+</div>
+<div class="col-md-12">
+    <label class="control-label Model-title">
+        Table Full Width :
+    </label>
+    <label class="switch switch-small">
+        <input value="1" type="checkbox"  ng-model="appModel.tableFullWidth"
+               ng-true-value="true" ng-false-value="false">
+        <span></span>
+    </label>
+
+</div>

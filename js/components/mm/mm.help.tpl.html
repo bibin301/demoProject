@@ -1,0 +1,355 @@
+<style>
+  .custom-nav-help {
+    position: fixed;
+    z-index: 10;
+    /*width: 86%;*/
+  }
+
+  .navbar-right {
+    right: 2%;
+  }
+
+  .umHelpsection-small {
+    margin-top: 23%;
+  }
+
+  .mm_topmargin {
+    margin-top: 6%;
+  }
+</style>
+
+<div class="panel panel-default animated zoomIn" ng-class="{'panel-custom-fullScreen':panelFullScreen}">
+  <div class="panel-heading panel-custom panel-heading-custom2">
+    <h2 class="panel-title">Meeting Minutes Help
+    </h2>
+    <div class="box-icon pull-right">
+      <a class="btn btn-close btn-round btn-default" ng-click="panelFullScreen = !panelFullScreen"><i class="glyphicon" ng-class="{'glyphicon-resize-full':!panelFullScreen,'glyphicon-resize-small':panelFullScreen}" ></i></a>
+
+    </div>
+    <div class="clearfix"></div>
+  </div>
+  <div class="panel-body " ng-show="!isOpened">
+
+      <!-- MENU (STATIC ON TOP -->
+      <nav class="navbar navbar-default navbar-right custom-nav-help" id="menu" role="navigation">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="header-inner">
+          <div class="navbar-header">
+            <button class="navbar-toggle colored-bg" ng-click="navCollapsed = !navCollapsed" ng-init="navCollapsed = true" type="button">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+          </div>
+
+          <!-- Collect the nav links, forms, and other content for toggling -->
+          <div class="collapse navbar-collapse" ng-class="!navCollapsed && 'in'">
+            <ul class="nav navbar-nav navbar-right topMenuHeight">
+              <li class="login-btn events">
+                <a ng-click="appModel.gotoSection('mm_section1')">What is Meeting Minutes ?</a>
+              </li>
+              <li class="login-btn">
+                <a ng-click="appModel.gotoSection('mm_section2')">Features</a>
+              </li>
+              <li class="login-btn">
+                <a ng-click="appModel.gotoSection('mm_section3')">Usage requirement</a>
+              </li>
+              <li class="login-btn">
+                <a ng-click="appModel.gotoSection('mm_section4')">Accessing Meeting Minutes</a>
+              </li>
+              <li class="login-btn">
+                <a ng-click="appModel.gotoSection('mm_section5')">Home page for Meeting Minutes</a>
+              </li>
+              <li class="login-btn">
+                <a ng-click="appModel.gotoSection('mm_section6')">Listing of Meeting Minutes</a>
+              </li>
+              <li class="login-btn">
+                <a ng-click="appModel.gotoSection('mm_section7')">Creating new Meeting Minutes</a>
+              </li>
+              <li class="login-btn">
+                <a ng-click="appModel.gotoSection('mm_section8')">Working with the tool</a>
+              </li>
+              <li class="login-btn">
+                <a ng-click="appModel.gotoSection('mm_section9')">Viewing actions</a>
+              </li>
+            </ul>
+          </div>
+          <!-- /.navbar-collapse -->
+        </div>
+      </nav>
+      <div class="content-wrapper">
+        <div class="col-md-10">
+          <div class="tab-content">
+            <!--STO tap select one -->
+            <div class="tab-pane active text-style mm_section1 visible-lg mm_topmargin" id="mm_section1">
+              <h4>1 What is Meeting Minutes?</h4>
+              <div class="clearfix"></div>
+              <p>
+                Meeting Minutes is a web-based tool that helps to capture and manage minutes of a meeting. Actions from the meeting can be recorded and assigned to attendees and people on the distribution list along with target dates.
+              </p>
+              <hr>
+
+
+              <img ng-src="images/meetingminutes/workflow-{{appModel.cartapp.config.theme}}.gif" class="img-responsive">
+
+              <hr>
+            </div>
+            <!--  for small device and medium device-->
+            <div class="tab-pane active text-style umHelpsection-small visible-xs visible-sm visible-md" id="mm_section1">
+              <h4>1 What is Meeting Minutes?</h4>
+              <div class="clearfix"></div>
+              <p>
+                Meeting Minutes is a web-based tool that helps to capture and manage minutes of a meeting. Actions from the meeting can be recorded and assigned to attendees and people on the distribution list along with target dates.
+              </p>
+              <hr>
+
+
+              <img ng-src="images/meetingminutes/workflow-{{appModel.cartapp.config.theme}}.gif" class="img-responsive">
+
+              <hr>
+            </div>
+            <!--ENO tap select one -->
+
+
+            <!--STO tap select two -->
+            <div class="tab-pane active text-style umHelpsection-2 col-md-12" id="mm_section2">
+              <h4>Features</h4>
+              <div class="clearfix"></div>
+              Meeting Minutes is a web based tool that provides an automated framework to capture and track minutes of meeting.
+              <ol>
+                <li>• Web based solution: No additional software management is required at client (user) end other than the standard web browser.</li>
+                <li>• Paperless solution: Provides a paperless solution including sending email's on the minutes captured.</li>
+                <li>• Controlled access: The minutes of meetings are allowed based on attendee. Hence, the tool will take care of allowing only the needed minutes to each user.</li>
+                <li>• Consolidated Actions: Provides the list of all the actions for which the current user has to act upon including the status. The user can further act on the action/s and update the status.</li>
+                <li>• Emailing the minutes: Provision for the minutes owner (author) to send mails to all the attendees, thereby providing a copy of the minutes.</li>
+                <li>• Integrated to Windows authentication framework: User's need not maintain separate username/password for accessing the application. The same username (Windows username/password) is used for authentication.</li>
+              </ol>
+              <hr>
+              <img class="img-rounded img-responsive pull-right" src="images/350x250.png">
+            </div>
+            <!--ENO tap select two -->
+
+            <!--STO tap select three -->
+            <div class="tab-pane active text-style umHelpsection-3 col-md-12" id="mm_section3">
+              <h4>Usage requirement</h4>
+              <div class="clearfix"></div>
+              The following are the criteria needed for using the meeting minutes tool
+              <ol>
+                <li>• Need a web browser (currently tested only for Internet Explorer 9 and above) with JavaScript enabled.</li>
+                <li>• Need to be part of the Assystem's network.</li>
+                <li>• Permission settings to access the Meeting minutes. The administrator to provide the access is with "TIG team" at India. Please contact the TIG team in-case the access (link) is not available for your user-id.</li>
+              </ol>
+              <hr>
+              <img class="img-rounded img-responsive pull-right" src="images/350x250.png">
+            </div>
+            <!--ENO tap select three -->
+
+            <!--STO tap select four -->
+            <div class="tab-pane active text-style umHelpsection-4 col-md-12" id="mm_section4">
+              <h4>Logging into cartwheel for accessing Meeting Minutes</h4>
+              <div class="clearfix"></div>
+              The access to Meeting Minutes can be done by logging into Cartwheel (url: http://10.1.3.15/cartwheel) using your Windows username and password.
+              <p>
+                You will be directed to a page that will be similar to the screenshot shown below :
+              </p>
+              <ol>
+                <li>The left frame will contain links to tools that you will have been provided access. In the above case, the access has been provided for 2 tools, namely, Meeting Minutes and TLS.</li>
+              </ol>
+              <hr>
+              <img class="img-rounded img-responsive pull-right" src="images/350x250.png">
+            </div>
+            <!--ENO tap select four -->
+
+            <!--STO tap select five -->
+            <div class="tab-pane active text-style umHelpsection-4 col-md-12" id="mm_section5">
+              <h4>Home page for Meeting Minutes</h4>
+              <div class="clearfix"></div>
+              <p>
+              Click on Meeting Minutes (on the left panel) and you will be directed to a page that will look similar to the image shown below :</p>
+              <h2>Create Department </h2>
+              <div class="clearfix"></div>
+
+              <p>
+                This link is available only for the Admin for the Meeting Minutes tool. This will provide the admin to add new departments. Hence if you need to add a new department, please contact the admin of Meeting minutes. This can be done by mailing the request
+                (approved by the department head) to the TIG team.
+              </p>
+
+              <h2>Meetings</h2>
+              <div class="clearfix"></div>
+              <p>
+                This link provides the list of meetings which the user has access to. The access is based on the participation of the meeting (i.e., either the user is the author, attendee or in the distribution list). For each of the meetings, the meeting history is
+                maintained for which the user can select and view the meeting details.
+              </p>
+
+              <h2>Actions</h2>
+              <div class="clearfix"></div>
+
+              <p>
+                This link provides the list of actions (across meetings) for which the logged user has been assigned. The user can view/modify(edit) the action with the action performed which helps in tracking the actions. The actions appears as outstanding actions for
+                the forthcoming meetings for the same topic with the status until it is closed.
+              </p>
+
+              <p>THE DETAILS OF THE ABOVE FUNCTIONALITIES IS EXPLAINED IN NEXT SECTION.</p>
+              <hr>
+              <img class="img-rounded img-responsive pull-right" src="images/350x250.png">
+            </div>
+            <!--ENO tap select five -->
+
+            <!--STO tap select six -->
+            <div class="tab-pane active text-style umHelpsection-4 col-md-12" id="mm_section6">
+              <h4>Listing of Meeting Minutes</h4>
+              <div class="clearfix"></div>
+              Provides the list of minutes that the user has access. The list is dynamic for each user.
+              <hr>
+              <img class="img-rounded img-responsive pull-right" src="images/350x250.png">
+            </div>
+            <!--ENO tap select six -->
+
+            <!--STO tap select seven -->
+            <div class="tab-pane active text-style umHelpsection-4 col-md-12" id="mm_section7">
+              <h4>Creating New Meeting Minutes</h4>
+              <div class="col-md-10">
+                This tool allows you to create minutes in two ways:
+                <ol>
+                  <li>1. Creating minutes for a new meeting (that is there is no precedent meeting on the same topic).</li>
+                  <li>2. Creating minutes for follow-on meetings.</li>
+                  To understand the above Point 2, here is an example: Let us say a team of people meet for a meeting called "Finance Monthly Review" for the first time in the month of June. So, the minutes will be created under the department "Finance" and can have a
+                  meeting title "Monthly Review". So, the minutes created here does not have precedence as this is being created for the first time. When a meeting is held the following month for the same topic to discuss finance status, another minutes
+                  would be created that is a follow-up to the previous one. By doing this, the actions (along with a few other items) from the previous meeting would be carried over. Now, if this team meets again (same or different set of people) for discussing
+                  status of projects, a new Meeting Minutes could be created under the "Operations" department with the title "Monthly Review". Note that this minutes and the one created under "Finance" are two different minutes. The following images will
+                  show how to create new minutes and how to create a continuum.
+                </ol>
+                <hr>
+              </div>
+              <div class="col-md-12">
+                <div class="col-md-4">
+                  <img class="img-rounded  img-responsive pull-right" src="images/250x250.png">
+                  <p>To create a new Meeting Minutes (that does not have precedence), click on "Create Meeting". This will lead to a page that may look similar to the following:</p>
+                </div>
+                <div class="col-md-4">
+                  <img class="img-rounded img-responsive pull-right" src="images/250x250.png">
+                  <p>However, most of the times you will be requiring to create a minutes for the latest of a series of meetings, such as monthly reviews. In this case, you will see records of the previous minutes and a link to create minutes, like the following
+                  </p>
+                </div>
+                <div class="col-md-4">
+                  <img class="img-rounded img-responsive pull-right" src="images/250x250.png">
+                  <p>
+                    Click on the appropriate "Create" link. This will lead you to a page that looks very similar to Figure-4. However, this page will contain data from the previous minutes, such as, all open & updated actions in the "Outstanding Actions" section, all previous
+                    attendees, etc.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <!--ENO tap select seven -->
+
+            <!--STO tap select eight -->
+            <div class="tab-pane active text-style umHelpsection-2 col-md-12" id="mm_section8">
+              <h4>Working with the Tool</h4>
+              <p>To create a new Meeting Minutes, click "Create Meeting" link (as shown in Figure-3), which will lead you to the page as in Figure-4.</p>
+              <div class="col-md-12">
+                <h2>Department </h2>
+                <div class="clearfix"></div>
+
+                <p>Select the appropriate "Department" that is pre-defined. The currently available options are :</p>
+                <img class="img-rounded img-responsive pull-right" src="images/250x250.png">
+                <div class="col-md-12">
+                  <div class="col-md-7">
+                    <p>If you require additions to this list, you will need to request this with the Admin, by clicking on the link.</p>
+
+
+                    <h2>Meeting title
+                    </h2>
+                    <div class="clearfix"></div>
+                    <p>You can either type in the title or select one from the drop-down list (which can be got by pressing the space-bar once). The title cannot be the same as an existing title for that department.
+                    </p>
+                  </div>
+                  <hr>
+                  <img class="img-rounded img-responsive pull-right" src="images/350x250.png">
+                </div>
+                <h2>Date, Time and Venue
+                </h2>
+                <div class="clearfix"></div>
+                <p>Similarly, the meeting date, time & venue can be filled. Note that Department, Title and Venue are mandatory fields.
+                </p>
+                <hr>
+                <div class="clearfix"></div>
+                <img class="img-rounded img-responsive" src="images/350x250.png">
+                <h2>Attendees and distribution
+                </h2>
+                <div class="clearfix"></div>
+                <p>Attendees and distribution list can be built by selecting staff from the "Employees" list and clicking on the respective addition buttons.
+                </p>
+                <h2>External attendees
+                </h2>
+                <div class="clearfix"></div>
+                <p>If there are people who are part of the meeting or need to get copies of the minutes and are not part of the Organization, then they can be added by typing in their name in the "External Attendee" and their corresponding email id.
+                </p>
+                <hr>
+                <img class="img-rounded img-responsive pull-right" src="images/350x250.png">
+                <h2>Agenda
+                </h2>
+                <div class="clearfix"></div>
+                <p>Add the agenda reference, if any.
+                </p>
+                <h2>Minutes
+                </h2>
+                <div class="clearfix"></div>
+                <p>After this, you could start recording the minutes and any associated actions.
+                </p>
+                <hr>
+                <img class="img-rounded img-responsive pull-right" src="images/350x250.png">
+                <h2>Actions
+                </h2>
+                <div class="clearfix"></div>
+                <p>To add an action, fill in the "Issue" box, select the Target Date from the Calendar provided, select the owner of the Action from the drop-down box and click on the "Assign" button. This will produce a new action in a list below. Unlimited
+                  actions can be added in this manner. In the end (or at regular intervals) click on "Save Meeting". This will save the data and exit out of the page.
+                </p>
+                <hr>
+                <img class="img-rounded img-responsive pull-right" src="images/350x250.png">
+                <h2>View
+                </h2>
+                <div class="clearfix"></div>
+                <p>To get back to the same page, click on "View" for that meeting (see Figure-5). This time, at the end of the page, you will notice a "Send Meeting" button. Clicking on this will send all the data for that meeting minutes to all the people
+                  in the Attendees, Distribution & External Attendees' list via email.
+                </p>
+                <h2>Continuation meeting minutes
+                </h2>
+                <div class="clearfix"></div>
+                <p>Continuation meeting minutes can be created only when the previous minutes have been sent (using the "Send Meeting" button). Continuation Minutes will contain "Outstanding Actions" list. These actions will be in 'Open' state to start with.
+                  The "Action Taken" text box can be filled in either by the Author or the Owner of the Action. While the Author can update this text box while in this page, the section below will describe how the Owner can update. However, only the Author
+                  can 'Close' the action by selecting 'Close' from the drop-down box in the Status column. Once the action is 'Closed' the colour of that row darkens. This action is reversible by the Author till a new Meeting Minutes is created.
+                </p>
+                <hr>
+              </div>
+            </div>
+            <!--ENO tap select eight -->
+
+            <!--STO tap select nine -->
+            <div class="tab-pane active text-style umHelpsection-4 col-md-12" id="mm_section9">
+              <h4>Viewing Actions</h4>
+              <div class="clearfix"></div>
+              Minutes can be "Viewed" from the Meeting Minutes home page. By default, the last minutes will be viewed. However, previous minutes can be viewed by selecting the appropriate meeting number from the "Previous Meetings" drop-down box (See Figure-5).
+              <br> To view actions belonging only to you, click on the "Actions" link on the left in the Meeting Minutes home page (See Figure-2). This will lead to a page similar to the following:
+              <hr>
+              <img class="img-rounded img-responsive" src="images/350x250.png">
+              <p>The links on the left (TT_03001_003 in the above example) is the action number.
+              </p>
+              <hr>
+              <img class="img-rounded img-responsive" src="images/350x250.png">
+              <p>Clicking it will take you to the relevant Meeting Minutes. The link on the right ("Details") will take you to the page where the "Action Taken" section can be updated (See below):
+              </p>
+              <hr>
+              <img class="img-rounded img-responsive" src="images/350x250.png">
+              <p>Clicking on the "Update" button will save the data and will reflect in the relevant Meeting Minutes.
+              </p>
+            </div>
+            <!--ENO tap select nine -->
+
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>

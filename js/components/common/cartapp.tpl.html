@@ -1,0 +1,31 @@
+<!--
+*
+* Cartwheel App Container Page.
+* After Login application templates are handle through this page
+* 2nd level ui-view after index page
+*
+-->
+
+
+<!-- / navbar -->
+
+<!-- Header navbar -->
+<!--Footer Controller for copyrights-->
+<!--<div class="hidden-xs" id="footer-cart" ng-include="homeModel.template.footer"></div>-->
+
+<section ng-include="'js/components/common/cart.app.top.menu.tpl.html'" id="header" class="{{main.settings.navbarHeaderColor}}"></section>
+
+<div id="controls">
+
+    <aside data-ng-include="'js/components/common/cart.app.left.menu.tpl.html'" id="sidebar"></aside>
+
+
+</div>
+
+<div id="content" >
+	<div class="btn btn-sky" ncy-breadcrumb></div>
+    <section ui-view></section>
+    <div class="hidden-xs" id="footer-cart" ng-include="'js/shared/section/common.footer.tpl.html'"></div>
+</div>
+
+

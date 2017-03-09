@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+
+<div class="panel panel-default animated zoomIn" ng-class="{'panel-custom-fullScreen':panelFullScreen}">
+    <div class="panel-heading panel-custom panel-heading-custom2">
+        <h2 class="panel-title">Meeting Minutes - Manage Department </h2>
+        <div class="box-icon pull-right">
+            <a class="btn btn-close btn-round btn-default" title="Create New Department" ng-click="mmAdminExtAttModel.extAtt = '';mmAdminExtAttModel.title = 'Create New'"><i class="glyphicon glyphicon-plus"></i></a>
+            <a class="btn btn-close btn-round btn-default" ng-click="panelFullScreen = !panelFullScreen"><i class="glyphicon" ng-class="{'glyphicon-resize-full':!panelFullScreen,'glyphicon-resize-small':panelFullScreen}" ></i></a>
+            <a class="btn btn-minimize btn-round btn-default"><i class="glyphicon" ng-class="{'glyphicon-chevron-up':!isOpened,'glyphicon-chevron-down':isOpened}" ng-click="isOpened = !isOpened"></i></a>
+            <a class="btn btn-close btn-round btn-default" ng-click="mmAdminExtAttModel.loadExtAtt()"><i class="glyphicon glyphicon-refresh fa-spin-hover"></i></a>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="panel-body " ng-show="!isOpened">
+        <div class="row">
+
+            <div class="col-md-6" ng-class="{'full-width':appModel.tableFullWidth}">
+                <div class="panel panel-default animated zoomIn" ng-class="{'panel-custom-fullScreen':panelFullScreen}" ng-controller="panelCtrl">
+                    <div class="panel-heading panel-custom panel-heading-custom2">
+                        <h2 class="panel-title">External Attendies List</h2>
+                        <div class="box-icon pull-right">
+                            <a class="btn btn-close btn-round btn-default" ng-click="panelFullScreen = !panelFullScreen"><i class="glyphicon" ng-class="{'glyphicon-resize-full':!panelFullScreen,'glyphicon-resize-small':panelFullScreen}" ></i></a>
+                            <a class="btn btn-minimize btn-round btn-default"><i class="glyphicon" ng-class="{'glyphicon-chevron-up':!isOpened,'glyphicon-chevron-down':isOpened}" ng-click="isOpened = !isOpened"></i></a>
+                            <a class="btn btn-close btn-round btn-default" ng-click="mmAdminExtAttModel.loadExtAtt();"><i class="glyphicon glyphicon-refresh fa-spin-hover"></i></a>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="panel-body " ng-show="!isOpened">
+                        <table class="display table table-bordered table-striped" datatable="ng" id="dynamic-table custom_table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Email ID</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="extAtt in mmAdminExtAttModel.externalAttendees">
+                                    <td>{{extAtt.name}}</td>
+
+                                    <td>{{extAtt.email}}</td>
+                                    <td>
+                                        <button class="btn btn-xs colored-bg" data-toggle="modal" data-target=".bs-example-modal-lg" ng-click="mmAdminExtAttModel.editExtAtt(extAtt)" type="button">
+                                            <i class="fa fa-edit"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-md-6" ng-class="{'full-width':appModel.tableFullWidth}">
+
+
+                <div class="panel panel-default animated zoomIn" ng-if="mmAdminExtAttModel.title" ng-class="{'panel-custom-fullScreen':panelFullScreen}" ng-controller="panelCtrl">
+                    <div class="panel-heading panel-custom panel-heading-custom2">
+                        <h2 class="panel-title">{{mmAdminExtAttModel.title}}</h2>
+                        <div class="box-icon pull-right">
+
+                            <a class="btn btn-close btn-round btn-default" ng-click="panelFullScreen = !panelFullScreen"><i class="glyphicon" ng-class="{'glyphicon-resize-full':!panelFullScreen,'glyphicon-resize-small':panelFullScreen}" ></i></a>
+                            <a class="btn btn-minimize btn-round btn-default"><i class="glyphicon" ng-class="{'glyphicon-chevron-up':!isOpened,'glyphicon-chevron-down':isOpened}" ng-click="isOpened = !isOpened"></i></a>
+                            <a class="btn btn-close btn-round btn-default" ng-click="mmAdminExtAttModel.loadExtAtt();"><i class="glyphicon glyphicon-refresh fa-spin-hover"></i></a>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="panel-body " ng-show="!isOpened">
+
+                        <!-- STO form-->
+                        <form name="mmAdminExtAttModel.userForm" class="form-horizontal" ng-submit="mmAdminExtAttModel.updateExtAtt(mmAdminExtAttModel.extAtt)" novalidate="">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label Model-title ">External Attendee name</label>
+                                <div class="col-sm-7">
+                                    <input class="form-control underline" name="Name" placeholder="external attendee name" ng-model="mmAdminExtAttModel.extAtt.extAttName" required="" type="text">
+                                    <div class="has-error" ng-show="(mmAdminExtAttModel.userForm.Name.$error.required && mmAdminExtAttModel.userForm.Name.$touched) || (mmAdminExtAttModel.userForm.$submitted && mmAdminExtAttModel.userForm.Name.$error.required)">external attendee name is required </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label Model-title">External Attendee Email</label>
+                                <div class="col-sm-7">
+                                    <input class="form-control underline" name="email" ng-model="mmAdminExtAttModel.extAtt.extAttEmail" required="" placeholder="external attendee email" type="email">
+                                    <div class="has-error" ng-show="(mmAdminExtAttModel.userForm.email.$error.required && mmAdminExtAttModel.userForm.email.$touched) || (mmAdminExtAttModel.userForm.$submitted && mmAdminExtAttModel.userForm.email.$error.required)">Email Id is required</div>
+                                    <div class="has-error" ng-show="mmAdminExtAttModel.userForm.email.$error.email">please enter a valid email.</div>
+                                </div>
+                            </div>
+
+
+
+                            <div class="col-sm-4 pull-right">
+                                <button type="submit" class="btn colored-bg">{{mmAdminExtAttModel.title}} <i class="fa fa-arrow-circle-right"></i></button>
+                            </div>
+                        </form>
+                        <!-- STO form-->
+                    </div>
+                </div>
+            </div>
+        </div>    
+    </div>
+</div>

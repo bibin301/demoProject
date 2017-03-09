@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<div class="timeline" ng-repeat="tktDetail in hdkMyTktModel.tktDetails">
+
+    <!-- START TIMELINE header -->
+    <div class="timeline-header ">
+        <accordion>
+            <accordion-group is-open="status.open">
+                <accordion-heading>
+                    <span class="colored">{{tktDetail.catName}} </span><i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+                </accordion-heading>
+                <table class="table table-user-information">
+                    <tbody>
+
+                        <tr>
+                            <th>Area Id:</th>
+                            <td>{{tktDetail.areaId}}</td>
+                        </tr>
+                        <tr>
+                            <th>Ticket Title:</th>
+                            <td>{{tktDetail.catName}}</td>
+                        </tr>
+                        <tr>
+                            <th>Owner-Name:</th>
+                            <td>{{tktDetail.ownName}}</td>
+                        </tr>
+                        <tr>
+                            <th>Ticket Raised Date:</th>
+                            <td>{{tktDetail.tktRaisedDateTime}}</td>
+                        </tr>
+                        <tr>
+                            <th>Category Name:</th>
+                            <td>{{tktDetail.catName}}</td>
+                        </tr>
+                        <tr>
+                            <th>Area Name</th>
+                            <td>{{tktDetail.areaName}}</td>
+
+                        </tr>
+                        <tr ng-if="tktDetail.recordStatus">
+                            <th>Record Status</th>
+                            <td>{{tktDetail.recordStatus}}</td>
+
+                        </tr>
+
+                    </tbody>
+                </table>
+
+            </accordion-group>
+        </accordion>
+
+    </div>
+    <!-- END TIMELINE header -->
+
+    <!-- START TIMELINE ITEM -->
+    <div class="timeline-item" ng-repeat=" tracks in tktDetail.ticketStatus" ng-class="tktDetail.ownId == tracks.updatedByEmpId ? '' : 'timeline-item-right'">
+        <div class="timeline-item-info" title="{{tracks.updatedByUser}}">{{tracks.updatedByUser}}</div>
+        <div class="timeline-item-icon">
+            <ng-letter-avatar data="{{tracks.updatedByUser}}" fontWeight="600" shape="round" avatarborder="true" width="30" height="30" fontSize="14"></ng-letter-avatar>
+        </div>
+        <div class="timeline-item-content">
+            <accordion>
+                <accordion-group is-open="status.open">
+                    <accordion-heading>
+                        {{tracks.tktStatus}} <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+                    </accordion-heading>
+                    <div class="timeline-heading">
+                        <img src="assets/images/users/user2.jpg"> <a href="#">{{tracks.updatedByUser}}</a>
+                    </div>
+                    <div class="timeline-body">
+                        <p>{{tracks.tktDetails}}</p>
+                        <ul class="list-tags">
+                            <li>
+                                <a href="#">
+                                    <span class="fa fa-tag"></span> {{tracks.updatedByUser}}</a>
+                            </li>
+                        </ul>
+                    </div>
+                </accordion-group>
+            </accordion>
+        </div>
+    </div>
+    <!-- END TIMELINE ITEM -->
+
+    <!-- START TIMELINE ITEM -->
+
+    <div class="timeline-item timeline-main timeline-footer" ng-if="tktDetail.allowedStatus">
+        <accordion>
+            <accordion-group is-open="status.open">
+                <form name="hdkMyTktModel.userForm" novalidate>
+                    <accordion-heading>
+                        <span class="colored">Update Status
+                        </span><i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+                    </accordion-heading>
+                    <div class="update-status">
+                        <select ng-model="hdkMyTktModel.response.SLA"  class="form-border" ng-options="idx as status for (idx, status) in tktDetail.allowedStatus" name="status" required="">
+                            <option value="">-select status-</option>
+                        </select>``
+
+                        <span class="has-error error-space" ng-show="(hdkMyTktModel.userForm.status.$error.required && hdkMyTktModel.userForm.status.$touched) || (hdkMyTktModel.userForm.$submitted && hdkMyTktModel.userForm.status.$error.required)">status is required</span>
+                    </div>
+
+                    <div class="col-sm-12">
+                        <textarea ng-model="hdkMyTktModel.response.description" ui-tinymce="appModel.tinymceOptions" name="comment"></textarea>
+                        <div class="has-error" ng-show="(hdkMyTktModel.userForm.$submitted && hdkMyTktModel.response.description.length < 35)">comment is required</div>
+                    </div>
+
+                    <button class="btn colored-bg pull-right footer-button" type="submit" ng-click="hdkMyTktModel.tktResponse(hdkMyTktModel.response, tktDetail.tktId)">
+                        Submit <i class="fa fa-arrow-circle-right"></i>
+                    </button>
+                </form>
+            </accordion-group>
+        </accordion>
+    </div>
+    <!-- END TIMELINE ITEM -->
+</div>

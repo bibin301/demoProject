@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en" data-ng-app="CartwheelApp">
+
+<head>
+  <meta charset="utf-8" />
+  <title>CartWheel | Host for Assystem Intranet Apps</title>
+  <meta name="description" content="Assystem, Cartwheel, intranet, TLS, MM, HKS, STARS, RMS, AppSys, Timesheet Logging System, Meeting Minutes, Helpdesk System, Project Managemnt, Review Management System, Appraisal System, Leave Management System" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+  <!-- Latest compiled and minified CSS -->
+  <link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico">
+  <link rel="stylesheet" type="text/css" href="vendor/bootstrap-3.3.5/dist/css/bootstrap.min.css?vnd=1.0">
+  <link rel="stylesheet" type="text/css" href="vendor/font-awesome-4.4.0/css/font-awesome.min.css?vnd=1.0">
+  <link rel="stylesheet" type="text/css" href="vendor/jquery/datatables/dataTables.min.css?vnd=2.0">
+  <link rel="stylesheet" type="text/css" href="vendor/jquery/datepicker/css/bootstrap-datepicker3.min.css?vnd=1.0">
+  <link rel="stylesheet" type="text/css" href="vendor/angular/toastr/toastr.min.css?vnd=1.0">
+  <link rel="stylesheet" type="text/css" href="vendor/angular/angular-chosen/chosen.css?vnd=1.0">
+  <link rel="stylesheet" type="text/css" href="css/theme-default.css?nsh=1.0" media="screen">
+  <link rel="stylesheet" type="text/css" href="css/animate.min.css?vnd=1.0" media="screen">
+  <link rel="stylesheet" type="text/css" href="vendor/angular/tinymce/skin.min.css?vnd=1.0" media="screen">
+  <link rel="stylesheet" type="text/css" href="css/bootstrap-fileupload.min.css?vnd=1.0" media="screen">
+
+  <link rel="stylesheet" type="text/css" href="css/style-w3.css?nsh=1.0" />
+  <link rel="stylesheet" type="text/css" href="css/circle.css?nsh=1.0" />
+  <link rel="stylesheet" type="text/css" href="css/style.css?vnd=1.0" />
+  <link rel="stylesheet" type="text/css" href="css/timeline.css?vnd=1.0" />
+  <link rel="stylesheet" type="text/css" href="css/red.css?vnd=1.0" />
+  <link rel="stylesheet" type="text/css" href="css/nav.css?vnd=1.0">
+
+  <link rel="stylesheet" type="text/css" href="css/vAccordion.css?vnd=1.0">
+
+  <link rel="stylesheet" type="text/css" href="css/wbsTree.css?vnd=1.0" media="screen">
+
+</head>
+
+<body data-ng-controller="CartAppCtrl" class="scheme-default default-scheme-color  header-fixed aside-fixed appWrapper rightbar-show">
+  <link rel="stylesheet" ng-href="css/{{appModel.cartapp.config.theme}}.css?nsh=v1.0" ng-if="appModel.cartapp.config.theme">
+  <!-- Toaster section -->
+  <toaster-container toaster-options="{'close-button':true,'progressBar': true,'animation-class': 'toast-top-right'}"></toaster-container>
+
+  <div class="container" lock-screen id="top">
+    <div ui-view></div>
+  </div>
+
+  <!--color picker for theme-->
+  <div class="theme-color" ng-include="'js/components/home/home.color-palete.tpl.html?nsh=v1.0'" ng-class="{'theme-color-expand ':appModel.themeExpand}"></div>
+  <span id="goTop" ng-click="appModel.gotoSection('top')">
+    <i class="fa fa-angle-double-up"></i>
+  </span>
+  <!-- jQuery -->
+  <script src="vendor/jquery/jquery-1.11.3.min.js?vnd=1.0"></script>
+  <script src="vendor/bootstrap-3.3.5/dist/js/bootstrap.min.js?vnd=1.0"></script>
+  <script src="vendor/jquery/datatables/jquery.dataTables.min.js?vnd=1.0"></script>
+  <script src="vendor/jquery/datepicker/js/bootstrap-datepicker.min.js"></script>
+  <script src="vendor/jquery/nicescroll/nicescroll.js?vnd=1.0"></script>
+  <script src="vendor/des.js?vnd=1.0"></script>
+  <script src="vendor/tree.js?vnd=1.0"></script>
+  <script src="vendor/jquery/tree.min.js"> </script>
+
+  <!-- <script src="vendor/vAccordion.js?vnd=1.0"></script> -->
+
+
+  <!-- Angular -->
+  <script src="vendor/angular/angular-1.4.7/angular.min.js?vnd=1.0"></script>
+  <script src="vendor/angular/angular-1.4.7/angular-animate.min.js?vnd=1.0"></script>
+  <script src="vendor/angular/angular-1.4.7/angular-cookies.min.js?vnd=1.0"></script>
+  <script src="vendor/angular/angular-1.4.7/angular-resource.min.js?vnd=1.0"></script>
+  <script src="vendor/angular/angular-1.4.7/angular-sanitize.min.js?vnd=1.0"></script>
+  <script src="vendor/angular/angular-1.4.7/angular-touch.min.js?vnd=1.0"></script>
+  <script src="vendor/angular/vAccordion.js"></script>
+  <script src="vendor/angular/angular-breadcrumb/angular-breadcrumb.js?vnd=1.0"></script>
+
+
+  <script src="vendor/angular/toastr/toastr.min.js?vnd=1.0"></script>
+
+  <script src="vendor/angular/angular-ui-router/angular-ui-router.js?vnd=1.0"></script>
+  <script src="vendor/angular/ngstorage/ngStorage.js?vnd=1.0"></script>
+
+  <!-- bootstrap -->
+  <script src="vendor/angular/angular-bootstrap/ui-bootstrap-tpls.js?vnd=1.0"></script>
+
+  <!-- lazyload -->
+  <script src="vendor/angular/oclazyload/ocLazyLoad.js?vnd=1.0"></script>
+
+
+  <!-- translate -->
+  <script src="vendor/angular/angular-translate/angular-translate.js?vnd=1.0"></script>
+  <script src="vendor/angular/angular-translate/loader-static-files.js?vnd=1.0"></script>
+  <script src="vendor/angular/angular-translate/storage-cookie.js?vnd=1.0"></script>
+  <script src="vendor/angular/angular-translate/storage-local.js?vnd=1.0"></script>
+
+  <!-- 3rd party angular components -->
+  <script src="vendor/angular/services/ui-load.js?vnd=1.0"></script>
+  <script src="vendor/angular/directives/ui-jq.js?vnd=1.0"></script>
+  <script src="vendor/angular/directives/ui-validate.js?vnd=1.0"></script>
+  <script src="vendor/angular/ngletteravatar/ngletteravatar.min.js?vnd=1.0"></script>
+  <script src="vendor/jquery/datatables/angular-dataTables.min.js?vnd=1.0"></script>
+  <script src="vendor/angular/angular-chosen/dist/jquery-chosen.min.js?vnd=1.0"></script>
+  <script src="vendor/angular/angular-chosen/dist/angular-chosen.min.js?vnd=1.0"></script>
+
+
+  <script src="vendor/angular/tinymce/tinymce.min.js?vnd=1.0"></script>
+  <script src="vendor/angular/tinymce/tinymce.js?vnd=1.0"></script>
+
+
+
+  <script src="vendor/angular/ngTable/ngTable.min.js?vnd=1.0"></script>
+
+
+  <script src="js/shared/unsavedChanges.js?vnd=1.0 "></script>
+
+  <script src="js/shared/cartwheel.app.js?nsh=1.0 "></script>
+  <script src="js/shared/cartwheel.debug.js?nsh=1.0"></script>
+  <script src="js/shared/cartwheel.config.js?nsh=1.0"></script>
+  <script src="js/shared/cartwheel.router.js?nsh=1.0"></script>
+  <script src="js/shared/cartwheel.auth.js?nsh=1.0"></script>
+  <script src="js/shared/cartwheel.main.js?nsh=1.0"></script>
+  <script src="js/shared/cartwheel.directives.js?nsh=1.1"></script>
+  <script src="vendor/angular/directives/datepicker.js?vnd=1.0"></script>
+
+  <script src="js/shared/cartapp.controller.js?nsh=1.0"></script>
+  <script src="js/shared/login/login.controller.js?nsh=1.0"></script>
+  <script src="js/shared/section/cartfooter.controller.js?nsh=1.0"></script>
+
+
+  <script src="js/components/home/home.controller.js?nsh=1.0"></script>
+  <script src="js/components/home/home.modal.controller.js?nsh=1.0"></script>
+  <script src="js/components/home/home.service.js?nsh=1.0"></script>
+
+  <script src="js/components/dashboard/dashboard.controller.js?nsh=1.0"></script>
+  <script src="js/components/dashboard/dashboard.service.js?nsh=1.0"></script>
+
+  <script src="js/components/mm/mm.list.controller.js?nsh=1.0"></script>
+  <script src="js/components/mm/mm.actions.controller.js?nsh=1.0"></script>
+  <script src="js/components/mm/mm.admin.controller.js?nsh=1.0"></script>
+  <script src="js/components/mm/mm.service.js?nsh=1.0"></script>
+
+  <script src="js/components/um/um.list.controller.js?nsh=1.0"></script>
+  <script src="js/components/um/um.service.js?nsh=1.0"></script>
+
+
+  <script src="js/components/hdk/hdk.manage-ticket.controller.js?nsh=1.0"></script>
+  <script src="js/components/hdk/hdk.my-ticket.controller.js?nsh=1.0"></script>
+  <script src="js/components/hdk/hdk.admin.controller.js?nsh=1.0"></script>
+
+
+  <script src="js/components/hdk/hdk.service.js?nsh=1.0"></script>
+
+  <script src="js/components/tls/tls.submission.controller.js"></script>
+  <script src="js/components/tls/tls.service.js"></script>
+  <script src="js/components/tls/tls.wri.controller.js"></script>
+  <script src="js/components/tls/tls.timelog.reports.controller.js?nsh=1.0"></script>
+  <script src="js/components/tls/tls.approval.controller.js?nsh=1.0"></script>
+  <script src="js/components/tls/tls.wbs.controller.js?nsh=1.0"></script>
+  <script src="js/components/tls/tls.wbs.template.js"></script>
+  <script src="js/components/tls/tls.changeApproverCtrl.js"></script>
+
+
+
+
+  <script src="js/components/common/cart.pagination.controller.js?nsh=1.0"></script>
+  <script src="vendor/angular/services/anchorSmoothScroll.js?nsh=1.0"></script>
+
+</body>
+
+</html>

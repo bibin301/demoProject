@@ -1,0 +1,223 @@
+<!--STO visible to  large devices only--->
+
+<div class="events-wrapper animate text-center visible-lg visible-md" id="events">
+    <div class="col-md-12 event-title">
+        <div class="title-top"></div>
+        <h2>What's New</h2>
+    </div>
+    <div class="row">
+        <div class="col-md-3 ">
+            <div class="panel panel-default">
+                <div class="panel-heading colored-bg">
+                    <h3 class="panel-title">New Joinee</h3>
+                </div>
+                <carousel class="pointer" interval="cartAppObj.slowSlideInterval">
+                    <!-- Slider Image ng-repeat active="slide.active" ng-repeat="slide in newbie" -->
+                    <slide active="slide.active" ng-repeat="slide in homeModel.sectiondata.newbie">
+                        <div class="panel-body">
+                            <div class="avatar">
+                                <img class="img-circle" ng-src="images/employees/{{slide.usrImage}}">
+                            </div>
+                            <div class="info">
+                                <div class="desc">{{slide.empName}}</div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 pannel-bottom">
+                            <div class="col-xs-4 colored">
+                                <span class="glyphicon glyphicon-map-marker"></span>
+                                {{location_strip(slide.locName)}}
+                            </div>
+                            <div class="col-xs-4 colored">
+                                <span class="glyphicon glyphicon-glass"></span>{{slide.embDob}}
+                            </div>
+                            <div class="col-xs-4 colored">
+                                <span class="glyphicon glyphicon-thumbs-up"></span>45
+                            </div>
+                        </div>
+                    </slide>
+                </carousel>
+                <carousel ng-show="!homeModel.sectiondata.newbie.length">
+                    <slide ng-show="!homeModel.sectiondata.newbie.length">
+                        <div class="panel-body">
+                            <div class="avatar">
+                                <img class="img-circle" ng-src="images/employees/2.jpg">
+                            </div>
+                            <div class="info">
+                                <div class="desc">Name</div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 pannel-bottom">
+                            <div class="col-xs-4 colored">
+                                <span class="glyphicon glyphicon-map-marker"></span>
+                                Location
+                            </div>
+                            <div class="col-xs-4 colored">
+                                <span class="glyphicon glyphicon-glass"></span>Date
+                            </div>
+                            <div class="col-xs-4 colored">
+                                <span class="glyphicon glyphicon-thumbs-up"></span>45
+                            </div>
+                        </div>
+                    </slide>
+                </carousel>
+            </div>
+
+        </div>
+        <!--EDO New Joinee-->
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading colored-bg">
+                    <h3 class="panel-title">Funadda</h3>
+                </div>
+                <carousel interval="cartAppObj.slowSlideInterval">
+                    <!-- Slider Image ng-repeat active="slide.active" ng-repeat="slide in newbie" -->
+                    <slide active="fun.active" ng-click="homeModel.showModalAlbum(fun)" ng-repeat="fun in homeModel.sectiondata.club">
+                        <div class="panel-body fun-body">
+                            <div class="avatar1">
+                                <img ng-src="images/club/{{fun.eventImages[0].imgName}}">
+                                <img ng-src="images/club/fun1.jpg" ng-if="!fun.images.length">
+                            </div>
+                        </div>
+                        <div class="col-md-12 pannel-bottom">
+                            <div class="col-xs-4 colored">
+                                <span class="glyphicon glyphicon-map-marker"></span>
+                                {{fun.eventVenue}} {{fun.eventTitle}}
+                            </div>
+                            <div class="col-xs-4 colored">
+                                <span class="glyphicon glyphicon-calendar"></span>{{fun.eventDate}}
+                            </div>
+                            <div class="col-xs-4 colored">
+                                <span class="glyphicon glyphicon-thumbs-up"></span>-34
+                            </div>
+                        </div>
+                    </slide>
+                </carousel>
+                <carousel ng-show="!homeModel.sectiondata.club.length">
+                    <slide>
+                        <div class="panel-body fun-body">
+                            <div class="avatar1">
+                                <img src="images/club/AMSTERDAM.jpg">
+                            </div>
+                        </div>
+                        <div class="col-md-12 pannel-bottom">
+                            <div class="col-xs-4 colored">
+                                <span class="glyphicon glyphicon-map-marker"></span>
+                                location
+                            </div>
+                            <div class="col-xs-4 colored">
+                                <span class="glyphicon glyphicon-calendar"></span>Date
+                            </div>
+                            <div class="col-xs-4 colored">
+                                <span class="glyphicon glyphicon-thumbs-up"></span>-34
+                            </div>
+                        </div>
+                    </slide>
+                </carousel>
+            </div>
+        </div>
+        <!--EDO Funadda-->
+        <div class="col-md-3  funadda">
+            <div class="panel panel-default">
+                <div class="panel-heading colored-bg">
+                    <h3 class="panel-title">Birthday Buddies</h3>
+                </div>
+                <carousel interval="cartAppObj.slowSlideInterval">
+                    <!-- Slider Image ng-repeat active="slide.active" ng-repeat="slide in newbie" -->
+                    <slide active="fun.active" ng-click="showAlbum(fun)" ng-repeat="birthday in homeModel.sectiondata.birthdays">
+                        <div class="panel-body">
+                            <div class="avatar">
+                                <img class="img-circle" ng-src="images/employees/{{birthday.usrImage}}">
+                            </div>
+                            <div class="info">
+                                <div class="desc">{{birthday.empName}}</div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 pannel-bottom">
+                            <div class="col-xs-4 colored">
+                                <span class="glyphicon glyphicon-map-marker"></span>
+                                locaction
+                            </div>
+                            <div class="col-xs-4 colored">
+                                <!--<span class="glyphicon glyphicon-calendar"></span>-->{{birthday.empDob}}
+                            </div>
+                            <div class="col-xs-4 colored">
+                                <span class="glyphicon glyphicon-thumbs-up"></span>-34
+                            </div>
+                        </div>
+                    </slide>
+                </carousel>
+
+
+                <carousel class="pointer" ng-show="!homeModel.sectiondata.birthdays.length">
+                    <!-- Slider Image ng-repeat active="slide.active" ng-repeat="slide in newbie" -->
+                    <slide>
+                        <div class="panel-body">
+                            <div class="avatar">
+                                <img class="img-circle" ng-src="images/employees/1.jpg">
+                            </div>
+                            <div class="info">
+                                <div class="desc">Name</div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 pannel-bottom">
+                            <div class="col-xs-4 colored">
+                                <span class="glyphicon glyphicon-map-marker"></span>
+                                location
+                            </div>
+                            <div class="col-xs-4 colored">
+                                <span class="glyphicon glyphicon-calendar"></span>Date
+                            </div>
+                            <div class="col-xs-4 colored">
+                                <span class="glyphicon glyphicon-thumbs-up"></span>-34
+                            </div>
+                        </div>
+                    </slide>
+                </carousel>
+            </div>
+
+        </div>
+        <!--EDO Birthday-->
+    </div>
+    <div class="clearfix"></div>
+</div>
+<!--ENO visible to  large devices only--->
+<!--STO visible to  small and extra small devices only--->
+<div class="events-wrapper animate text-center visible-sm visible-xs device-bottom" id="events">
+    <div class="col-md-12 event-title">
+        <div class="title-top"></div>
+        <h4>What's New</h4>
+    </div>
+    <div class="row">
+        <div class="col-xs-6 no-margin">
+            <div class="panel panel-default">
+                <div class="panel-heading colored-bg">New joinee</div>
+                <div class="panel-body xs-events-container">
+                    <carousel class="pointer">
+                        <!-- Slider Image ng-repeat active="slide.active" ng-repeat="slide in newbie" -->
+                        <slide active="birthday.active" ng-repeat="slide in homeModel.sectiondata.newbie">
+                            {{slide.empName}}
+                        </slide>
+                        <slide active="birthday.active" ng-show="!homeModel.sectiondata.newbie">
+                            New Joinee
+                        </slide>
+                    </carousel>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-6 no-margin">
+            <div class="panel panel-default">
+                <div class="panel-heading colored-bg">Birthday</div>
+                <div class="panel-body xs-events-container">
+                    <carousel interval="cartAppObj.slowSlideInterval">
+                        <!-- Slider Image ng-repeat active="slide.active" ng-repeat="slide in newbie" -->
+                        <slide active="fun.active" ng-click="showAlbum(fun)" ng-repeat="birthday in homeModel.sectiondata.birthdays">
+                            {{birthday.empName}}
+                            <br>{{birthday.empDob}}
+                        </slide>
+                    </carousel>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="row">
+        </div>

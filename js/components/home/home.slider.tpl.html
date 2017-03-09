@@ -1,0 +1,48 @@
+
+
+<!-- STO slider for large devices-->
+<div class="visible-lg visible-md">
+    <div ng-show="homeModel.sectiondata.slides.length">
+        <carousel interval="cartAppObj.slowSlideInterval">
+            <!-- Slider Image ng-repeat -->
+            <slide active="slide.active" ng-repeat="slide in homeModel.sectiondata.slides">
+                <img ng-src="images/banners/{{slide.imgName}}">
+                <!-- image path -->
+                <div class="carousel-caption">
+                    <div class="scroll-down" id="scrolldown" ng-if="homeModel.isLogged()">
+                        <span ng-click="appModel.gotoSection('event-container')">
+                            <i class="fa fa-angle-down fa-5x"></i>
+                        </span>
+                    </div>
+                    <div class="scroll-down" id="scrolldown" ng-if="!homeModel.isLogged()">
+                        <span ng-click="appModel.gotoSection('applications')">
+                            <i class="fa fa-angle-down fa-5x"></i>
+                        </span>
+                    </div>
+                </div>
+            </slide>
+        </carousel>
+    </div>
+    <div ng-hide="homeModel.sectiondata.slides.length">
+        <carousel interval="cartAppObj.slowSlideInterval">
+            <slide active="appinfo.active" ng-repeat="appinfo in appModel.sectiondata.application">
+                <h3 class="colored"><i class="fa" ng-class="{{'appinfo.iconName'}}"></i> {{appinfo.appName}}</h3>
+                <span>{{appinfo}}
+                </span>
+            </slide>
+        </carousel>
+    </div>
+</div>
+<!-- ENO slider for large devices-->
+<!-- STO slider for small device only-->
+<div class="visible-sm visible-xs home-slider-top small-device-bgimage">
+    <carousel interval="cartAppObj.mediumSlideInterval">
+        <!-- Slider Image ng-repeat -->
+        <slide active="appinfo.active" ng-repeat="appinfo in homeModel.sectiondata.application">
+            <h3 class="colored"><i class="fa" ng-class="{{'appinfo.Icon_name'}}"></i> {{appinfo.appName}}</h3>
+            <span>{{appinfo.appDesc}}
+            </span>
+        </slide>
+    </carousel>
+</div>
+<!-- ENO slider for small  device only-->

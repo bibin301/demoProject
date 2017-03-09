@@ -1,0 +1,22 @@
+<!-- Section on displaying the Cartwheel Applications -->
+<div class="inner">
+    <div class="as-service-header">
+        <div class="title-top"></div>
+        <h2>Applications</h2>
+    </div>
+    <div class="service-box-wrapper">
+        <div class="temp">
+            <div class="col-xs-2 service-box animated fadeInDown pointer" ng-repeat="app in homeModel.sectiondata.application">
+                <div ng-click="homeModel.showModalApp(app)">
+<!-- Service-icons -->
+                    <a class="service-icon">
+                        <i class="fa" ng-class="{{'app.iconName'}}"></i>
+                    </a>
+                    <h3>{{app.appName}}</h3>
+                </div>
+            </div>
+        </div>
+<!-- EDO Service icon -->
+    </div>
+    <div class="clearfix"></div>
+</div>

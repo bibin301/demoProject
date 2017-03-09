@@ -1,0 +1,92 @@
+<style>
+  .template-header {
+    padding: 1px;
+  }
+</style>
+
+
+
+
+
+<div class="panel panel-default animated zoomIn" ng-class="{'panel-custom-fullScreen':panelFullScreen}">
+  <div class="panel-heading panel-custom panel-heading-custom2">
+    <h2 class="panel-title">Templates
+    </h2>
+    <div class="box-icon pull-right">
+      <a class="btn btn-close btn-round btn-default" ng-click="panelFullScreen = !panelFullScreen"><i class="glyphicon" ng-class="{'glyphicon-resize-full':!panelFullScreen,'glyphicon-resize-small':panelFullScreen}" ></i></a>
+
+    </div>
+    <div class="clearfix"></div>
+  </div>
+  <div class="panel-body " ng-show="!isOpened">
+    <div class="row">
+
+
+      <div class="col-md-12">
+        <!-- STO timesheet sction-->
+        <div class="col-md-6">
+          <div class="panel panel-default">
+            <div class="text-center template-header">
+              <h3>Time Sheet</h3>
+            </div>
+            <div class="panel-body">
+              <div class="col-md-3">
+              </div>
+              <div class="col-sm-3">
+                <div class="panel panel-default colored-border">
+                  <div class="panel-body">
+                    <a href="../public1/files/tls/templates/time_sheet.csv">
+                      <img ng-src="images/tls/timesheet/csv/csv-{{appModel.cartapp.config.theme}}.png" class="img-responsive" style="width:100px;">
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-3">
+                <div class="panel panel-default colored-border">
+                  <div class="panel-body">
+                    <a href="../public1/files/tls/templates/time_sheet.xls">
+                      <img ng-src="images/tls/timesheet/xlsx/xlsx-{{appModel.cartapp.config.theme}}.png" class="img-responsive" style="width:100px;">
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!--End 0f timesheet section-->
+        <!--Start  0f WBS section-->
+        <div class="col-md-6">
+          <div class="panel panel-default">
+            <div class="text-center template-header">
+              <h3>WBS</h3>
+            </div>
+            <div class="panel-body">
+              <div class="col-md-3">
+              </div>
+              <div class="col-sm-3">
+                <div class="panel panel-default colored-border">
+                  <div class="panel-body">
+                    <a href="../public1/files/tls/templates/wbs.csv">
+                      <img ng-src="images/tls/wbs/csv/csv-{{appModel.cartapp.config.theme}}.png" class="img-responsive" style="width:100px;">
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-3">
+                <div class="panel panel-default colored-border">
+                  <div class="panel-body">
+                    <a href="../public1/files/tls/templates/wbs.xls">
+                      <img ng-src="images/tls/wbs/xlsx/xlsx-{{appModel.cartapp.config.theme}}.png" class="img-responsive" style="width:100px;">
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--End  0f WBS section-->
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,123 @@
+<style>
+  .custom-nav-help {
+    position: fixed;
+    z-index: 10;
+    /*width: 86%;*/
+  }
+
+  .navbar-right {
+    right: 3%;
+  }
+
+  .umHelpsection-2,
+  .umHelpsection-3,
+  .umHelpsection-4 {
+    min-height: 300px;
+  }
+
+  .umHelpsection-small {
+    margin-top: 23%;
+  }
+</style>
+
+
+
+
+
+
+<div class="panel panel-default animated zoomIn" ng-class="{'panel-custom-fullScreen':panelFullScreen}">
+  <div class="panel-heading panel-custom panel-heading-custom2">
+    <h2 class="panel-title">User Management Help
+    </h2>
+    <div class="box-icon pull-right">
+      <a class="btn btn-close btn-round btn-default" ng-click="panelFullScreen = !panelFullScreen"><i class="glyphicon" ng-class="{'glyphicon-resize-full':!panelFullScreen,'glyphicon-resize-small':panelFullScreen}" ></i></a>
+
+    </div>
+    <div class="clearfix"></div>
+  </div>
+  <div class="panel-body " ng-show="!isOpened">
+    <div class="row">
+      <!-- MENU (STATIC ON TOP -->
+      <nav class="navbar navbar-default navbar-right custom-nav-help" id="menu" role="navigation">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="header-inner">
+          <div class="navbar-header">
+            <button class="navbar-toggle colored-bg" ng-click="navCollapsed = !navCollapsed" ng-init="navCollapsed = true" type="button">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+          </div>
+
+          <!-- Collect the nav links, forms, and other content for toggling -->
+          <div class="collapse navbar-collapse" ng-class="!navCollapsed && 'in'">
+            <ul class="nav navbar-nav navbar-right topMenuHeight">
+              <li class="login-btn events">
+                <a ng-click="appModel.gotoSection('um_section1')"> What is user management?</a>
+              </li>
+              <li class="login-btn">
+                <a ng-click="appModel.gotoSection('um_section2')">Create user</a>
+              </li>
+              <li class="login-btn">
+                <a ng-click="appModel.gotoSection('um_section3')">Edit Users</a>
+              </li>
+              <li class="login-btn">
+                <a ng-click="appModel.gotoSection('um_section4')">View user</a>
+              </li>
+            </ul>
+          </div>
+          <!-- /.navbar-collapse -->
+        </div>
+      </nav>
+      <div class="content-wrapper">
+        <div class="col-md-10">
+          <div class="tab-content">
+            <!--STO tap select one -->
+            <div class="tab-pane active text-style umHelpsection-1 visible-lg" id="um_section1">
+              <h2 class="col-md-12">1 What is User Management?</h2>
+              <div class="col-md-12">
+                User Management is a web-based tool
+              </div>
+              <img ng-src="images/usermanagement/workflow-{{appModel.cartapp.config.theme}}.gif" class="img-responsive">
+            </div>
+            <div class="tab-pane active text-style umHelpsection-small visible-xs visible-sm" id="um_section1">
+              <div class="col-md-12">
+                <h2>1 What is User Management?</h2>
+              </div>
+              <div class="clearfix">
+              </div>
+              <div class="col-md-12">
+                User Management is a web-based tool
+              </div>
+              <img ng-src="images/usermanagement/workflow-{{appModel.cartapp.config.theme}}.gif" class="img-responsive">
+            </div>
+            <!--ENO tap select one -->
+            <!--STO tap select two -->
+            <div class="tab-pane active text-style umHelpsection-2 col-md-12" id="um_section2">
+              <h2>2 Create User</h2>
+              <hr>
+              <img class="img-rounded img-responsive pull-right" src="images/350x250.png">
+            </div>
+            <!--ENO tap select two -->
+            <!--STO tap select three -->
+            <div class="tab-pane active text-style umHelpsection-3 col-md-12" id="um_section3">
+              <h2>3 Edit Users</h2>
+              <hr>
+              <img class="img-rounded img-responsive pull-right" src="images/350x250.png">
+            </div>
+            <!--ENO tap select three -->
+            <!--STO tap select four -->
+            <div class="tab-pane active text-style umHelpsection-4 col-md-12" id="um_section4">
+              <h2>4 View User</h2>
+              <hr>
+              <img class="img-rounded img-responsive pull-right" src="images/350x250.png">
+            </div>
+            <!--ENO tap select four -->
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

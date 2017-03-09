@@ -1,0 +1,366 @@
+<!--
+ * User Management List Page : um.list.tpl.html
+ * controller : um.list.controller.js : umListCtrl
+-->
+<style>
+
+  .um-list .form-horizontal .control-label {
+    text-align: left;
+    font-weight: 600;
+    font-size: 14px;
+    color: #000000;
+  }
+  .underline-mName {
+    background: none !important;
+    background-image: none;
+    /*border: 1px solid #789637;*/
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-radius: 0 0 0 0 !important;
+    /*color: #5b5b60;*/
+    padding: 5px 4px;
+    font-family: inherit;
+    font-size: 12px;
+    line-height: 1.2;
+    transition-duration: 0.1s;
+    box-shadow: none !important;
+    transition: border 300ms ease-out;
+  }
+
+  .user-image .user-image-buttons {
+    color: #eee;
+    position: absolute;
+    top: 15%;
+    right: 33%;
+    background-color: #00BDCC;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+
+  .user-image {
+    text-align: center;
+  }
+</style>
+
+<div class="panel panel-default panel-custom animated zoomIn" ng-class="{'panel-custom-fullScreen':panelFullScreen}">
+  <div class="panel-heading panel-custom panel-heading-custom2">
+    <h2 class="panel-title">User Management</h2>
+    <div class="box-icon pull-right">
+      <a class="btn btn-close btn-round btn-default" ng-click="umListModel.umAdd()" title="Add New Employee"><i class="glyphicon glyphicon-plus "></i></a>
+
+      <a class="btn btn-close btn-round btn-default" ng-click="panelFullScreen = !panelFullScreen"><i class="glyphicon" ng-class="{'glyphicon-resize-full':!panelFullScreen,'glyphicon-resize-small':panelFullScreen}" ></i></a>
+      <a class="btn btn-minimize btn-round btn-default" ng-click="isOpened = !isOpened"><i class="glyphicon" ng-class="{'glyphicon-chevron-up':!isOpened,'glyphicon-chevron-down':isOpened}" ></i></a>
+      <a class="btn btn-close btn-round btn-default" ng-click="umListModel.umReload();"><i class="glyphicon glyphicon-refresh fa-spin-hover"></i></a>
+    </div>
+    <div class="clearfix "></div>
+  </div>
+  <div class="panel-body " ng-show="!isOpened ">
+    <div class="row">
+      <div class="umList">
+        <div class="col-sm-12 um-list">
+          <!--STO right  -->
+          <div class="col-sm-8" ng-class="{'full-width':appModel.tableFullWidth}">
+
+            <div class="panel panel-default animated zoomIn" ng-class="{'panel-custom-fullScreen':panelFullScreen}" ng-controller="panelCtrl">
+              <div class="panel-heading panel-custom panel-heading-custom2">
+                <h2 class="panel-title">userList</h2>
+                <div class="box-icon pull-right">
+                  <a class="btn btn-close btn-round btn-default" ng-click="panelFullScreen = !panelFullScreen"><i class="glyphicon" ng-class="{'glyphicon-resize-full':!panelFullScreen,'glyphicon-resize-small':panelFullScreen}" ></i></a>
+                  <a class="btn btn-minimize btn-round btn-default"><i class="glyphicon" ng-class="{'glyphicon-chevron-up':!isOpened,'glyphicon-chevron-down':isOpened}" ng-click="isOpened = !isOpened"></i></a>
+
+                </div>
+                <div class="clearfix"></div>
+              </div>
+              <div class="panel-body " ng-show="!isOpened">
+
+                <select ng-model="umListModel.userlocations" chosen persistent-create-option="true" ng-selected="umListModel.userlocations" ng-change="umListModel.getEmpByLoc(umListModel.userlocations.id)" ng-options="empLoc.locName for empLoc in umListModel.empLoc track by empLoc.id">
+                  <option value="">--Choose Location--</option>
+                </select>
+
+                <div class="table-responsive um-table" style="overflow-x:auto ">
+                  <table class="display table table-bordered table-striped " datatable="ng " id="dynamic-table custom_table ">
+                    <thead>
+                      <tr>
+                        <th>Employee No</th>
+                        <th>Employee Name</th>
+                        <th>Home Location</th>
+                        <th>Current Location</th>
+                        <th>Department</th>
+                        <th>Designation</th>
+                        <th>Employee Type</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr ng-repeat="usrList in umListModel.empList">
+                        <td>{{usrList.empNo}}</td>
+                        <td>{{usrList.empFname}} {{userList.empLname}}</td>
+                        <td title="{{usrList.empHomeLocName}}">{{usrList.empHomeLocName}}</td>
+                        <td title="{{usrList.empCurrentLocName}}"> {{usrList.empCurrentLocName}}</td>
+                        <td title="{{usrList.empDepName}}">{{usrList.empDepName}}</td>
+                        <td title="{{usrList.empDesgName}}">{{usrList.empDesgName}}</td>
+                        <td>{{umListModel.empType[usrList.empType]}}</td>
+                        <td>{{umListModel.empStatus[usrList.empStatus]}}</td>
+                        <td><button class="btn btn-xs colored-bg" ng-click="umListModel.umListEdit(usrList)" type="button">
+                                                <i class="fa fa-edit"></i>
+                                            </button></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--ENO right  -->
+          <!--STO left  -->
+
+          <div class="col-sm-4" ng-class="{'full-width':appModel.tableFullWidth}">
+            <div class="panel panel-default animated zoomIn" ng-class="{'panel-custom-fullScreen':panelFullScreen}" ng-controller="panelCtrl">
+              <div class="panel-heading panel-custom panel-heading-custom2">
+                <h2 class="panel-title">{{umListModel.title }}</h2>
+                <div class="box-icon pull-right">
+                  <a class="btn btn-close btn-round btn-default" ng-click="panelFullScreen = !panelFullScreen"><i class="glyphicon" ng-class="{'glyphicon-resize-full':!panelFullScreen,'glyphicon-resize-small':panelFullScreen}" ></i></a>
+                  <a class="btn btn-minimize btn-round btn-default"><i class="glyphicon" ng-class="{'glyphicon-chevron-up':!isOpened,'glyphicon-chevron-down':isOpened}" ng-click="isOpened = !isOpened"></i></a>
+
+                </div>
+                <div class="clearfix"></div>
+              </div>
+              <div class="panel-body " ng-show="!isOpened">
+
+                <div>
+                  <form class="form-horizontal" name="umListModel.userForm" novalidate ng-submit="umListModel.createUm(umListModel.usrRes)">
+                    <!-- STO image upload section unsaved-warning-form-->
+                    <div class="form-group">
+                      <div class="image-upload">
+                        <div class="user_profile" ng-mouseover="umListModel.hoverIn()" ng-mouseleave="umListModel.hoverOut()">
+                          <h3 class="colored text-center">{{umListModel.listdata.empFname}}{{umListModel.listdata.empLname}}</h3>
+
+                          <div class="fileupload fileupload-new" data-provides="fileupload">
+                            <div class="user-image">
+                              <div class="fileupload-new thumbnail">
+                                <span ng-if="!umListModel.usrRes.empPic">
+                                  <img src="images/employees/default.jpg" class="img-circle img-responsive" style="width:180px;height:180px">
+                                </span>
+                                <span ng-if="umListModel.usrRes.empPic">
+                                  <img ng-src="{{umListModel.usrRes.empPic}}" class="img-circle img-responsive" style="width:180px;height:180px">
+                                </span>
+
+                              </div>
+                              <div style="" class="user-image-buttons" ng-show="umListModel.hoverEdit">
+                                <span class="btn btn-azure btn-file btn-sm">
+                                  <span class="fileupload-new"><i class="fa fa-pencil"></i></span>
+                                  <span class="fileupload-exists"><i class="fa fa-pencil"></i></span>
+                                  <input class="ng-pristine ng-untouched ng-valid" ng-model="umListModel.usrRes.empPic" onchange="angular.element(this).scope().photoChanged(this.files)" type="file">
+
+
+                                </span>
+                                <a href="#" class="btn fileupload-exists btn-red btn-sm" data-dismiss="fileupload">
+                                  <i class="fa fa-times"></i>
+                                </a>
+
+                              </div>
+                            </div>
+                          </div>
+
+                        </div>
+                      </div>
+                    </div>
+                    <!-- ENO image upload section -->
+
+                    <!--STO add/edit form section  -->
+
+
+                    <div class="form-group">
+                      <label class="col-sm-4 control-label model-header">Windows Id</label>
+                      <div class="col-sm-8">
+
+                        <input type="text" class="form-control underline" name="loginid" ng-model="umListModel.usrRes.usrName" placeholder="Windows Id" required>
+                        <div class="has-error" ng-show="(umListModel.userForm.loginid.$error.required && umListModel.userForm.loginid.$touched)||(umListModel.userForm.$submitted && umListModel.userForm.loginid.$error.required)">Windows id is required </div>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="col-sm-4 control-label">Employee No</label>
+                      <div class="col-sm-8">
+                        <input type="text" name="empNo" ng-model="umListModel.usrRes.empId" class="form-control underline" placeholder="Employee No" required resettable>
+                        <div class="has-error" ng-show="(umListModel.umListModel.userForm.empNo.$error.required && umListModel.userForm.empNo.$touched)||(umListModel.userForm.$submitted && umListModel.userForm.empNo.$error.required)">employee number is required </div>
+
+                      </div>
+                    </div>
+
+
+                    <div class="form-group">
+                      <label class="col-sm-4 control-label">First Name</label>
+                      <div class="col-sm-8">
+                        <input type="text" onkeypress="isCharacter(event)" ng-model="umListModel.usrRes.firstName" class="form-control underline" placeholder="First Name" name="fName" required>
+                        <div class="has-error" ng-show="(umListModel.userForm.fName.$error.required && umListModel.userForm.fName.$touched)||(umListModel.userForm.$submitted && umListModel.userForm.fName.$error.required)">firstname is required </div>
+                      </div>
+                    </div>
+
+
+                    <div class="form-group">
+                      <label class="col-sm-4 control-label">Middle Name</label>
+                      <div class="col-sm-8">
+                        <input type="text" onkeypress="isCharacter(event)" ng-model="umListModel.usrRes.middleName" class="form-control underline-mName" placeholder="Middle Name">
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="col-sm-4 control-label">Last Name</label>
+                      <div class="col-sm-8">
+                        <input type="text" onkeypress="isCharacter(event)" ng-model="umListModel.usrRes.lastName" name="lName" class="form-control underline" placeholder="Last Name" required>
+                        <div class="has-error" ng-show="(umListModel.userForm.lName.$error.required && umListModel.userForm.lName.$touched)||(umListModel.userForm.$submitted && umListModel.userForm.lName.$error.required)">last name is required </div>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="col-sm-4 control-label">Email</label>
+                      <div class="col-sm-8">
+                        <input type="email" name="email" ng-model="umListModel.usrRes.emailId" class="form-control underline" placeholder="Email" required>
+                        <div class="has-error" ng-show="(umListModel.userForm.email.$error.required && umListModel.userForm.email.$touched)||(umListModel.userForm.$submitted && umListModel.userForm.email.$error.required)">email is required </div>
+                        <span ng-show="umListModel.userForm.email.$error.email" class="has-error">Please, write a valid email address</span>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="col-sm-4 control-label">Phone Number</label>
+                      <div class="col-sm-8">
+
+                        <!-- onkeypress="return isNumberKey(event)"
+                        ng-pattern="/^(?=.*[0-9])[- +()0-9]+$/"
+
+                       -->
+                        <input type="text" onkeypress="return isNumberKey(event)" ng-model="umListModel.usrRes.phoneNo" class="form-control underline" placeholder="Phone Number" name="pNo" required>
+                        <div class="has-error" ng-show="(umListModel.userForm.pNo.$error.required && umListModel.userForm.pNo.$touched)||(umListModel.userForm.$submitted && umListModel.userForm.pNo.$error.required)">phone number is required </div>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="col-sm-4 control-label">Home Location</label>
+                      <div class="col-sm-8">
+                        <select type="text" chosen persistent-create-option="true" ng-model="umListModel.usrRes.homeLoc" class="form-control form-border" name="hLoc" ng-options="umEditLoc.locName for umEditLoc in umListModel.empLocations track by umEditLoc.id" required>
+                          <option value="">--select home location--</option>
+                        </select>
+                        <div class="has-error" ng-show="(umListModel.userForm.hLoc.$error.required && umListModel.userForm.hLoc.$touched)||(umListModel.userForm.$submitted && umListModel.userForm.hLoc.$error.required)">home location is required </div>
+
+                      </div>
+                    </div>
+
+
+                    <div class="form-group">
+                      <label class="col-sm-4 control-label">Current Location</label>
+                      <div class="col-sm-8">
+                        <select type="text" chosen persistent-create-option="true" ng-model="umListModel.usrRes.CurrentLoc" name="cLoc" class="form-control form-border" ng-options="umEditLoc.locName for umEditLoc in umListModel.empLocations track by umEditLoc.id" required>
+                          <option value="">--select current location--</option>
+                        </select>
+                        <div class="has-error" ng-show="(umListModel.userForm.cLoc.$error.required && umListModel.userForm.cLoc.$touched)||(umListModel.userForm.$submitted && umListModel.userForm.cLoc.$error.required)">current location is required </div>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="col-sm-4 control-label">Department</label>
+                      <div class="col-sm-8">
+                        <select type="text" chosen persistent-create-option="true" ng-model="umListModel.usrRes.depName" name="dName" class="form-control form-border" ng-change="umListModel.getempDepID(umListModel.usrRes.depName)" ng-options="umDep.depName for umDep in umListModel.departments track by umDep.id"
+                          required>
+                          <option value="">--select department--</option>
+                        </select>
+                        <div class="has-error" ng-show="(umListModel.userForm.dName.$error.required && umListModel.userForm.dName.$touched)||(umListModel.userForm.$submitted && umListModel.userForm.dName.$error.required)">department is required </div>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="col-sm-4 control-label">Designation</label>
+                      <div class="col-sm-8">
+                        <select type="text" chosen persistent-create-option="true" ng-model="umListModel.usrRes.desg" class="form-control form-border" name="desName" ng-options="umDesg.desgName for umDesg in umListModel.empDesignations track by umDesg.id" required>
+                          <option value="">-- select designation--</option>
+                        </select>
+                        <div class="has-error" ng-show="(umListModel.userForm.desName.$error.required && umListModel.userForm.desName.$touched)||(umListModel.userForm.$submitted && umListModel.userForm.desName.$error.required)">designation is required </div>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+
+                      <label class="col-sm-4 control-label">Date of Birth</label>
+                      <div class="col-sm-8">
+
+                        <input id="datepicker" name="jDate" date-picker ng-model="umListModel.usrRes.dob" type="text" class="form-control underline" required/>
+
+                        <div class="has-error" ng-show="(umListModel.userForm.jDate.$error.required && umListModel.userForm.jDate.$touched)||(umListModel.userForm.$submitted && umListModel.userForm.jDate.$error.required)">joining date is required </div>
+                      </div>
+                    </div>
+
+
+                    <div class="form-group">
+                      <label class="col-sm-4 control-label">Date of Joining</label>
+                      <div class="col-sm-8">
+                        <input id="datepicker" date-picker ng-model="umListModel.usrRes.doj" type="text" class="form-control underline" name="dob" required/>
+
+                        <div class="has-error" ng-show="(umListModel.userForm.dob.$error.required && umListModel.userForm.dob.$touched)||(umListModel.userForm.$submitted && umListModel.userForm.dob.$error.required)">date of birth is required </div>
+                      </div>
+                    </div>
+
+
+                    <div class="form-group">
+                      <label class="col-sm-4 control-label">Active </label>
+                      <div class="col-sm-3">
+                        <select chosen persistent-create-option="true" class="form-control form-border" type="text" ng-model="umListModel.usrRes.status" name="status" required>
+                          <option value="">-select status-</option>
+                          <option value="y">Yes</option>
+                          <option value="n">No</option>
+                        </select>
+                        <div class="has-error" ng-show="(umListModel.userForm.status.$error.required && umListModel.userForm.status.$touched)||(umListModel.userForm.$submitted && umListModel.userForm.status.$error.required)"> status is required </div>
+                      </div>
+                      <label class="col-sm-1 control-label left-padding">Type</label>
+                      <div class="col-sm-3">
+                        <select chosen persistent-create-option="true" ng-model="umListModel.usrRes.type" class="form-control form-border" name="type" required="">
+                          <option value="">-select type-</option>
+                          <option value="P">Permanent</option>
+                          <option value="C">Contract</option>
+                          <option value="F">Fulltime</option>
+                          <option value="X">Others</option>
+                        </select>
+                        <div class="has-error" ng-show="(umListModel.userForm.type.$error.required && umListModel.userForm.type.$touched)||(umListModel.userForm.$submitted && umListModel.userForm.type.$error.required)">type is required </div>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="col-sm-4 control-label">Gender</label>
+                      <div class="col-sm-8">
+                        <div>
+
+                          <label class="radio-inline">
+                            <input type="radio" name="gender" ng-model="umListModel.usrRes.gender" value="M" required> Male
+                          </label>
+
+                          <label class="radio-inline">
+                            <input type="radio" name="gender" ng-model="umListModel.usrRes.gender" value="F" required> Female
+                          </label>
+
+                          <label class="radio-inline">
+                            <input type="radio" name="gender" ng-model="umListModel.usrRes.gender" value="O" required> Others
+                          </label>
+
+                        </div>
+                        <span class="has-error" ng-show="umListModel.userForm.$submitted &&!umListModel.usrRes.gender">Gender is required</span>
+                      </div>
+                    </div>
+
+                    <div class="col-sm-3 col-md-offset-9">
+                      <button class="btn colored-bg btn-block" type="submit" ng-click="">
+                        {{umListModel.btn}} <i class="fa fa-arrow-circle-right"></i>
+                      </button>
+                    </div>
+                    <!--ENO add/edit form section  -->
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--ENO left  -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

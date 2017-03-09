@@ -1,0 +1,969 @@
+{
+  "tls": {
+    "projects": [{
+      "prjId": "16",
+      "prjCode": "Overhead_IND",
+      "prjName": "Overhead_IND",
+      "prjMgrId": "2",
+      "pgmMgrId": "2",
+      "visibleToAll": "Y"
+    }, {
+      "prjId": "17",
+      "prjCode": "Overhead-BD_IND",
+      "prjName": "Overhead-BD_IND",
+      "prjMgrId": "685",
+      "pgmMgrId": "2",
+      "visibleToAll": "Y"
+    }, {
+      "prjId": "18",
+      "prjCode": "Overhead-FIN_IND",
+      "prjName": "Overhead-FIN_IND",
+      "prjMgrId": "14",
+      "pgmMgrId": "2",
+      "visibleToAll": "Y"
+    }, {
+      "prjId": "19",
+      "prjCode": "Overhead-ADMIN_IND",
+      "prjName": "Overhead-ADMIN_IND",
+      "prjMgrId": "644",
+      "pgmMgrId": "28",
+      "visibleToAll": "Y"
+    }, {
+      "prjId": "20",
+      "prjCode": "Overhead-HR_IND",
+      "prjName": "Overhead-HR_IND",
+      "prjMgrId": "28",
+      "pgmMgrId": "2",
+      "visibleToAll": "Y"
+    }, {
+      "prjId": "21",
+      "prjCode": "Overhead-MISC_IND",
+      "prjName": "Overhead-MISC_IND",
+      "prjMgrId": "2",
+      "pgmMgrId": "2",
+      "visibleToAll": "Y"
+    }, {
+      "prjId": "22",
+      "prjCode": "Overhead-OTH_IND",
+      "prjName": "Overhead-OTH_IND",
+      "prjMgrId": "161",
+      "pgmMgrId": "28",
+      "visibleToAll": "Y"
+    }, {
+      "prjId": "24",
+      "prjCode": "Overhead-REC_IND",
+      "prjName": "Overhead-REC_IND",
+      "prjMgrId": "733",
+      "pgmMgrId": "28",
+      "visibleToAll": "Y"
+    }, {
+      "prjId": "25",
+      "prjCode": "Overhead-Recreation-Club_IND",
+      "prjName": "Overhead-Recreation-Club_IND",
+      "prjMgrId": "161",
+      "pgmMgrId": "28",
+      "visibleToAll": "Y"
+    }, {
+      "prjId": "26",
+      "prjCode": "Overhead-SYS_IND",
+      "prjName": "Overhead-SYS_IND",
+      "prjMgrId": "2",
+      "pgmMgrId": "2",
+      "visibleToAll": "Y"
+    }, {
+      "prjId": "27",
+      "prjCode": "Overhead-Trg_IND",
+      "prjName": "Overhead-Trg_IND",
+      "prjMgrId": "166",
+      "pgmMgrId": "28",
+      "visibleToAll": "Y"
+    }, {
+      "prjId": "29",
+      "prjCode": "Project office_IND",
+      "prjName": "Project office_IND",
+      "prjMgrId": "8",
+      "pgmMgrId": "8",
+      "visibleToAll": "Y"
+    }, {
+      "prjId": "50",
+      "prjCode": "GF T&D Analysis",
+      "prjName": "GF T&D Analysis",
+      "prjMgrId": "19",
+      "pgmMgrId": "8",
+      "visibleToAll": "Y"
+    }, {
+      "prjId": "82",
+      "prjCode": "Overhead",
+      "prjName": "Overhead",
+      "prjMgrId": "208",
+      "pgmMgrId": "208",
+      "visibleToAll": "Y"
+    }, {
+      "prjId": "83",
+      "prjCode": "Overhead-HR",
+      "prjName": "Overhead-HR",
+      "prjMgrId": "225",
+      "pgmMgrId": "28",
+      "visibleToAll": "Y"
+    }, {
+      "prjId": "86",
+      "prjCode": "SEPG",
+      "prjName": "SEPG",
+      "prjMgrId": "86",
+      "pgmMgrId": "208",
+      "visibleToAll": "Y"
+    }, {
+      "prjId": "90",
+      "prjCode": "Overhead-REC",
+      "prjName": "Overhead-REC",
+      "prjMgrId": "231",
+      "pgmMgrId": "231",
+      "visibleToAll": "Y"
+    }, {
+      "prjId": "103",
+      "prjCode": "Elan Team",
+      "prjName": "Elan Team",
+      "prjMgrId": "7",
+      "pgmMgrId": "7",
+      "visibleToAll": "Y"
+    }, {
+      "prjId": "105",
+      "prjCode": "0428102129321-CERT_ERTMS_OB",
+      "prjName": "0428102129321-CERT_ERTMS_OB",
+      "prjMgrId": "347",
+      "pgmMgrId": "347",
+      "visibleToAll": "Y"
+    }, {
+      "prjId": "106",
+      "prjCode": "0428102120001-ISA_PNR",
+      "prjName": "0428102120001-ISA_PNR",
+      "prjMgrId": "345",
+      "pgmMgrId": "347",
+      "visibleToAll": "Y"
+    }, {
+      "prjId": "110",
+      "prjCode": "0428102729353-SAF_SLA",
+      "prjName": "0428102729353-SAF_SLA",
+      "prjMgrId": "347",
+      "pgmMgrId": "347",
+      "visibleToAll": "Y"
+    }, {
+      "prjId": "113",
+      "prjCode": "0428082320006-SAF_TRAN_GR",
+      "prjName": "0428082320006-SAF_TRAN_GR",
+      "prjMgrId": "347",
+      "pgmMgrId": "347",
+      "visibleToAll": "Y"
+    }, {
+      "prjId": "131",
+      "prjCode": "0428102220028-DataPrep_support",
+      "prjName": "0428102220028-DataPrep_support",
+      "prjMgrId": "351",
+      "pgmMgrId": "347",
+      "visibleToAll": "Y"
+    }, {
+      "prjId": "136",
+      "prjCode": "042800001XXXX-OH_BD_Spain",
+      "prjName": "042800001XXXX-OH_BD_Spain",
+      "prjMgrId": "347",
+      "pgmMgrId": "347",
+      "visibleToAll": "Y"
+    }, {
+      "prjId": "140",
+      "prjCode": "0428102220016-RBC_Verification",
+      "prjName": "0428102220016-RBC_Verification",
+      "prjMgrId": "464",
+      "pgmMgrId": "347",
+      "visibleToAll": "Y"
+    }, {
+      "prjId": "161",
+      "prjCode": "0428102220047-RAMS_C&P",
+      "prjName": "0428102220047-RAMS_C&P",
+      "prjMgrId": "343",
+      "pgmMgrId": "347",
+      "visibleToAll": "Y"
+    }, {
+      "prjId": "168",
+      "prjCode": "Quality",
+      "prjName": "Quality",
+      "prjMgrId": "86",
+      "pgmMgrId": "2",
+      "visibleToAll": "Y"
+    }, {
+      "prjId": "170",
+      "prjCode": "0428102220072-EVC_Support",
+      "prjName": "0428102220072-EVC_Support",
+      "prjMgrId": "347",
+      "pgmMgrId": "347",
+      "visibleToAll": "Y"
+    }, {
+      "prjId": "178",
+      "prjCode": "IAI-TXB-HLC",
+      "prjName": "IAI-TXB-HLC",
+      "prjMgrId": "9",
+      "pgmMgrId": "19",
+      "visibleToAll": "Y"
+    }, {
+      "prjId": "184",
+      "prjCode": "0428102220078-RAMS_ML",
+      "prjName": "0428102220078-RAMS_ML",
+      "prjMgrId": "343",
+      "pgmMgrId": "347",
+      "visibleToAll": "Y"
+    }, {
+      "prjId": "193",
+      "prjCode": "0428103020056-ISA_CESIS_SEPSA",
+      "prjName": "0428103020056-ISA_CESIS_SEPSA",
+      "prjMgrId": "347",
+      "pgmMgrId": "347",
+      "visibleToAll": "Y"
+    }, {
+      "prjId": "206",
+      "prjCode": "0428102120075-CE_LIN_CAT",
+      "prjName": "0428102120075-CE_LIN_CAT",
+      "prjMgrId": "347",
+      "pgmMgrId": "347",
+      "visibleToAll": "Y"
+    }, {
+      "prjId": "207",
+      "prjCode": "0428082320022-ISA_IXL_SIG",
+      "prjName": "0428082320022-ISA_IXL_SIG",
+      "prjMgrId": "347",
+      "pgmMgrId": "347",
+      "visibleToAll": "Y"
+    }, {
+      "prjId": "218",
+      "prjCode": "531-OSYS DAC LUC",
+      "prjName": "531-OSYS DAC LUC",
+      "prjMgrId": "195",
+      "pgmMgrId": "7",
+      "visibleToAll": "Y"
+    }, {
+      "prjId": "219",
+      "prjCode": "0428102220110-RAMS_MT",
+      "prjName": "0428102220110-RAMS_MT",
+      "prjMgrId": "343",
+      "pgmMgrId": "347",
+      "visibleToAll": "Y"
+    }, {
+      "prjId": "223",
+      "prjCode": "543-SA GERMANY-TP400 CWT",
+      "prjName": "543-SA GERMANY-TP400 CWT",
+      "prjMgrId": "195",
+      "pgmMgrId": "7",
+      "visibleToAll": "Y"
+    }, {
+      "prjId": "232",
+      "prjCode": "Program Group_EL_CW",
+      "prjName": "Program Group_EL_CW",
+      "prjMgrId": "163",
+      "pgmMgrId": "8",
+      "visibleToAll": "Y"
+    }, {
+      "prjId": "233",
+      "prjCode": "Program Group_IAI_WR_PR",
+      "prjName": "Program Group_IAI_WR_PR",
+      "prjMgrId": "19",
+      "pgmMgrId": "8",
+      "visibleToAll": "Y"
+    }, {
+      "prjId": "236",
+      "prjCode": "UK Onsite Support",
+      "prjName": "UK Onsite Support",
+      "prjMgrId": "160",
+      "pgmMgrId": "19",
+      "visibleToAll": "Y"
+    }, {
+      "prjId": "239",
+      "prjCode": "0428000000004-OH_Quality_Spain",
+      "prjName": "0428000000004-OH_Quality_Spain",
+      "prjMgrId": "313",
+      "pgmMgrId": "347",
+      "visibleToAll": "Y"
+    }, {
+      "prjId": "240",
+      "prjCode": "0428000000003-OH_Generic_Spain",
+      "prjName": "0428000000003-OH_Generic_Spain",
+      "prjMgrId": "347",
+      "pgmMgrId": "347",
+      "visibleToAll": "Y"
+    }, {
+      "prjId": "241",
+      "prjCode": "042800000000X-OH_HR_Spain",
+      "prjName": "042800000000X-OH_HR_Spain",
+      "prjMgrId": "372",
+      "pgmMgrId": "347",
+      "visibleToAll": "Y"
+    }, {
+      "prjId": "243",
+      "prjCode": "PRESAGIS-SEAWIND-V&V",
+      "prjName": "PRESAGIS-SEAWIND-V&V",
+      "prjMgrId": "19",
+      "pgmMgrId": "8",
+      "visibleToAll": "Y"
+    }, {
+      "prjId": "245",
+      "prjCode": "0428101920172-BT_Support",
+      "prjName": "0428101920172-BT_Support",
+      "prjMgrId": "347",
+      "pgmMgrId": "347",
+      "visibleToAll": "Y"
+    }, {
+      "prjId": "252",
+      "prjCode": "0428102120140 - RAMS Training",
+      "prjName": "0428102120140 - RAMS Training",
+      "prjMgrId": "343",
+      "pgmMgrId": "347",
+      "visibleToAll": "Y"
+    }, {
+      "prjId": "258",
+      "prjCode": "0428010320082-RAMS_TRAZ_ASS",
+      "prjName": "0428010320082-RAMS_TRAZ_ASS",
+      "prjMgrId": "343",
+      "pgmMgrId": "347",
+      "visibleToAll": "Y"
+    }, {
+      "prjId": "262",
+      "prjCode": "0428104620260-I+D+i_MAG",
+      "prjName": "0428104620260-I+D+i_MAG",
+      "prjMgrId": "347",
+      "pgmMgrId": "347",
+      "visibleToAll": "Y"
+    }, {
+      "prjId": "270",
+      "prjCode": "0428102220299 - NO_REG_ERTMS",
+      "prjName": "0428102220299 - NO_REG_ERTMS",
+      "prjMgrId": "343",
+      "pgmMgrId": "347",
+      "visibleToAll": "Y"
+    }, {
+      "prjId": "271",
+      "prjCode": "0428102120298 - CONS_ADIF",
+      "prjName": "0428102120298 - CONS_ADIF",
+      "prjMgrId": "343",
+      "pgmMgrId": "347",
+      "visibleToAll": "Y"
+    }, {
+      "prjId": "272",
+      "prjCode": "0428102220303 - Ing_Sistemas",
+      "prjName": "0428102220303 - Ing_Sistemas",
+      "prjMgrId": "313",
+      "pgmMgrId": "347",
+      "visibleToAll": "Y"
+    }, {
+      "prjId": "273",
+      "prjCode": "0428102320177-ISA_S3e_CAF",
+      "prjName": "0428102320177-ISA_S3e_CAF",
+      "prjMgrId": "343",
+      "pgmMgrId": "347",
+      "visibleToAll": "Y"
+    }, {
+      "prjId": "276",
+      "prjCode": "0428102720313-ISA_SAAT_ICF",
+      "prjName": "0428102720313-ISA_SAAT_ICF",
+      "prjMgrId": "345",
+      "pgmMgrId": "347",
+      "visibleToAll": "Y"
+    }, {
+      "prjId": "278",
+      "prjCode": "0428102420326-ISA_MOD_ENY",
+      "prjName": "0428102420326-ISA_MOD_ENY",
+      "prjMgrId": "345",
+      "pgmMgrId": "347",
+      "visibleToAll": "Y"
+    }, {
+      "prjId": "279",
+      "prjCode": "0428102720345_ISA_CE_ICF",
+      "prjName": "0428102720345_ISA_CE_ICF",
+      "prjMgrId": "345",
+      "pgmMgrId": "347",
+      "visibleToAll": "Y"
+    }, {
+      "prjId": "283",
+      "prjCode": "CWCAE CH53K DCU P2",
+      "prjName": "CWCAE CH53K DCU P2",
+      "prjMgrId": "75",
+      "pgmMgrId": "9",
+      "visibleToAll": "Y"
+    }, {
+      "prjId": "284",
+      "prjCode": "0428101920362-BT_ISA_MOD_CDV",
+      "prjName": "0428101920362-BT_ISA_MOD_CDV",
+      "prjMgrId": "345",
+      "pgmMgrId": "347",
+      "visibleToAll": "Y"
+    }, {
+      "prjId": "285",
+      "prjCode": "0428102620358-CONS_RIAD_IDOM",
+      "prjName": "0428102620358-CONS_RIAD_IDOM",
+      "prjMgrId": "345",
+      "pgmMgrId": "343",
+      "visibleToAll": "Y"
+    }, {
+      "prjId": "286",
+      "prjCode": "0428103020363-ISA_ASFA_SEP_120",
+      "prjName": "0428103020363-ISA_ASFA_SEP_120",
+      "prjMgrId": "345",
+      "pgmMgrId": "347",
+      "visibleToAll": "Y"
+    }, {
+      "prjId": "287",
+      "prjCode": "0428102120366-CERT_OB_HARA",
+      "prjName": "0428102120366-CERT_OB_HARA",
+      "prjMgrId": "343",
+      "pgmMgrId": "347",
+      "visibleToAll": "Y"
+    }, {
+      "prjId": "289",
+      "prjCode": "ULTRA-A400M-NIM-V&V-PH-2",
+      "prjName": "ULTRA-A400M-NIM-V&V-PH-2",
+      "prjMgrId": "52",
+      "pgmMgrId": "19",
+      "visibleToAll": "Y"
+    }, {
+      "prjId": "290",
+      "prjCode": "0428099720370-ISA_MOD_GRIJ",
+      "prjName": "0428099720370-ISA_MOD_GRIJ",
+      "prjMgrId": "343",
+      "pgmMgrId": "347",
+      "visibleToAll": "Y"
+    }, {
+      "prjId": "292",
+      "prjCode": "TIG",
+      "prjName": "Technology Innovation Group",
+      "prjMgrId": "118",
+      "pgmMgrId": "118",
+      "visibleToAll": "Y"
+    }, {
+      "prjId": "293",
+      "prjCode": "0428101920395-BT_ISA_MOD_POR",
+      "prjName": "0428101920395-BT_ISA_MOD_POR",
+      "prjMgrId": "343",
+      "pgmMgrId": "347",
+      "visibleToAll": "Y"
+    }, {
+      "prjId": "295",
+      "prjCode": "0428102220312-RAMS_IBR",
+      "prjName": "0428102220312-RAMS_IBR",
+      "prjMgrId": "343",
+      "pgmMgrId": "347",
+      "visibleToAll": "Y"
+    }, {
+      "prjId": "296",
+      "prjCode": "0428082320389-ISA_MOD_SIG",
+      "prjName": "0428082320389-ISA_MOD_SIG",
+      "prjMgrId": "343",
+      "pgmMgrId": "347",
+      "visibleToAll": "Y"
+    }, {
+      "prjId": "297",
+      "prjCode": "0428099720399-ALS_ISA_MOD_TORN",
+      "prjName": "0428099720399-ALS_ISA_MOD_TORN",
+      "prjMgrId": "343",
+      "pgmMgrId": "347",
+      "visibleToAll": "Y"
+    }, {
+      "prjId": "298",
+      "prjCode": "AGMBH-Liebherr-TEC-P0208",
+      "prjName": "AGMBH-Liebherr-TEC-P0208",
+      "prjMgrId": "782",
+      "pgmMgrId": "8",
+      "visibleToAll": "Y"
+    }, {
+      "prjId": "299",
+      "prjCode": "AFR-Sch PF-TEC-P0416",
+      "prjName": "AFR-Sch PF-TEC-P0416",
+      "prjMgrId": "782",
+      "pgmMgrId": "8",
+      "visibleToAll": "Y"
+    }, {
+      "prjId": "300",
+      "prjCode": "Safran Staffing-TEC-P0530",
+      "prjName": "Safran Staffing-TEC-P0530",
+      "prjMgrId": "782",
+      "pgmMgrId": "8",
+      "visibleToAll": "Y"
+    }, {
+      "prjId": "301",
+      "prjCode": "TDW Illustration-TEC-P0535",
+      "prjName": "TDW Illustration-TEC-P0535",
+      "prjMgrId": "782",
+      "pgmMgrId": "8",
+      "visibleToAll": "Y"
+    }, {
+      "prjId": "302",
+      "prjCode": "Chrysler Staffing-TEC-P0388",
+      "prjName": "Chrysler Staffing-TEC-P0388",
+      "prjMgrId": "687",
+      "pgmMgrId": "8",
+      "visibleToAll": "Y"
+    }, {
+      "prjId": "304",
+      "prjCode": "SM Onsite Support-ANA-P0517",
+      "prjName": "SM Onsite Support-ANA-P0517",
+      "prjMgrId": "680",
+      "pgmMgrId": "8",
+      "visibleToAll": "Y"
+    }, {
+      "prjId": "305",
+      "prjCode": "AUK-A350 FEM Val-ANA-P0539",
+      "prjName": "AUK-A350 FEM Val-ANA-P0539",
+      "prjMgrId": "680",
+      "pgmMgrId": "8",
+      "visibleToAll": "Y"
+    }, {
+      "prjId": "306",
+      "prjCode": "Chrysler Staffing-ANA-P0396",
+      "prjName": "Chrysler Staffing-ANA-P0396",
+      "prjMgrId": "687",
+      "pgmMgrId": "8",
+      "visibleToAll": "Y"
+    }, {
+      "prjId": "307",
+      "prjCode": "RNTBCI Staffing-ANA-P0412",
+      "prjName": "RNTBCI Staffing-ANA-P0412",
+      "prjMgrId": "687",
+      "pgmMgrId": "8",
+      "visibleToAll": "Y"
+    }, {
+      "prjId": "308",
+      "prjCode": "RB Staffing-ANA-P0462",
+      "prjName": "RB Staffing-ANA-P0462",
+      "prjMgrId": "687",
+      "pgmMgrId": "8",
+      "visibleToAll": "Y"
+    }, {
+      "prjId": "309",
+      "prjCode": "AFR Onsite Support-DES-P0479",
+      "prjName": "AFR Onsite Support-DES-P0479",
+      "prjMgrId": "682",
+      "pgmMgrId": "8",
+      "visibleToAll": "Y"
+    }, {
+      "prjId": "310",
+      "prjCode": "Godrej Tooling-DES-P0538",
+      "prjName": "Godrej Tooling-DES-P0538",
+      "prjMgrId": "682",
+      "pgmMgrId": "8",
+      "visibleToAll": "Y"
+    }, {
+      "prjId": "311",
+      "prjCode": "RNTBCI-Staffing-DES-P0493",
+      "prjName": "RNTBCI-Staffing-DES-P0493",
+      "prjMgrId": "687",
+      "pgmMgrId": "8",
+      "visibleToAll": "Y"
+    }, {
+      "prjId": "312",
+      "prjCode": "Daimler Staffing-DES-P0524",
+      "prjName": "Daimler Staffing-DES-P0524",
+      "prjMgrId": "687",
+      "pgmMgrId": "8",
+      "visibleToAll": "Y"
+    }, {
+      "prjId": "313",
+      "prjCode": "AUK-A350 Spirit Con-ANA-P0519",
+      "prjName": "AUK-A350 Spirit Con-ANA-P0519",
+      "prjMgrId": "680",
+      "pgmMgrId": "8",
+      "visibleToAll": "Y"
+    }, {
+      "prjId": "314",
+      "prjCode": "SM-A350 FEM Val-ANA-P0523",
+      "prjName": "SM-A350 FEM Val-ANA-P0523",
+      "prjMgrId": "680",
+      "pgmMgrId": "8",
+      "visibleToAll": "Y"
+    }, {
+      "prjId": "315",
+      "prjCode": "Alstom Staffing-TEC-P0241",
+      "prjName": "Alstom Staffing-TEC-P0241",
+      "prjMgrId": "782",
+      "pgmMgrId": "8",
+      "visibleToAll": "Y"
+    }, {
+      "prjId": "316",
+      "prjCode": "AFR-M_P-TEC-P0345",
+      "prjName": "AFR-M_P-TEC-P0345",
+      "prjMgrId": "782",
+      "pgmMgrId": "8",
+      "visibleToAll": "Y"
+    }, {
+      "prjId": "317",
+      "prjCode": "AFR-A350 Stress-ANA-P0498",
+      "prjName": "AFR-A350 Stress-ANA-P0498",
+      "prjMgrId": "680",
+      "pgmMgrId": "8",
+      "visibleToAll": "Y"
+    }, {
+      "prjId": "318",
+      "prjCode": "AUK-A320 Neo Draw-DES-P0506",
+      "prjName": "AUK-A320 Neo Draw-DES-P0506",
+      "prjMgrId": "682",
+      "pgmMgrId": "8",
+      "visibleToAll": "Y"
+    }, {
+      "prjId": "319",
+      "prjCode": "Michelin Staffing-INF-P0397",
+      "prjName": "Michelin Staffing-INF-P0397",
+      "prjMgrId": "687",
+      "pgmMgrId": "8",
+      "visibleToAll": "Y"
+    }, {
+      "prjId": "320",
+      "prjCode": "AUK-A350CSWP6.2-ANA-P0541",
+      "prjName": "AUK-A350CSWP6.2-ANA-P0541",
+      "prjMgrId": "680",
+      "pgmMgrId": "8",
+      "visibleToAll": "Y"
+    }, {
+      "prjId": "321",
+      "prjCode": "AGMBH-A330F&DT-ANA-P0526",
+      "prjName": "AGMBH-A330F&DT-ANA-P0526",
+      "prjMgrId": "680",
+      "pgmMgrId": "8",
+      "visibleToAll": "Y"
+    }, {
+      "prjId": "322",
+      "prjCode": "0428009520300-AUTO_CONTI",
+      "prjName": "0428009520300-AUTO_CONTI",
+      "prjMgrId": "674",
+      "pgmMgrId": "347",
+      "visibleToAll": "Y"
+    }, {
+      "prjId": "323",
+      "prjCode": "0428102220416-EVC_SRA_01",
+      "prjName": "0428102220416-EVC_SRA_01",
+      "prjMgrId": "343",
+      "pgmMgrId": "347",
+      "visibleToAll": "Y"
+    }, {
+      "prjId": "324",
+      "prjCode": "0428102620408-CONS_IDOM_LRT",
+      "prjName": "0428102620408-CONS_IDOM_LRT",
+      "prjMgrId": "343",
+      "pgmMgrId": "347",
+      "visibleToAll": "Y"
+    }, {
+      "prjId": "325",
+      "prjCode": "0428102220412-SRA_LIRIC",
+      "prjName": "0428102220412-SRA_LIRIC",
+      "prjMgrId": "351",
+      "pgmMgrId": "347",
+      "visibleToAll": "Y"
+    }, {
+      "prjId": "327",
+      "prjCode": "0428106720398-SAM_ISA_PG_TELE",
+      "prjName": "0428106720398-SAM_ISA_PG_TELE",
+      "prjMgrId": "343",
+      "pgmMgrId": "347",
+      "visibleToAll": "Y"
+    }, {
+      "prjId": "328",
+      "prjCode": "0428102320383-CAF-ISA-SPEC-TUR",
+      "prjName": "0428102320383-CAF-ISA-SPEC-TUR",
+      "prjMgrId": "343",
+      "pgmMgrId": "347",
+      "visibleToAll": "Y"
+    }, {
+      "prjId": "329",
+      "prjCode": "AGMBH-A330 OBD Flap FEM-ANA-P0",
+      "prjName": "AGMBH-A330 OBD Flap FEM-ANA-P0",
+      "prjMgrId": "680",
+      "pgmMgrId": "8",
+      "visibleToAll": "Y"
+    }, {
+      "prjId": "330",
+      "prjCode": "0428102320400-CAF_ISA_PG_ERTMS",
+      "prjName": "0428102320400-CAF_ISA_PG_ERTMS",
+      "prjMgrId": "343",
+      "pgmMgrId": "347",
+      "visibleToAll": "Y"
+    }, {
+      "prjId": "331",
+      "prjCode": "0428102120429-CETREN_17020",
+      "prjName": "0428102120429-CETREN_17020",
+      "prjMgrId": "343",
+      "pgmMgrId": "347",
+      "visibleToAll": "Y"
+    }, {
+      "prjId": "332",
+      "prjCode": "0428009520334-BOSCH_CC_PS",
+      "prjName": "0428009520334-BOSCH_CC_PS",
+      "prjMgrId": "674",
+      "pgmMgrId": "347",
+      "visibleToAll": "Y"
+    }, {
+      "prjId": "333",
+      "prjCode": "0428102820427-LOG_ISA_MOD_DCO",
+      "prjName": "0428102820427-LOG_ISA_MOD_DCO",
+      "prjMgrId": "343",
+      "pgmMgrId": "347",
+      "visibleToAll": "Y"
+    }, {
+      "prjId": "334",
+      "prjCode": "AGMBH-Onsite Support-DES-P0475",
+      "prjName": "AGMBH-Onsite Support-DES-P0475",
+      "prjMgrId": "682",
+      "pgmMgrId": "8",
+      "visibleToAll": "Y"
+    }, {
+      "prjId": "335",
+      "prjCode": "AFR-A380 NFI&CFI-ANA-P0551",
+      "prjName": "AFR-A380 NFI&CFI-ANA-P0551",
+      "prjMgrId": "680",
+      "pgmMgrId": "8",
+      "visibleToAll": "Y"
+    }, {
+      "prjId": "336",
+      "prjCode": "AUK-DAR-DES-P0554",
+      "prjName": "AUK-DAR-DES-P0554",
+      "prjMgrId": "682",
+      "pgmMgrId": "8",
+      "visibleToAll": "Y"
+    }, {
+      "prjId": "337",
+      "prjCode": "0428102620431-DOORS_RIY_MET_ID",
+      "prjName": "0428102620431-DOORS_RIY_MET_ID",
+      "prjMgrId": "313",
+      "pgmMgrId": "347",
+      "visibleToAll": "Y"
+    }, {
+      "prjId": "338",
+      "prjCode": "AUK-A350-FTI MBN-DES-P0556",
+      "prjName": "AUK-A350-FTI MBN-DES-P0556",
+      "prjMgrId": "682",
+      "pgmMgrId": "8",
+      "visibleToAll": "Y"
+    }, {
+      "prjId": "339",
+      "prjCode": "0428099720425-ALS_ISA_LE_CONV",
+      "prjName": "0428099720425-ALS_ISA_LE_CONV",
+      "prjMgrId": "343",
+      "pgmMgrId": "347",
+      "visibleToAll": "Y"
+    }, {
+      "prjId": "340",
+      "prjCode": "0428102820441-LOG_ISA_PG_ASFAV",
+      "prjName": "0428102820441-LOG_ISA_PG_ASFAV",
+      "prjMgrId": "343",
+      "pgmMgrId": "347",
+      "visibleToAll": "Y"
+    }, {
+      "prjId": "341",
+      "prjCode": "0428102120109-CER_ASFA_SEP_120",
+      "prjName": "0428102120109-CER_ASFA_SEP_120",
+      "prjMgrId": "345",
+      "pgmMgrId": "347",
+      "visibleToAll": "Y"
+    }, {
+      "prjId": "342",
+      "prjCode": "AUK-RR-GT-Onsite support-ANA",
+      "prjName": "AUK-RR-GT-Onsite support-ANA",
+      "prjMgrId": "160",
+      "pgmMgrId": "8",
+      "visibleToAll": "Y"
+    }, {
+      "prjId": "343",
+      "prjCode": "AGMBH-A330STATIC-ANA-P0558",
+      "prjName": "AGMBH-A330STATIC-ANA-P0558",
+      "prjMgrId": "2",
+      "pgmMgrId": "2",
+      "visibleToAll": "Y"
+    }, {
+      "prjId": "344",
+      "prjCode": "TEST123",
+      "prjName": "TEST123",
+      "prjMgrId": "1",
+      "pgmMgrId": "2",
+      "visibleToAll": "Y"
+    }],
+    "swipe": [{
+      "date": "2015-08-24",
+      "minutes": "620"
+    }, {
+      "date": "2015-08-25",
+      "minutes": "533"
+    }, {
+      "date": "2015-08-26",
+      "minutes": "548"
+    }, {
+      "date": "2015-08-27",
+      "minutes": "585"
+    }, {
+      "date": "2015-08-28",
+      "minutes": "642"
+    }],
+    "tlsStatus": {
+      "1": {
+        "dateRange": {
+          "startDate": "2015-07-13",
+          "endDate": "2015-07-19"
+        },
+        "status": "Approved"
+      },
+      "2": {
+        "dateRange": {
+          "startDate": "2015-07-20",
+          "endDate": "2015-07-26"
+        },
+        "status": "Approved"
+      },
+      "3": {
+        "dateRange": {
+          "startDate": "2015-07-27",
+          "endDate": "2015-08-02"
+        },
+        "status": "Approved"
+      },
+      "4": {
+        "dateRange": {
+          "startDate": "2015-08-03",
+          "endDate": "2015-08-09"
+        },
+        "status": "Approved"
+      },
+      "5": {
+        "dateRange": {
+          "startDate": "2015-08-10",
+          "endDate": "2015-08-16"
+        },
+        "status": "Approved"
+      },
+      "6": {
+        "dateRange": {
+          "startDate": "2015-08-17",
+          "endDate": "2015-08-23"
+        },
+        "status": "Approved"
+      },
+      "7": {
+        "dateRange": {
+          "startDate": "2015-08-24",
+          "endDate": "2015-08-30"
+        },
+        "status": "Approved"
+      }
+    },
+    "weekdata": [{
+      "id": "514638",
+      "uid": "1015",
+      "date": "2015-08-24",
+      "prjId": "292",
+      "prjName": "Technology Innovation Group",
+      "phsId": "1889",
+      "phsName": "Tools",
+      "actId": "7730",
+      "actName": "Framework",
+      "tskId": "20978",
+      "tskName": "Develop",
+      "actualEffort": "480",
+      "usrCmtId": "213664",
+      "usrCmt": "Cartwheel App  AngularJs framework Home ,standard components for Meeting minutes and apps.",
+      "locId": "1",
+      "status": "A",
+      "approverId": "118",
+      "approverCmtId": null,
+      "approverCmt": null,
+      "imported": "N",
+      "submittedDatetime": "2015-08-28 18:02:27",
+      "swipe": "620"
+    }, {
+      "id": "514640",
+      "uid": "1015",
+      "date": "2015-08-25",
+      "prjId": "292",
+      "prjName": "Technology Innovation Group",
+      "phsId": "1889",
+      "phsName": "Tools",
+      "actId": "7730",
+      "actName": "Framework",
+      "tskId": "20978",
+      "tskName": "Develop",
+      "actualEffort": "480",
+      "usrCmtId": "213664",
+      "usrCmt": "Cartwheel App  AngularJs framework Home ,standard components for Meeting minutes and apps.",
+      "locId": "1",
+      "status": "A",
+      "approverId": "118",
+      "approverCmtId": null,
+      "approverCmt": null,
+      "imported": "N",
+      "submittedDatetime": "2015-08-28 18:02:27",
+      "swipe": "533"
+    }, {
+      "id": "515947",
+      "uid": "1015",
+      "date": "2015-08-26",
+      "prjId": "292",
+      "prjName": "Technology Innovation Group",
+      "phsId": "1889",
+      "phsName": "Tools",
+      "actId": "7730",
+      "actName": "Framework",
+      "tskId": "20978",
+      "tskName": "Develop",
+      "actualEffort": "480",
+      "usrCmtId": "213664",
+      "usrCmt": "Cartwheel App  AngularJs framework Home ,standard components for Meeting minutes and apps.",
+      "locId": "1",
+      "status": "A",
+      "approverId": "118",
+      "approverCmtId": null,
+      "approverCmt": null,
+      "imported": "N",
+      "submittedDatetime": "2015-08-28 18:02:27",
+      "swipe": "548"
+    }, {
+      "id": "515950",
+      "uid": "1015",
+      "date": "2015-08-27",
+      "prjId": "292",
+      "prjName": "Technology Innovation Group",
+      "phsId": "1889",
+      "phsName": "Tools",
+      "actId": "7730",
+      "actName": "Framework",
+      "tskId": "20978",
+      "tskName": "Develop",
+      "actualEffort": "480",
+      "usrCmtId": "214179",
+      "usrCmt": "Enhanced the architecture of the front-end so that multiple person work on different module for the app simultaneously.working for the better UI in home page and dashboard pages.",
+      "locId": "1",
+      "status": "A",
+      "approverId": "118",
+      "approverCmtId": null,
+      "approverCmt": null,
+      "imported": "N",
+      "submittedDatetime": "2015-08-28 18:02:27",
+      "swipe": "585"
+    }, {
+      "id": "515951",
+      "uid": "1015",
+      "date": "2015-08-28",
+      "prjId": "292",
+      "prjName": "Technology Innovation Group",
+      "phsId": "1889",
+      "phsName": "Tools",
+      "actId": "7730",
+      "actName": "Framework",
+      "tskId": "20978",
+      "tskName": "Develop",
+      "actualEffort": "480",
+      "usrCmtId": "214179",
+      "usrCmt": "Enhanced the architecture of the front-end so that multiple person work on different module for the app simultaneously.working for the better UI in home page and dashboard pages.",
+      "locId": "1",
+      "status": "A",
+      "approverId": "118",
+      "approverCmtId": null,
+      "approverCmt": null,
+      "imported": "N",
+      "submittedDatetime": "2015-08-28 18:02:27",
+      "swipe": "642"
+    }]
+  },
+  "token": "9FAE8866-5DB4-6E6D-9CD9-465E7748712E",
+  "err": false,
+  "code": "TLS_S_01",
+  "msg": "Success"
+}

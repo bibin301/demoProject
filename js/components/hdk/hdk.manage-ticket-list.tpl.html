@@ -1,0 +1,259 @@
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<style>
+    .timeline-item .panel-group {
+        margin-bottom: 0px;
+    }
+
+    .timeline-header.timeline-header.timeline-header {
+        width: 90% !important;
+        margin: 0px auto;
+        z-index: 10;
+    }
+
+    .timeline-footer.timeline-footer.timeline-footer {
+        margin: 0px auto;
+        float: none;
+    }
+
+    .manage-status {
+        padding: 1px 0px 7px 10px;
+    }
+
+    /*  .error-space {
+       padding-bottom: 50px;
+      }*/
+    .submit-btn{
+        padding: 11px 1px 0px 12px;
+    }
+</style>
+
+
+<div class="panel panel-default panel-custom animated zoomIn" ng-class="{'panel-custom-fullScreen':panelFullScreen}">
+    <div class="panel-heading panel-heading-custom2">
+        <h2 class="panel-title">Manage Tickets</h2>
+        <div class="box-icon pull-right">
+            <!--<a class="btn btn-close btn-round btn-default" ng-click="hdkAdminCategoryModel.title='Create New';hdkAdminCategoryModel.response=''; "><i class="glyphicon glyphicon-plus"></i></a>-->
+            <a class="btn btn-close btn-round btn-default" ng-click="panelFullScreen = !panelFullScreen"><i class="glyphicon" ng-class="{'glyphicon-resize-full':!panelFullScreen,'glyphicon-resize-small':panelFullScreen}" ></i></a>
+            <a class="btn btn-minimize btn-round btn-default"><i class="glyphicon" ng-class="{'glyphicon-chevron-up':!isOpened,'glyphicon-chevron-down':isOpened}" ng-click="isOpened = !isOpened"></i></a>
+            <a class="btn btn-close btn-round btn-default" ng-click="hdkManageModel.loadData();"><i class="glyphicon glyphicon-refresh fa-spin-hover"></i></a>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="panel-body " ng-show="!isOpened">
+        <div class="row">
+            <div class="col-md-6 col-sm-12" ng-class="{'full-width':appModel.tableFullWidth}">
+                <div class="panel panel-default animated zoomIn" ng-class="{'panel-custom-fullScreen':panelFullScreen}" ng-controller="panelCtrl">
+                    <div class="panel-heading panel-custom panel-heading-custom2">
+                        <h2 class="panel-title">Ticket List</h2>
+                        <div class="box-icon pull-right">
+                            <a class="btn btn-close btn-round btn-default" ng-click="panelFullScreen = !panelFullScreen"><i class="glyphicon" ng-class="{'glyphicon-resize-full':!panelFullScreen,'glyphicon-resize-small':panelFullScreen}" ></i></a>
+                            <a class="btn btn-minimize btn-round btn-default"><i class="glyphicon" ng-class="{'glyphicon-chevron-up':!isOpened,'glyphicon-chevron-down':isOpened}" ng-click="isOpened = !isOpened"></i></a>
+                            <a class="btn btn-close btn-round btn-default" ng-click="hdkManageModel.loadCategory();"><i class="glyphicon glyphicon-refresh fa-spin-hover"></i></a>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="panel-body " ng-show="!isOpened">
+                        <table class="display table table-bordered table-striped" datatable="ng" id="dynamic-table custom_table">
+                            <thead>
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Owner</th>
+                                    <th>Raised Date</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="ticketList in hdkManageModel.tickets" >
+                                    <td>{{ticketList.tktTitle}}</td>
+                                    <td>{{ticketList.ownName}}</td>
+                                    <td>{{ticketList.tktRaisedDateTime}}</td>
+                                    <td>{{ticketList.tktStatus}}</td>
+                                    <td>
+                                        <button ng-if="list.createNew != 'No'"class="btn btn-xs colored-bg" data-toggle="modal" data-target=".bs-example-modal-lg" ng-click="hdkManageModel.ticketTimeline(ticketList.tktId)" type="button">
+                                            <i class="fa fa-edit"></i>
+                                        </button>
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="col-md-6 col-sm-12" ng-if="hdkManageModel.response.ticketid" ng-class="{'full-width':appModel.tableFullWidth}">
+                <div class="panel panel-default animated zoomIn" ng-class="{'panel-custom-fullScreen':panelFullScreen}" ng-controller="panelCtrl">
+                    <div class="panel-heading panel-custom panel-heading-custom2">
+                        <h2 class="panel-title">Track Ticket</h2>
+                        <div class="box-icon pull-right">
+                            <a class="btn btn-close btn-round btn-default" ng-click="panelFullScreen = !panelFullScreen"><i class="glyphicon" ng-class="{'glyphicon-resize-full':!panelFullScreen,'glyphicon-resize-small':panelFullScreen}" ></i></a>
+                            <a class="btn btn-minimize btn-round btn-default"><i class="glyphicon" ng-class="{'glyphicon-chevron-up':!isOpened,'glyphicon-chevron-down':isOpened}" ng-click="isOpened = !isOpened"></i></a>
+                            <a class="btn btn-close btn-round btn-default" ng-click="hdkManageModel.loadCategory();"><i class="glyphicon glyphicon-refresh fa-spin-hover"></i></a>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="panel-body " ng-show="!isOpened">
+                        <div class="timeline" ng-repeat="tktDetail in hdkManageModel.tktDetails">
+
+                            <!-- START TIMELINE header -->
+                            <div class="timeline-header ">
+                                <accordion>
+                                    <accordion-group is-open="status.open" ng-init="status.open = $last">
+                                        <accordion-heading>
+                                            <span class="colored">{{tktDetail.catName}} </span><i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+                                        </accordion-heading>
+                                        <table class="table table-user-information">
+                                            <tbody>
+
+                                                <tr>
+                                                    <th>Area Id:</th>
+                                                    <td>{{tktDetail.areaId}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Ticket Title:</th>
+                                                    <td>{{tktDetail.catName}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Owner-Name:</th>
+                                                    <td>{{tktDetail.ownName}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Ticket Raised Date:</th>
+                                                    <td>{{tktDetail.tktRaisedDateTime}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Time Elapsed:</th>
+                                                    <td>{{tktDetail.timeElapsed}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Category Name:</th>
+                                                    <td>{{tktDetail.catName}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Area Name</th>
+                                                    <td>{{tktDetail.areaName}}</td>
+
+                                                </tr>
+                                                <tr>
+                                                    <th>SLA</th>
+                                                    <td>{{tktDetail.slaElapsedTime}}</td>
+
+                                                </tr>
+                                                <tr>
+                                                    <th>SLA-Elapsed-Time</th>
+                                                    <td>{{tktDetail.slaElapsedTime}}</td>
+
+                                                </tr>
+                                                <tr ng-if="tktDetail.recordStatus">
+                                                    <th>Record Status</th>
+                                                    <td>{{tktDetail.recordStatus}}</td>
+
+                                                </tr>
+
+                                            </tbody>
+                                        </table>
+
+                                    </accordion-group>
+                                </accordion>
+
+                            </div>
+                            <!-- END TIMELINE header -->
+
+                            <!-- START TIMELINE ITEM -->
+                            <div class="timeline-item" ng-repeat=" tracks in tktDetail.ticketStatus" ng-class="tktDetail.ownId == tracks.updatedByEmpId ? '' : 'timeline-item-right'">
+                                <div class="timeline-item-info" title="{{tracks.updatedByEmp}}"> {{tracks.updatedByEmp}}</div>
+                                <div class="timeline-item-icon">
+                                    <ng-letter-avatar data="{{tracks.updatedByEmp}}" fontWeight="600" shape="round" avatarborder="true" width="30" height="30" fontSize="14"></ng-letter-avatar>
+                                    </span>
+                                </div>
+                                <div class="timeline-item-content">
+                                    <accordion>
+                                        <accordion-group is-open="status.open" ng-init="status.open = $last">
+                                            <accordion-heading>
+                                                {{tracks.tktStatus}} <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+                                            </accordion-heading>
+                                            <div class="timeline-heading">
+                                                <img src="assets/images/users/user2.jpg"> <a href="#">{{tracks.updatedByEmp}}</a>
+                                            </div>
+                                            <div class="timeline-body">
+                                                <p ng-bind-html="tracks.tktDetails"></p>
+
+                                                <ul class="list-tags">
+                                                    <li>
+                                                        <a href="#">
+                                                            <span class="fa fa-tag"></span> {{tracks.stausUpDateTime}} </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </accordion-group>
+                                    </accordion>
+
+
+                                </div>
+                            </div>
+                            <!-- END TIMELINE ITEM -->
+
+                            <!-- START TIMELINE ITEM -->
+                            <div class="timeline-item timeline-main timeline-footer" ng-init="hdkManageModel.response.ticketstatus = tktDetail.recordStatus" ng-if="tktDetail.allowedStatus">
+                                <accordion>
+                                    <accordion-group is-open="status.open">
+                                        <form name="hdkManageModel.userForm" novalidate>
+                                            <accordion-heading>
+                                                <span class="colored">Update Status
+
+                                                </span><i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+                                            </accordion-heading>
+
+
+                                            <div class="manage-status">
+                                                <label>SLA Status </label>
+                                                <div>
+                                                    <select ng-model="hdkManageModel.response.SLA" ng-options="idx as status for (idx, status) in tktDetail.allowedStatus" ng-if="tktDetail.recordStatus == 'IN PROGRESS'" name="status" required>
+                                                        <option value="">-select status-</option>
+                                                    </select>
+                                                </div>
+                                                <div class="has-error error-space" ng-if="tktDetail.recordStatus == 'IN PROGRESS'" ng-show="(hdkManageModel.userForm.status.$error.required && hdkManageModel.userForm.status.$touched) || (hdkManageModel.userForm.$submitted && hdkManageModel.userForm.status.$error.required)">status is required</div>
+                                                <div>
+                                                    <select ng-model="hdkManageModel.response.SLA" ng-options="idx as status for (idx, status) in hdkManageModel.statusDrop | orderBy:idx" ng-if="tktDetail.recordStatus != 'IN PROGRESS'" name="status" required>
+                                                        <option value="">-select status-</option>
+                                                    </select>
+                                                </div>
+                                                <div class="has-error error-space" ng-if="tktDetail.recordStatus != 'IN PROGRESS'" ng-show="(hdkManageModel.userForm.status.$error.required && hdkManageModel.userForm.status.$touched) || (hdkManageModel.userForm.$submitted && hdkManageModel.userForm.status.$error.required)">status is required</div>
+                                            </div>
+
+
+                                            <div class="row">
+                                                <div class="form-group col-md-12">
+                                                    <label>Description </label>
+                                                    <textarea ng-model="hdkManageModel.response.description" ui-tinymce="appModel.tinymceOptions" name="comment" required></textarea>
+                                                    <div class="has-error" ng-show="(hdkManageModel.userForm.$submitted && hdkManageModel.response.description.length < 35)">comment is required</div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-3 col-md-offset-10 submit-btn">
+                                                <button class="btn colored-bg" type="submit" ng-click="hdkManageModel.ticketResponse(hdkManageModel.response, tktDetail.tktId)">
+                                                    Submit <i class="fa fa-arrow-circle-right"></i>
+                                                </button>
+                                            </div>
+
+                                        </form>
+                                    </accordion-group>
+                                </accordion>
+                            </div>
+                            <!-- END TIMELINE ITEM -->
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>

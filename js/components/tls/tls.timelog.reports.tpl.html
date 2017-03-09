@@ -1,0 +1,329 @@
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+chosen persistent-create-option="true" -use dropdown
+key.prjName for key in tlsReportsModel.projects.slice().reverse() track by key.prjId -option reverse
+
+-->
+<style>
+  .panel-height {
+    min-height: 360px;
+  }
+
+  .panel-top {
+    margin-top: 20px;
+  }
+
+  .pannel-top {
+    margin-top: 40px;
+    float:right;
+  }
+</style>
+
+
+<!-- sto section1  -->
+<div class="wri-List">
+  <div class="panel panel-default animated zoomIn" ng-class="{'panel-custom-fullScreen':panelFullScreen}">
+    <div class="panel-heading panel-custom panel-heading-custom2">
+      <h2 class="panel-title">Timelog Report</h2>
+      <div class="box-icon pull-right">
+        <a class="btn btn-close btn-round btn-default" ng-click="panelFullScreen = !panelFullScreen"><i class="glyphicon" ng-class="{'glyphicon-resize-full':!panelFullScreen,'glyphicon-resize-small':panelFullScreen}" ></i></a>
+      </div>
+      <div class="clearfix"></div>
+    </div>
+    <div class="panel-body">
+      <div class="row">
+        <!-- sto right -->
+        <div class="col-md-12" ng-class="{'full-width':appModel.tableFullWidth}" ng-show="tlsReportsModel.panelFirstShow">
+          <div class="panel panel-default animated zoomIn" ng-class="{'panel-custom-fullScreen':panelFullScreen}" ng-controller="panelCtrl">
+            <div class="panel-heading panel-custom panel-heading-custom2">
+              <h2 class="panel-title">Timelog Report</h2>
+              <div class="box-icon pull-right">
+                <a class="btn btn-close btn-round btn-default" ng-click="panelFullScreen = !panelFullScreen"><i class="glyphicon" ng-class="{'glyphicon-resize-full':!panelFullScreen,'glyphicon-resize-small':panelFullScreen}" ></i></a>
+                <a class="btn btn-minimize btn-round btn-default"><i class="glyphicon" ng-class="{'glyphicon-chevron-up':!isOpened,'glyphicon-chevron-down':isOpened}" ng-click="isOpened = !isOpened"></i></a>
+                <a class="btn btn-close btn-round btn-default" ng-click="mmListModel.loadDept()"><i class="glyphicon glyphicon-refresh fa-spin-hover"></i></a>
+              </div>
+              <div class="clearfix"></div>
+            </div>
+            <div class="panel-body" ng-show="!isOpened">
+              <form novalidate>
+                <!--STO project-->
+                <div class="col-sm-3">
+                  <div class="panel panel-default">
+                    <div class="panel-body panel-height">
+                      <div class="form-group">
+
+                        <h5 class="">Project </h5>
+
+                        <!-- project.prjId as -->
+                        <!-- <select ng-model="tlsReportsModel.usrRes.prj" chosen persistent-create-option="true" ng-change="tlsReportsModel.getPhaseName(tlsReportsModel.usrRes.prj)" ng-options="tlsReportsModel.projects.indexOf(Prj) as Prj.prjName for Prj in tlsReportsModel.projects"></select> -->
+                        <select class="form-control" chosen persistent-create-option="true" ng-change="tlsReportsModel.getPhaseName(tlsReportsModel.usrRes.prj)" ng-model="tlsReportsModel.usrRes.prj" ng-options="project.prjName for  project in tlsReportsModel.projects" required>
+
+                        </select>
+
+                        <!-- <select class="form-control" chosen persistent-create-option="true" ng-change="tlsReportsModel.getPhaseName(tlsReportsModel.usrRes.prj)" ng-model="tlsReportsModel.usrRes.prj" data-ng-options="key.prjName for key in tlsReportsModel.projects.slice().reverse()"
+                          required>
+                          <option value="">All</option>
+
+                        </select> -->
+                      </div>
+
+                      <div class="form-group">
+                        <h5 class="">Employee</h5>
+                        <!-- <select ng-model="tlsReportsModel.usrRes.emp" chosen persistent-create-option="true"  ng-options="tlsReportsModel.employees.indexOf(emp) as emp.fName + '' +emp.lName for emp in tlsReportsModel.employees"></select> -->
+                        <select class="form-control" chosen persistent-create-option="true" name="emp" ng-init="tlsReportsModel.usrRes.emp=coreModel.userData.id" ng-model="tlsReportsModel.usrRes.emp" ng-options="emp.empId as emp.fName +' '+emp.lName for emp in tlsReportsModel.employees"
+                          required>
+
+                        </select>
+                      </div>
+
+                      <div class="form-group">
+                        <h5 class="">Location</h5>
+
+                        <select class="form-control" chosen persistent-create-option="true" ng-model="tlsReportsModel.usrRes.loc" ng-options="loc.locName for loc in tlsReportsModel.locations" required>
+
+                        </select>
+                        <!-- <select ng-model="tlsReportsModel.usrRes.loc"  chosen persistent-create-option="true"  ng-options="tlsReportsModel.locations.indexOf(loc) as loc.locName for loc in tlsReportsModel.locations"></select> -->
+                      </div>
+
+
+                      <div class="form-group">
+                        <div class="multiple" ng-init="tlsReportsModel.usrRes.reportLoc= 0">
+                          <div>
+                            <label>
+                              <input name="location" ng-model="tlsReportsModel.usrRes.reportLoc" checked="checked" type="radio" ng-value="1">Reporting Location
+                            </label>
+                          </div>
+                          <label>
+                            <input name="location" ng-model="tlsReportsModel.usrRes.reportLoc" type="radio" ng-value="0">Work Location
+                          </label>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+                <!--ENO project-->
+                <!--STO phase-->
+                <div class="col-sm-3">
+                  <div class="panel panel-default">
+                    <div class="panel-body panel-height">
+
+                      <div class="form-group">
+                        <h5 class="">Phase</h5>
+                        <select class="form-control" chosen persistent-create-option="true" name="Phase" ng-change="tlsReportsModel.getActivityName(tlsReportsModel.usrRes.Phs)" ng-model="tlsReportsModel.usrRes.Phs" ng-options="PhaseInfo.phsId as PhaseInfo.phsName for PhaseInfo in tlsReportsModel.phase">
+                          <option value="">All</option>
+                        </select>
+                      </div>
+
+                      <div class="form-group col-sm-7">
+                        <h5 class="">Duration</h5>
+                        <select class="form-control" chosen persistent-create-option="true" name="dur" ng-change="tlsReportsModel.getWeeekReports(tlsReportsModel.usrRes.weekReports)" ng-model="tlsReportsModel.usrRes.weekReports" ng-options="Week.name for Week in tlsReportsModel.WeekInfo"
+                          required>
+                          <option value="">--select Duration--
+                          </option>
+                        </select>
+                      </div>
+
+                      <div class="clearfix"></div>
+                      <div class="form-group  col-sm-6">
+                        <h5 class="">Reporting Period</h5>
+                        <select class="form-control" chosen persistent-create-option="true" name="per" ng-change="tlsReportsModel.getMonthReports(tlsReportsModel.usrRes.monthReports)" ng-model="tlsReportsModel.usrRes.monthReports" ng-options="monthPeriod.Period for monthPeriod in tlsReportsModel.repotingPeriod"
+                          required>
+                          <option value="">- choose month -</option>
+                        </select>
+                      </div>
+
+
+                      <div class="clearfix"></div>
+                      <div class="form-group">
+                        <h5 class="">Status</h5>
+                        <div class="multiple" ng-init="tlsReportsModel.usrRes.status.app ='A'">
+                          <div>
+                            <label>
+                              <input name="Report" ng-model="tlsReportsModel.usrRes.status.app" type="checkbox" ng-true-value="'A'" ng-false-value="''"> Approved
+                            </label>
+                          </div>
+                          <div>
+                            <label>
+                              <input name="Work" ng-model="tlsReportsModel.usrRes.status.toBe" type="checkbox" ng-true-value="'U'" ng-false-value="''"> To Be Approved
+                            </label>
+                          </div>
+                          <div>
+                            <label>
+                              <input name="WorkR" ng-model="tlsReportsModel.usrRes.status.Rej" type="checkbox" ng-true-value="'R'" ng-false-value="''"> Rejected
+                            </label>
+                          </div>
+                          <label>
+                            <input name="save" ng-model="tlsReportsModel.usrRes.status.Sav" type="checkbox" ng-true-value="'S'" ng-false-value="''"> Saved
+                          </label>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+                <!--ENO phase-->
+                <!--ENO Activity-->
+                <div class="col-sm-3">
+                  <div class="panel panel-default">
+                    <div class="panel-body panel-height">
+
+                      <div class="form-group">
+                        <h5 class="">Activity</h5>
+                        <select class="form-control" chosen persistent-create-option="true" name="act" ng-change="tlsReportsModel.getTaskName(tlsReportsModel.usrRes.act)" ng-model="tlsReportsModel.usrRes.act" ng-options="activity.actId as activity.actName for activity in tlsReportsModel.activity"
+                          required>
+                          <option value="">All</option>
+                        </select>
+                      </div>
+
+                      <div class="form-group">
+                        <h5 class="">From</h5>
+                        <span class="input-group">
+                          <input id="datepicker" name="fromDate" date-picker ng-model="tlsReportsModel.usrRes.fromDate" placeholder="yyyy/mm/dd" type="text" class="form-control underline" required/>
+                        </span>
+                      </div>
+
+                      <div class="form-group">
+                        <h5 class="">Type of Report</h5>
+                        <div class="multiple" ng-init="tlsReportsModel.usrRes.reportType = 1">
+                          <div>
+                            <label>
+                              <input name="Status" ng-model="tlsReportsModel.usrRes.reportType" value="1" type="radio">Week wise
+                            </label>
+                          </div>
+                          <label>
+                            <input name="Status" ng-model="tlsReportsModel.usrRes.reportType" value="0" type="radio"> Day wise
+                          </label>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+                <!--ENO Activity-->
+                <!--STO Task-->
+                <div class="col-sm-3">
+                  <div class="panel panel-default">
+                    <div class="panel-body panel-height">
+
+                      <div class="form-group">
+                        <h5 class="">Task</h5>
+                        <select class="form-control" chosen persistent-create-option="true" name="Task" ng-model="tlsReportsModel.usrRes.tsk" ng-options="task.tskName for task in tlsReportsModel.task" required>
+                          <option value="">All</option>
+                        </select>
+                      </div>
+
+                      <div class="form-group">
+                        <h5 class="">To</h5>
+                        <span class="input-group">
+                          <input id="datepicker" name="toDate" date-picker ng-model="tlsReportsModel.usrRes.toDate" placeholder="yyyy/mm/dd" type="text" class="form-control underline" required/>
+                        </span>
+                      </div>
+
+                      <div class="form-group">
+                        <h5 class="">Comments</h5>
+                        <label>
+                          <input name="cmt" ng-model="tlsReportsModel.usrRes.Comments" ng-true-value="1" ng-false-value="0" type="checkbox"> Include Comments
+                        </label>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+                <!--ENO Task-->
+                <div class="pull-right">
+                  <span>
+                    <button class="btn colored-bg" ng-click="tlsReportsModel.timelogReportReset()" type="submit">
+                      Reset
+                      <i class="fa fa-refresh" aria-hidden="true"></i>
+                    </button>
+                  </span>
+                  <span>
+                    <button class="btn colored-bg" ng-click="tlsReportsModel.timelogReportCreate(tlsReportsModel.usrRes)" type="submit">
+                      Submit
+                      <i class="fa fa-arrow-circle-right"></i>
+                    </button>
+                  </span>
+                </div>
+
+            </div>
+            </form>
+
+
+          </div>
+        </div>
+      </div>
+
+      <!-- eno right -->
+      <!-- sto left -->
+
+      <div class="col-md-12" ng-class="{'full-width':appModel.tableFullWidth}" ng-show="tlsReportsModel.panelShow">
+        <div class="panel panel-default animated zoomIn" ng-class="{'panel-custom-fullScreen':panelFullScreen}" ng-controller="panelCtrl">
+          <div class="panel-heading panel-custom panel-heading-custom2">
+            <h2 class="panel-title">Timelog Generated Data</h2>
+            <div class="box-icon pull-right">
+              <a class="btn btn-close btn-round btn-default" ng-click="panelFullScreen = !panelFullScreen"><i class="glyphicon" ng-class="{'glyphicon-resize-full':!panelFullScreen,'glyphicon-resize-small':panelFullScreen}" ></i></a>
+              <a class="btn btn-minimize btn-round btn-default"><i class="glyphicon" ng-class="{'glyphicon-chevron-up':!isOpened,'glyphicon-chevron-down':isOpened}" ng-click="isOpened = !isOpened"></i></a>
+              <a class="btn btn-close btn-round btn-default" ng-click="mmListModel.loadDept()"><i class="glyphicon glyphicon-refresh fa-spin-hover"></i></a>
+            </div>
+            <div class="clearfix"></div>
+          </div>
+          <div class="panel-body" ng-show="!isOpened">
+            <table class="display table table-bordered table-striped" datatable="ng" id="dynamic-table custom_table">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Project</th>
+                  <th>Phase</th>
+                  <th>Activity</th>
+                  <th>Task</th>
+                  <th>Mon</th>
+                  <th>Tus</th>
+                  <th>Wed</th>
+                  <th>Thu</th>
+                  <th>Fri</th>
+                  <th>Sat</th>
+                  <th>Sun</th>
+                  <th>Total</th>
+                  <th>Comments</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr ng-repeat="weekRec in  tlsReportsModel.weekRecords">
+                  <td>{{$index}}</td>
+                  <td title="{{weekRec.prjName}}">{{weekRec.prjName}} </td>
+                  <td title="{{weekRec.phsName}}">{{weekRec.phsName}} </td>
+                  <td title="{{weekRec.actName}}">{{weekRec.actName}}</td>
+                  <td title="{{weekRec.tskName}}">{{weekRec.tskName}}</td>
+                  <td>{{weekRec.swipe/60}}</td>
+                  <td>{{weekRec.swipe/60}}</td>
+                  <td>{{weekRec.swipe/60}}</td>
+                  <td>{{weekRec.swipe/60}}</td>
+                  <td>{{weekRec.swipe/60}}</td>
+                  <td></td>
+                  <td></td>
+                  <td>{{weekRec.swipe}}</td>
+                  <td title="{{weekRec.usrCmt}}">{{weekRec.usrCmt}}</td>
+                  <td title="{{weekRec.status}}">{{weekRec.status}}</td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="pannel-top">
+              <button type="button" class="btn btn-danger" ng-click="tlsReportsModel.showTimlog()"> <i class="fa fa-hand-o-up" aria-hidden="true"></i>
+go report</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <!-- eno left -->
+  </div>
+</div>
+
+</div>
+</div>

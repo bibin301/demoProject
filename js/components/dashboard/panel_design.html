@@ -1,0 +1,79 @@
+<style>
+	.panel-custom{
+		border: 1px solid #DEDEDE;
+		border-radius: 3px;
+		-webkit-border-radius: 3px;
+		-moz-border-radius: 3px;
+		box-shadow: 0 0 10px rgba(189, 189, 189, 0.4);
+		-webkit-box-shadow: 0 0 10px rgba(189, 189, 189, 0.4);
+		-moz-box-shadow: 0 0 10px rgba(189, 189, 189, 0.4);
+	}
+	.panel-custom h2 {
+	    font-size: 15px;
+	    width: auto;
+	    clear: none;
+	    float: left;
+	    line-height: 25px;
+	    white-space: nowrap;
+	    font-weight: bold;
+	    margin-top: 0;
+	    margin-bottom: 0;
+	}
+	.box-icon a {
+	    clear: none;
+	    float: left;
+	    margin: 0 2px;
+	    height: 20px;
+	    width: 5px;
+	    margin-top: 1px;
+	}
+	.btn-round {
+	    border-radius: 40px;
+	    -webkit-border-radius: 40px;
+	    -moz-border-radius: 40px;
+	    font-size: 12px;
+	    padding-top: 4px;
+	}
+	.box-icon a i {
+	    margin-left: -6px;
+	    top: -1px;
+	}
+	.ng-show,.ng-hide {
+	  padding:10px;
+	  border:1px solid black;
+	  background:white;
+	}
+
+	.ng-show,.ng-hide {
+	  -webkit-transition:all linear 0.5s;
+	  transition:all linear 0.5s;
+	}
+
+	.ng-hide {
+	  opacity:0;
+	}
+	.panel-custom-fullScreen{
+		bottom: 0;
+		left: 10px;
+		position: fixed;
+		top: 10px;
+		right: 10px;
+		z-index: 1048;
+		background-color: #FFFFFF;
+	}
+</style>
+
+<div class="panel panel-default panel-custom" ng-class="{'panel-custom-fullScreen':panelFullScreen}">
+	<div class="panel-heading panel-heading-custom2">
+		<h2 class="panel-title">Dashboard</h2>
+		<div class="box-icon pull-right">
+			<a class="btn btn-close btn-round btn-default"><i class="glyphicon" ng-class="{'glyphicon-resize-full':!panelFullScreen,'glyphicon-resize-small':panelFullScreen}" ng-click="panelFullScreen=!panelFullScreen"></i></a>
+            <a class="btn btn-minimize btn-round btn-default"><i class="glyphicon" ng-class="{'glyphicon-chevron-up':!isOpened,'glyphicon-chevron-down':isOpened}" ng-click="isOpened=!isOpened"></i></a>
+            <a class="btn btn-close btn-round btn-default"  ng-click="dashModel.loadData();"><i class="glyphicon glyphicon-refresh fa-spin-hover"></i></a>
+        </div>
+		<div class="clearfix"></div>
+	</div>
+	<div class="panel-body" ng-show="!isOpened">
+		   Panel content
+	</div>
+</div>

@@ -1,0 +1,281 @@
+<div class="tls-container">
+
+  <div class="panel panel-default animated zoomIn" ng-class="{'panel-custom-fullScreen':panelFullScreen}">
+    <div class="panel-heading panel-custom panel-heading-custom2">
+      <h2 class="panel-title">Tls submission </h2>
+      <div class="box-icon pull-right">
+        <a class="btn btn-close btn-round btn-default"><i class="glyphicon" ng-class="{'glyphicon-resize-full':!panelFullScreen,'glyphicon-resize-small':panelFullScreen}" ng-click="panelFullScreen = !panelFullScreen"></i></a>
+        <a class="btn btn-minimize btn-round btn-default"><i class="glyphicon" ng-class="{'glyphicon-chevron-up':!isOpened,'glyphicon-chevron-down':isOpened}" ng-click="isOpened = !isOpened"></i></a>
+        <a class="btn btn-close btn-round btn-default" ng-click="mmAdminDeptModel.loadDept()"><i class="glyphicon glyphicon-refresh fa-spin-hover"></i></a>
+      </div>
+      <div class="clearfix"></div>
+    </div>
+    <div class="panel-body " ng-show="!isOpened">
+
+
+      <style>
+        .tls-submission-table {
+          width: 100%;
+        }
+
+        .tls-submission-table tr th,
+        .tls-submission-table tr td {
+          text-align: center;
+        }
+
+        .Subbmision-row input {
+          width: 35px;
+          text-align: center;
+        }
+
+        .Subbmision-row td {
+          padding-top: 10px;
+        }
+
+        .Subbmision-table-head th {
+          padding: 10px;
+        }
+      </style>
+      <div class="container" ng-init="tlsSubmissionModel.getTlsReport('new')">
+        <form class="form-horizontal" novalidate="">
+          <div class="panel panel-default tls-submission">
+            <div class="panel-body">
+              <div class="row">
+                <div class="col-md-4 content-box">
+                  <div class="colored-bg Submission-header text-center">Project,Phase,Activity,Task</div>
+                  <div class="panel panel-default">
+                    <div class="panel-body">
+                      <!-- sto project -->
+                      <label class="Model-title">Project
+                      </label>
+                      <select class="form-control" name="project" chosen persistent-create-option="true" ng-change="tlsSubmissionModel.getPhase(tlsSubmissionModel.usrRes.prj)" ng-model="tlsSubmissionModel.usrRes.prj" ng-options="prj.prjId as prj.prjName for prj in  tlsSubmissionModel.project"
+                        required type="text">
+                        <option value="">-- select project --</option>
+                      </select>
+
+                      <!-- eno project -->
+
+                      <!--sto phase  -->
+                      <label class="Model-title">Phase
+                      </label>
+                      <select class="form-control" chosen persistent-create-option="true" ng-change="tlsSubmissionModel.getActivity(tlsSubmissionModel.usrRes.phs)" ng-model="tlsSubmissionModel.usrRes.phs" ng-options="phs.id as phs.phsName for phs in tlsSubmissionModel.tlsPhase"
+                        required>
+                        <option value="">-- select phase --</option>
+                      </select>
+                      <!--eno phase  -->
+
+                      <!-- sto Activity -->
+                      <label class="Model-title">Activity
+                      </label>
+                      <select class="form-control" chosen persistent-create-option="true" ng-change="tlsSubmissionModel.getTask(tlsSubmissionModel.usrRes.Activity)" ng-model="tlsSubmissionModel.usrRes.Activity" ng-options="activity.id as activity.actName for activity in tlsSubmissionModel.tlsActivity"
+                        required>
+                        <option value="">-- select activity --</option>
+                      </select>
+                      <!-- eno Activity -->
+
+                      <!--sto task  -->
+
+                      <label class="Model-title">Task
+                      </label>
+                      <select class="form-control" chosen persistent-create-option="true" ng-model="tlsSubmissionModel.usrRes.task" ng-options="tsk.tskName for tsk in tlsSubmissionModel.tlsTask" required>
+                        <option value="">-- select task --</option>
+                      </select>
+                      <!--eno task  -->
+
+                    </div>
+                  </div>
+                </div>
+                <!--sto calender-->
+
+                <div class="col-md-3">
+                  <div class="colored-bg Submission-header text-center">Calender</div>
+                  <div class="panel panel-default">
+                    <div class="panel-body">
+                      <div class="content-date">
+                        <datepicker datepicker-options="tlsSubmissionModel.dateOptions" ui-date-format="mm/dd/yyyy" starting-day="1" ng-click="tlsSubmissionModel.getTlsReport(tlsSubmissionModel.usrRes.sdate)" ng-model="tlsSubmissionModel.usrRes.sdate" show-weeks="true">
+                        </datepicker>
+
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+                <!--eno calender-->
+                <!-- sto status-->
+                <div class="col-md-5 content-box">
+                  <div class="colored-bg Submission-header text-center">status</div>
+                  <div class="panel panel-default">
+                    <div class="panel-body">
+                      <div class="tls_status_content">
+                        <ul ng-repeat="dateRange in tlsSubmissionModel.tlsStatus | limitTo:7">
+                          <li>
+                            <a href="#" ng-click="tlsSubmissionModel.getDateRange(dateRange.dateRange.startDate)">{{dateRange.dateRange.startDate}}
+                                                    to
+                                                    {{dateRange.dateRange.endDate}}
+                                                    is
+                                                    {{dateRange.status}}
+                                                </a>
+                          </li>
+                        </ul>
+                        <!-- {{tls_subData.status}} -->
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- eno status-->
+              </div>
+            </div>
+          </div>
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <div ng-include="" ng-if=""></div>
+              <table class="tls-submission-table row-border hover table-striped table-bordered no-footer" id="custom_table">
+                <tr class="Subbmision-table-head">
+                  <th class="colored-bg" title="">Mon</th>
+                  <th class="colored-bg" title="">Tue</th>
+                  <th class="colored-bg" title="">Wed</th>
+                  <th class="colored-bg" title="">Thu</th>
+                  <th class="colored-bg" title="">Fri</th>
+                  <th class="colored-bg" title="">Sat</th>
+                  <th class="colored-bg" title="">Sun</th>
+                  <th class="colored-bg">Total</th>
+                  <th class="colored-bg">Overall Total</th>
+                  <th class="colored-bg">Comments</th>
+                </tr>
+                <tr class="Subbmision-row">
+                  <td>
+                    <input class="form-text" name="mon" maxlength="2" ng-model="tlsSubmissionModel.usrRes.mon" onkeypress="return isNumber(event)" placeholder="HH" size="12" title="Enter Hours" type="text" />
+                    <span class="divider">:</span>
+                    <input class="form-text" maxlength="2" onkeypress="return isNumber(event)" ng-model="tlsSubmissionModel.usrRes.monMin" placeholder="MM" size="60" title="Enter Minutes" type="text" />
+                  </td>
+
+                  <td>
+                    <input class="form-text" name="tue" maxlength="2" ng-model="tlsSubmissionModel.usrRes.tus" onkeypress="return isNumber(event)" placeholder="HH" size="12" title="Enter Hours" type="text" />
+                    <span class="divider">:</span>
+                    <input class="form-text" maxlength="2" ng-model="tlsSubmissionModel.usrRes.tusMin" onkeypress="return isNumber(event)" placeholder="MM" size="60" title="Enter Minutes" type="text" />
+                  </td>
+
+                  <td>
+                    <input class="form-text" name="wed" maxlength="2" ng-model="tlsSubmissionModel.usrRes.wed" onkeypress="return isNumber(event)" placeholder="HH" size="12" title="Enter Hours" type="text" />
+                    <span class="divider">:</span>
+                    <input class="form-text" maxlength="2" ng-model="tlsSubmissionModel.usrRes.wedMin" onkeypress="return isNumber(event)" placeholder="MM" size="60" title="Enter Minutes" type="text" />
+                  </td>
+
+                  <td>
+                    <input class="form-text" name="thu" maxlength="2" ng-model="tlsSubmissionModel.usrRes.thus" onkeypress="return isNumber(event)" placeholder="HH" size="12" title="Enter Hours" type="text" />
+                    <span class="divider">:</span>
+                    <input class="form-text" maxlength="2" ng-model="tlsSubmissionModel.usrRes.thusMin" onkeypress="return isNumber(event)" placeholder="MM" size="60" title="Enter Minutes" type="text" />
+                  </td>
+
+                  <td>
+                    <input class="form-text" name="fri" maxlength="2" ng-model="tlsSubmissionModel.usrRes.fri" onkeypress="return isNumber(event)" placeholder="HH" size="12" title="Enter Hours" type="text" />
+                    <span class="divider">:</span>
+                    <input class="form-text" maxlength="2" ng-model="tlsSubmissionModel.usrRes.friMin" onkeypress="return isNumber(event)" placeholder="MM" size="60" title="Enter Minutes" type="text" />
+                  </td>
+                  <!--over all  -->
+                  <td>
+                    <input class="form-text" maxlength="2" ng-model="tlsSubmissionModel.usrRes.sat" onkeypress="return isNumber(event)" placeholder="HH" size="12" title="Enter Hours" type="text" />
+                    <span class="divider">:</span>
+                    <input class="form-text" maxlength="2" ng-model="tlsSubmissionModel.usrRes.satMin" onkeypress="return isNumber(event)" placeholder="MM" size="60" title="Enter Minutes" type="text" />
+                  </td>
+
+                  <td>
+                    <input class="form-text" maxlength="2" ng-model="tlsSubmissionModel.usrRes.sun" onkeypress="return isNumber(event)" placeholder="HH" size="12" title="Enter Hours" type="text" />
+                    <span class="divider">:</span>
+                    <input class="form-text" maxlength="2" ng-model="tlsSubmissionModel.usrRes.satMin" onkeypress="return isNumber(event)" placeholder="MM" size="60" title="Enter Minutes" type="text" />
+                  </td>
+
+                  <td>
+                    Total : {{tlsSubmissionModel.usrRes.mon -- tlsSubmissionModel.usrRes.monMin/60 -- tlsSubmissionModel.usrRes.tus -- tlsSubmissionModel.usrRes.tusMin/60 -- tlsSubmissionModel.usrRes.wed -- tlsSubmissionModel.usrRes.wedMin/60 -- tlsSubmissionModel.usrRes.thus
+                    -- tlsSubmissionModel.usrRes.thusMin/60 --tlsSubmissionModel.usrRes.fri -- tlsSubmissionModel.usrRes.friMin/60 -- tlsSubmissionModel.usrRes.sat -- tlsSubmissionModel.usrRes.satMin/60 -- tlsSubmissionModel.usrRes.sun -- tlsSubmissionModel.usrRes.Minsun/60}}
+
+                  </td>
+
+                  <td id="total-all">
+                    overall total : {{tlsSubmissionModel.usrRes.mon -- tlsSubmissionModel.usrRes.monMin/60 -- tlsSubmissionModel.usrRes.tus -- tlsSubmissionModel.usrRes.tusMin/60 -- tlsSubmissionModel.usrRes.wed -- tlsSubmissionModel.usrRes.wedMin/60 -- tlsSubmissionModel.usrRes.thus
+                    -- tlsSubmissionModel.usrRes.thusMin/60 --tlsSubmissionModel.usrRes.fri -- tlsSubmissionModel.usrRes.friMin/60 -- tlsSubmissionModel.usrRes.sat -- tlsSubmissionModel.usrRes.satMin/60 -- tlsSubmissionModel.usrRes.sun -- tlsSubmissionModel.usrRes.Minsun/60}}
+                  </td>
+
+                  <td>
+                    <div class="form-item" id="edit-comments-wrapper">
+                      <textarea class="form-textarea resizable" ng-model="tlsSubmissionModel.usrRes.cmt" cols="17" id="edit-comments" name="comments" rows="3" placeholder="Enter the Comments"></textarea>
+                    </div>
+                  </td>
+
+                </tr>
+              </table>
+
+            </div>
+          </div>
+          <div class="text-center">
+            <button type="submit" class="btn colored-bg" ng-click="tlsSubmissionModel.createTls(tlsSubmissionModel.usrRes,tlsSubmissionModel.tlsStatus)">Add</button>
+            <button type="submit" class="btn colored-bg">Submit</button>
+            <button type="submit" class="btn colored-bg">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!-- STO table -->
+
+    <!-- <ul ng-repeat="weekRec in  tlsSubmissionModel.weekRecords">
+      <li>{{weekRec}}</li>
+    </ul> -->
+
+
+
+
+
+    <div class="panel panel-default" ng-show="tlsSubmissionModel.usrRes.sdate">
+      <div class="panel-body">
+        <div>
+          <h4>submission</h4>
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Project</th>
+                <th>Phase</th>
+                <th>Activity</th>
+                <th>Task</th>
+                <th>Mon</th>
+                <th>Tus</th>
+                <th>Wed</th>
+                <th>Thu</th>
+                <th>Fri</th>
+                <th>Sat</th>
+                <th>Sun</th>
+                <th>Total</th>
+                <th>Comments</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="weekRec in  approvalModel.weekRecords">
+                <td>{{$index}}</td>
+                <td title="{{weekRec.prjName}}">{{weekRec.prjName}} </td>
+                <td title="{{weekRec.phsName}}">{{weekRec.phsName}} </td>
+                <td title="{{weekRec.actName}}">{{weekRec.actName}}</td>
+                <td title="{{weekRec.tskName}}">{{weekRec.tskName}}</td>
+                <td>{{weekRec.swipe/60 | date:'yyyy-MM-dd HH:mm:ss Z'}}</td>
+                <td>{{weekRec.swipe/60 | date:'yyyy-MM-dd HH:mm:ss Z'}}</td>
+                <td>{{weekRec.swipe/60 | date:'yyyy-MM-dd HH:mm:ss Z'}}</td>
+                <td>{{weekRec.swipe/60 | date:'yyyy-MM-dd HH:mm:ss Z'}}</td>
+                <td>{{weekRec.swipe/60 | date:'yyyy-MM-dd HH:mm:ss Z'}}</td>
+                <td></td>
+                <td></td>
+                <td>{{weekRec.swipe}} </td>
+                <td title="{{weekRec.usrCmt}}">{{weekRec.usrCmt}}</td>
+                <td title="{{weekRec.status}}">{{weekRec.status}} </td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ENO table -->
+
+  </div>
+</div>

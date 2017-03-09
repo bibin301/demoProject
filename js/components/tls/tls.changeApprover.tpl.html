@@ -1,0 +1,254 @@
+<style>
+  .top-table {
+    margin-top: 10px;
+  }
+
+  .title {
+    margin-top: 5px;
+  }
+
+  .title2 {
+    margin-top: 3px;
+  }
+
+  .default-height {
+    min-height: 500px;
+  }
+
+  .select {
+    padding-left: 2px;
+  }
+
+  .btn-align {
+    margin: 0px 0px 15px 0px;
+  }
+
+  .first-tittle {
+    padding-top: 25px;
+  }
+
+  .pannel-top {
+    margin-top: 10px;
+  }
+
+  .btn-align2 {
+    margin: 6px 0px 0px 0px;
+  }
+</style>
+
+<div class="panel panel-default panel-custom animated zoomIn default-height" ng-class="{'panel-custom-fullScreen':panelFullScreen}">
+  <div class="panel-heading panel-custom panel-heading-custom2">
+    <h2 class="panel-title">Change Approver</h2>
+
+    <div class="box-icon pull-right">
+
+      <a class="btn btn-close btn-round btn-default" ng-click="panelFullScreen = !panelFullScreen"><i class="glyphicon" ng-class="{'glyphicon-resize-full':!panelFullScreen,'glyphicon-resize-small':panelFullScreen}" ></i></a>
+      <a class="btn btn-minimize btn-round btn-default" ng-click="isOpened = !isOpened"><i class="glyphicon" ng-class="{'glyphicon-chevron-up':!isOpened,'glyphicon-chevron-down':isOpened}" ></i></a>
+      <a class="btn btn-close btn-round btn-default"><i class="glyphicon glyphicon-refresh fa-spin-hover"></i></a>
+    </div>
+    <div class="clearfix "></div>
+  </div>
+  <div class="panel-body " ng-show="!isOpened ">
+    <div class="row">
+      <div class="umList">
+        <div class="col-sm-12">
+          <!--STO right  -->
+          <div class="col-sm-4" ng-class="{'full-width':appModel.tableFullWidth}">
+
+            <div class="panel panel-default animated zoomIn" ng-class="{'panel-custom-fullScreen':panelFullScreen}" ng-controller="panelCtrl">
+              <div class="panel-heading panel-custom panel-heading-custom2">
+                <h2 class="panel-title">Activity Selection</h2>
+                <div class="box-icon pull-right">
+                  <a class="btn btn-close btn-round btn-default" ng-click="panelFullScreen = !panelFullScreen"><i class="glyphicon" ng-class="{'glyphicon-resize-full':!panelFullScreen,'glyphicon-resize-small':panelFullScreen}" ></i></a>
+                  <a class="btn btn-minimize btn-round btn-default"><i class="glyphicon" ng-class="{'glyphicon-chevron-up':!isOpened,'glyphicon-chevron-down':isOpened}" ng-click="isOpened = !isOpened"></i></a>
+
+                </div>
+                <div class="clearfix"></div>
+              </div>
+              <div class="panel-body " ng-show="!isOpened">
+
+                <select ng-model="changeApproverModel.usrRes.approver" chosen persistent-create-option="true" ng-change="changeApproverModel.getSelectedStatus(changeApproverModel.usrRes.approver)" ng-options="list.name for list in changeApproverModel.approverData">
+                  <option value="">--select--</option>
+                </select>
+
+
+              </div>
+            </div>
+          </div>
+          <!--ENO right  -->
+          <!--STO left  -->
+
+          <div class="col-sm-8" ng-class="{'full-width':appModel.tableFullWidth}">
+            <div class="panel panel-default animated zoomIn" ng-class="{'panel-custom-fullScreen':panelFullScreen}" ng-controller="panelCtrl">
+              <div class="panel-heading panel-custom panel-heading-custom2">
+                <h2 class="panel-title">{{changeApproverModel.title}} </h2>
+                <div class="box-icon pull-right">
+                  <a class="btn btn-close btn-round btn-default" ng-click="panelFullScreen = !panelFullScreen"><i class="glyphicon" ng-class="{'glyphicon-resize-full':!panelFullScreen,'glyphicon-resize-small':panelFullScreen}" ></i></a>
+                  <a class="btn btn-minimize btn-round btn-default"><i class="glyphicon" ng-class="{'glyphicon-chevron-up':!isOpened,'glyphicon-chevron-down':isOpened}" ng-click="isOpened = !isOpened"></i></a>
+
+                </div>
+                <div class="clearfix"></div>
+              </div>
+              <div class="panel-body " ng-show="!isOpened">
+                <form>
+
+                  <div class="sectionOne" ng-show="changeApproverModel.sectionOne">
+
+
+                    <div class="form-group" ng-show="changeApproverModel.showPrj">
+                      <label for="exampleInputEmail1" class="first-tittle"><b>Project</b></label>
+                      <select ng-model="changeApproverModel.usrRes.project" ng-change="changeApproverModel.getPhase(changeApproverModel.usrRes.project)" chosen persistent-create-option="true" ng-options="prj.prjName for prj in changeApproverModel.projects">
+                        <option value="">--select--</option>
+                      </select>
+                    </div>
+
+                    <div class="form-group" ng-show="changeApproverModel.showPhase">
+                      <label for="exampleInputEmail1"><b>Phase</b></label>
+                      <select ng-model="changeApproverModel.usrRes.pha" chosen persistent-create-option="true" ng-change="changeApproverModel.getActivity(changeApproverModel.usrRes.pha)" ng-options="phs.phsName for phs in changeApproverModel.phase">
+                        <option value="">--select--</option>
+                      </select>
+                    </div>
+
+                    <div class="form-group" ng-show="changeApproverModel.showAct">
+                      <label for="exampleInputEmail1"><b>Activity</b></label>
+                      <select ng-model="changeApproverModel.usrRes.act" chosen persistent-create-option="true" ng-change="changeApproverModel.getTask(changeApproverModel.usrRes.act)" ng-options="prj.actName for prj in changeApproverModel.activity">
+                        <option value="">--select--</option>
+                      </select>
+                    </div>
+
+                    <div class="form-group" ng-show="changeApproverModel.showTsk">
+                      <label for="exampleInputEmail1"><b>Task</b></label>
+                      <select ng-model="changeApproverModel.usrRes.tsk" chosen persistent-create-option="true" ng-options="tsk.tskName for  tsk in changeApproverModel.task">
+                        <option value="">--select--</option>
+                      </select>
+                    </div>
+
+
+                    <div class="col-sm-12">
+                      <div class="col-sm-6">
+                        <h5 class="title col-sm-3">Current Approver </h5>
+                        <div class="col-sm-3 title2">
+                          {{changeApproverModel.project.prevHistory[0].empName}}
+                        </div>
+                      </div>
+                      <div class="col-sm-6">
+                        <h5 class="title col-sm-4">Change Approver To </h5>
+                        <div class="col-sm-8">
+                          <select chosen persistent-create-option="true" ng-model="changeApproverModel.usrRes.changeApprover" ng-options="usr.empName for usr in changeApproverModel.empName">
+                            <option>--select-- </option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="clearfix"></div>
+                    <div ng-class="{'full-width':appModel.tableFullWidth}" class="pannel-top">
+                      <div class="panel panel-default animated zoomIn" ng-class="{'panel-custom-fullScreen':panelFullScreen}" ng-controller="panelCtrl">
+                        <div class="panel-heading panel-custom panel-heading-custom2">
+                          <h2 class="panel-title">Change Approver history </h2>
+                          <div class="box-icon pull-right">
+                            <a class="btn btn-close btn-round btn-default" ng-click="panelFullScreen = !panelFullScreen"><i class="glyphicon" ng-class="{'glyphicon-resize-full':!panelFullScreen,'glyphicon-resize-small':panelFullScreen}" ></i></a>
+                            <a class="btn btn-minimize btn-round btn-default"><i class="glyphicon" ng-class="{'glyphicon-chevron-up':!isOpened,'glyphicon-chevron-down':isOpened}" ng-click="isOpened = !isOpened"></i></a>
+                            <a class="btn btn-close btn-round btn-default" ng-click="mmListModel.loadDept()"><i class="glyphicon glyphicon-refresh fa-spin-hover"></i></a>
+                          </div>
+                          <div class="clearfix"></div>
+                        </div>
+                        <div class="panel-body" ng-show="!isOpened">
+                          <table class="table  top-table table table-bordered table-responsive">
+                            <thead>
+                              <tr>
+                                <th>#</th>
+                                <th>Approver Name</th>
+                                <th>Date</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr ng-repeat="rec in changeApproverModel.usrRes.project.prevHistory">
+                                <td>{{$index +1}}</td>
+                                <td>{{rec.empName}}</td>
+                                <td>{{rec.tillDate}}</td>
+                              </tr>
+                            </tbody>
+                          </table>
+
+
+                        </div>
+                      </div>
+                    </div>
+
+
+                  </div>
+
+
+                  <div class="sectionTwo" ng-show="changeApproverModel.sectionTwo">
+                    <!-- <div class="panel panel-default">
+                      <div class="panel-body"> -->
+                    <div class="col-sm-12">
+                      <h5 class="title col-sm-2">Current Approver</h5>
+                      <div class="col-sm-4">
+                        <select chosen persistent-create-option="true" ng-options="approver.approverName for approver in changeApproverModel.changeBy" ng-model="changeApproverModel.usrRes.Approver">
+                          <option>--select-- </option>
+                        </select>
+                      </div>
+                      <h5 class="title col-sm-2">Change Approver To</h5>
+                      <div class="col-sm-4">
+                        <select chosen persistent-create-option="true" ng-options="approver.empName for approver in changeApproverModel.changeApprover" ng-model="changeApproverModel.usrRes.change">
+                          <option>--select-- </option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div>
+                      <table class="display table table-bordered table-striped" datatable="ng" id="dynamic-table custom_table">
+                        <thead>
+                          <tr>
+                            <th>Project Name</th>
+                            <th>Phase Name</th>
+                            <th>Activity Name</th>
+                            <th>Task Name</th>
+                            <th>Programme Manager</th>
+                            <th>Select All
+                              <input class="select" type="checkbox" ng-model="changeApproverModel.check" ng-click="changeApproverModel.checkAll()" value="">
+                              <!-- ng-change="changeApproverModel.getAll(changeApproverModel.usrRes.Approver.prjDetials)" -->
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr ng-repeat="prj in changeApproverModel.usrRes.Approver.prjDetials">
+                            <td>{{prj.prjName}}</td>
+                            <td>{{prj.phsName}}</td>
+                            <td>{{prj.actName}}</td>
+                            <td>{{prj.tskName}}</td>
+                            <td>{{prj.pgmMgr}}</td>
+
+                            <td>
+                              <input type="checkbox" ng-model="prj.selected" ng-click="changeApproverModel.check1()" value="">
+                              <!-- ng-change="changeApproverModel.getValue(prj)"  -->
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+
+
+
+                  </div>
+                  <!-- </div>
+
+
+                  </div> -->
+                  <div class="clearfix"> </div>
+                  <div class="pull-right btn-align2">
+                    <button type="button" class="btn colored-bg" ng-click="changeApproverModel.getUpdateData(changeApproverModel.usrRes)">Change</button>
+                  </div>
+
+                </form>
+              </div>
+              <!--ENO left  -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

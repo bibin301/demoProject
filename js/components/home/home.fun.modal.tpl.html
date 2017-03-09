@@ -1,0 +1,15 @@
+
+<div class="panel panel-default text-center" >
+  <button type="button" class="close" ng-click="AlbumModel.cancel()">x</button>
+  <h4 class="colored">{{AlbumModel.fun.eventTitle}}</h4>
+  <div class="panel-body">
+    <carousel no-wrap="noWrapSlides" class="col-md-12 album-img">
+      <slide  ng-repeat="img in AlbumModel.fun.eventImages" active="img.active">
+        <img ng-src="images/club/{{img.imgName}}">
+      </slide>
+    </carousel>
+    <h4 ><i class="glyphicon glyphicon-calendar text-danger"></i> {{AlbumModel.fun.eventDate}}</h4>
+    <h4 class="bg-danger">Description</h4>
+    <p>{{AlbumModel.fun.eventDesc}}</p>
+  </div>
+</div>

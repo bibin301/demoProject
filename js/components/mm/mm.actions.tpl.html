@@ -1,0 +1,132 @@
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<div class="panel panel-default animated zoomIn" ng-class="{'panel-custom-fullScreen':panelFullScreen}">
+    <div class="panel-heading panel-custom panel-heading-custom2">
+        <h2 class="panel-title">Meeting Minutes - My Actions </h2>
+        <div class="box-icon pull-right">
+            <a class="btn btn-close btn-round btn-default" ng-click="panelFullScreen = !panelFullScreen"><i class="glyphicon" ng-class="{'glyphicon-resize-full':!panelFullScreen,'glyphicon-resize-small':panelFullScreen}" ></i></a>
+            <a class="btn btn-minimize btn-round btn-default"><i class="glyphicon" ng-class="{'glyphicon-chevron-up':!isOpened,'glyphicon-chevron-down':isOpened}" ng-click="isOpened = !isOpened"></i></a>
+            <a class="btn btn-close btn-round btn-default" ng-click="mmActionModel.loadDept()"><i class="glyphicon glyphicon-refresh fa-spin-hover"></i></a>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="panel-body " ng-show="!isOpened">
+        <div class="row">
+            <div class="col-md-7" ng-class="{'full-width':appModel.tableFullWidth}">
+                <div class="panel panel-default animated zoomIn" ng-class="{'panel-custom-fullScreen':panelFullScreen}" ng-controller="panelCtrl">
+                    <div class="panel-heading panel-custom panel-heading-custom2">
+                        <h2 class="panel-title">Meeting Minutes - Action List </h2>
+                        <div class="box-icon pull-right">
+                            <a class="btn btn-close btn-round btn-default" ng-click="panelFullScreen = !panelFullScreen"><i class="glyphicon" ng-class="{'glyphicon-resize-full':!panelFullScreen,'glyphicon-resize-small':panelFullScreen}" ></i></a>
+                            <a class="btn btn-minimize btn-round btn-default"  ng-click="isOpened = !isOpened"><i class="glyphicon" ng-class="{'glyphicon-chevron-up':!isOpened,'glyphicon-chevron-down':isOpened}"></i></a>
+                            <a class="btn btn-close btn-round btn-default" ng-click="mmActionModel.loadDept()"><i class="glyphicon glyphicon-refresh fa-spin-hover"></i></a>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="panel-body " ng-show="!isOpened">
+                        <table class="display table table-bordered table-striped" datatable="ng" id="dynamic-table custom_table">
+                            <thead>
+                                <tr>
+                                    <th>Action Reference</th>
+                                    <th>Description</th>
+                                    <th>Action Taken</th>
+                                    <th>Target Date </th>
+                                    <th>Revised Date </th>
+                                    <th>Action Status </th>
+                                    <th>Action </th>
+
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="action in mmActionModel.actions">
+                                    <td>{{action.actionRef}}</td>
+                                    <td><div class="inner-div" ng-bind-html="action.actDesc" title="{{action.actDesc}}"></div></td>
+                                    <td><div class="inner-div" ng-bind-html="action.actTaken" title="{{action.actTaken}}"></div></td>
+                                    <td>{{action.dueDate}}</td>
+                                    <td>{{action.revDueDate}}</td>
+                                    <td>{{action.actStatus}}</td>
+                                    <td>
+                                        <button class="btn btn-xs colored-bg" ng-click="mmActionModel.editAction(action)" type="button">
+                                            <i class="fa" ng-class="{'fa-eye':action.actStatus == 'Locked' || action.actStatus == 'Closed','fa-edit':action.actStatus != 'Locked' && action.actStatus != 'Closed'}"></i>
+                                        </button>
+                                    </td>
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="col-md-5" ng-class="{'full-width':appModel.tableFullWidth}">
+                <div class="panel panel-default animated zoomIn" ng-class="{'panel-custom-fullScreen':panelFullScreen}" ng-controller="panelCtrl" ng-if='mmActionModel.action'>
+                    <div class="panel-heading panel-custom panel-heading-custom2">
+                        <h2 class="panel-title">Meeting Actions</h2>
+                        <div class="box-icon pull-right">
+                            <a class="btn btn-close btn-round btn-default"  ng-click="panelFullScreen = !panelFullScreen"><i class="glyphicon" ng-class="{'glyphicon-resize-full':!panelFullScreen,'glyphicon-resize-small':panelFullScreen}"></i></a>
+                            <a class="btn btn-minimize btn-round btn-default" ng-click="isOpened = !isOpened"><i class="glyphicon" ng-class="{'glyphicon-chevron-up':!isOpened,'glyphicon-chevron-down':isOpened}"></i></a>
+                            <a class="btn btn-close btn-round btn-default" ng-click="mmActionModel.loadDept()"><i class="glyphicon glyphicon-refresh fa-spin-hover"></i></a>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="panel-body " ng-show="!isOpened">
+                        <form class="form-horizontal" role="form" name="userForm" novalidate>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label Model-title">Action Reference</label>
+                                <div class="col-sm-7">
+                                    <input class="form-control underline" ng-model="mmActionModel.action.actionRef" required="" readonly type="text">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label Model-title">Status</label>
+                                <div class="col-sm-7">
+                                    <input class="form-control underline" ng-model="mmActionModel.action.actStatus" required="" readonly type="text">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label Model-title">Target Date</label>
+                                <div class="col-sm-7">
+                                    <input class="form-control underline" ng-model="mmActionModel.action.dueDate" required="" readonly type="text">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label Model-title">Description</label>
+                                <div class="col-sm-7">
+                                    <div ng-bind-html="mmActionModel.action.actDesc" title="{{mmActionModel.action.actDesc}}"></div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label Model-title">Revised Date</label>
+                                <div class="col-sm-7">
+
+                                    <input id="datepicker" name="rDate" date-picker="appModel.cartapp.dateOption" ng-model="mmActionModel.action.revDueDate" type="text" class="form-control underline"  required/>
+                                      <div class="has-error" ng-show="(userForm.rDate.$error.required && userForm.rDate.$touched)||(userForm.$submitted && userForm.rDate.$error.required)">revised date is required </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label Model-title">Action Taken</label>
+                                <div class="col-md-10">
+                                    <textarea ng-model="mmActionModel.action.actTaken" ui-tinymce="appModel.tinymceOptions"></textarea>
+                                </div>
+                            </div>
+                            
+                            <div class="col-sm-3 col-md-offset-8" ng-if="mmActionModel.action.actStatus != 'Locked' && mmActionModel.action.actStatus != 'Closed'">
+                                <button class="btn colored-bg btn-block ng-binding" ng-click="mmActionModel.updateAction(mmActionModel.action)">
+                                    Update <i class="fa fa-arrow-circle-right"></i>
+
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

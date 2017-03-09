@@ -1,0 +1,37 @@
+<div class="modal-header">
+    <button class="close" ng-click="appModel.cancel()" type="button">✕</button>
+    <h3 class="text-center colored">{{appModel.app.appName}}</h3>
+</div>
+<div class="modal-body" style="text-align:center;">
+    <div class="row-fluid">
+        <div class="span10 offset1">
+            <div id="modalTab">
+                <div class="tab-content">
+                    <div class="tab-pane active" id="about">
+                        <i class="fa fa-5x colored" ng-class="appModel.app.iconName"></i>
+                        <h3 class="media-heading">{{appModel.app.appName}}
+                        </h3>
+                        <span>
+                            <strong>functions:
+                            </strong>
+                        </span>
+                        <span class="label label-warning">Create</span>
+                        <span class="label label-info">Edit</span>
+                        <span class="label label-info">Help</span>
+                        <span class="label label-success">Track</span>
+
+                        <hr>
+                        <center>
+                            <p class="text-left">
+                                <strong>Description:
+                                </strong><br>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut sem dui, tempor sit amet commodo a, vulputate vel tellus.</p>
+                            <br>
+                            <img src="http://placekitten.com/200/300"> 
+                        </center>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

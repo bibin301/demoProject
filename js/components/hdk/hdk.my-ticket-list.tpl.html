@@ -1,0 +1,109 @@
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<style>
+    .timeline-item .panel-group {
+        margin-bottom: 0px;
+    }
+
+    .timeline-header.timeline-header.timeline-header {
+        width: 90% !important;
+        margin: 0px auto;
+        z-index: 10;
+    }
+
+    .timeline-footer.timeline-footer.timeline-footer {
+        margin: 0px auto;
+        float: none;
+    }
+
+    .footer-button {
+        margin-top: 5px;
+    }
+
+    .update-status {
+        padding: 0px 0px 10px 0px;
+    }
+    .error-space{
+        padding: 0px 0px 0px 5px;
+    }
+</style>
+
+<div class="panel panel-default animated zoomIn" ng-class="{'panel-custom-fullScreen':panelFullScreen}">
+    <div class="panel-heading panel-custom  panel-heading-custom2">
+        <h2 class="panel-title">My Tickets</h2>
+        <div class="box-icon pull-right">
+            <a class="btn btn-close btn-round btn-default" title="Add new Ticket" ng-click="hdkMyTktModel.openAddTicketModal();"><i class="glyphicon glyphicon-plus"></i></a>
+            <a class="btn btn-close btn-round btn-default" ng-click="panelFullScreen = !panelFullScreen"><i class="glyphicon" ng-class="{'glyphicon-resize-full':!panelFullScreen,'glyphicon-resize-small':panelFullScreen}" ></i></a>
+            <a class="btn btn-minimize btn-round btn-default"><i class="glyphicon" ng-class="{'glyphicon-chevron-up':!isOpened,'glyphicon-chevron-down':isOpened}" ng-click="isOpened = !isOpened"></i></a>
+            <a class="btn btn-close btn-round btn-default" ng-click="hdkMyTktModel.loadTicket();"><i class="glyphicon glyphicon-refresh fa-spin-hover"></i></a>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="panel-body " ng-show="!isOpened">
+        <div class="row" >
+            <div class="col-md-6"  ng-class="{'full-width':appModel.tableFullWidth}">
+                <div class="panel panel-default animated zoomIn" ng-class="{'panel-custom-fullScreen':panelFullScreen}" ng-controller="panelCtrl">
+                    <div class="panel-heading panel-custom panel-heading-custom2">
+                        <h2 class="panel-title">Raised Ticket List</h2>
+                        <div class="box-icon pull-right">
+                            <a class="btn btn-close btn-round btn-default" ng-click="panelFullScreen = !panelFullScreen"><i class="glyphicon" ng-class="{'glyphicon-resize-full':!panelFullScreen,'glyphicon-resize-small':panelFullScreen}" ></i></a>
+                            <a class="btn btn-minimize btn-round btn-default"><i class="glyphicon" ng-class="{'glyphicon-chevron-up':!isOpened,'glyphicon-chevron-down':isOpened}" ng-click="isOpened = !isOpened"></i></a>
+                            <a class="btn btn-close btn-round btn-default" ng-click="hdkMyTktModel.loadTicket();"><i class="glyphicon glyphicon-refresh fa-spin-hover"></i></a>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="panel-body " ng-show="!isOpened">
+                        <table class="display table table-bordered table-striped" datatable="ng" id="dynamic-table custom_table">
+                            <thead>
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Category</th>
+                                    <th>Area</th>
+                                    <th>Date Raised</th>
+                                    <th>Ticket Status</th>
+                                    <th>Ticket details</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="ticketList in hdkMyTktModel.tickets" >
+                                    <td>{{ticketList.tktTitle}}</td>
+                                    <td class="location">{{ticketList.catName}}</td>
+                                    <td>{{ticketList.areaName}}</td>
+                                    <td>{{ticketList.dateRaised}}</td>
+                                    <td>{{ticketList.tktStatus}}</td>
+                                    <td title={{ticketList.tktDetail}}><div class="inner-div" ng-bind-html="ticketList.tktDetail"></div></td>
+                                    <td>
+                                        <button ng-if="list.createNew != 'No'"class="btn btn-xs colored-bg" data-toggle="modal" data-target=".bs-example-modal-lg" ng-click="hdkMyTktModel.ticketTimeline(ticketList.tktId)" type="button">
+                                            <i class="fa fa-edit"></i>
+                                        </button>
+                                    </td>
+                                    <!-- <td class="comments" ng-bind-html="Categories.Comments"></td> -->
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6  col-sm-12" ng-class="{'full-width':appModel.tableFullWidth}">
+                <div class="panel panel-default animated zoomIn" ng-class="{'panel-custom-fullScreen':panelFullScreen}" ng-controller="panelCtrl">
+                    <div class="panel-heading panel-custom panel-heading-custom2">
+                        <h2 class="panel-title">{{hdkMyTktModel.title}}</h2>
+                        <div class="box-icon pull-right">
+                            <a class="btn btn-close btn-round btn-default" ng-click="panelFullScreen = !panelFullScreen"><i class="glyphicon" ng-class="{'glyphicon-resize-full':!panelFullScreen,'glyphicon-resize-small':panelFullScreen}" ></i></a>
+                            <a class="btn btn-minimize btn-round btn-default"><i class="glyphicon" ng-class="{'glyphicon-chevron-up':!isOpened,'glyphicon-chevron-down':isOpened}" ng-click="isOpened = !isOpened"></i></a>
+                            <a class="btn btn-close btn-round btn-default" ng-click="hdkMyTktModel.loadTicket();"><i class="glyphicon glyphicon-refresh fa-spin-hover"></i></a>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="panel-body " ng-show="!isOpened" ng-include="hdkMyTktModel.include">
+                        <!--load template based on the condition-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

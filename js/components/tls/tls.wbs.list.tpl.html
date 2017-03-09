@@ -1,0 +1,493 @@
+<!--
+ * User Management List Page : um.list.tpl.html
+ * controller : um.list.controller.js : umListCtrl
+-->
+
+<style>
+  Tree structure using CSS: http: //stackoverflow.com/questions/14922247/how-to-get-a-tree-in-html-using-pure-css
+  */ .tree,
+  .tree ul {
+    font: normal normal 14px/20px Helvetica, Arial, sans-serif;
+    list-style-type: none;
+    margin-left: 0 0 0 10px;
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .tree li {
+    margin: 0;
+    padding: 0 12px;
+    position: relative;
+  }
+
+  .tree li::before,
+  .tree li::after {
+    content: '';
+    position: absolute;
+    left: 0;
+  }
+  /* horizontal line on inner list items */
+
+  .tree li::before {
+    border-top: 1px solid #999;
+    top: 10px;
+    width: 10px;
+    height: 0;
+  }
+  /* vertical line on list items */
+
+  .tree li:after {
+    border-left: 1px solid #999;
+    height: 100%;
+    width: 0px;
+    top: -10px;
+  }
+  /* lower line on list items from the first level because they don't have parents */
+
+  .tree > li::after {
+    top: 10px;
+  }
+  /* hide line from the last of the first level list items */
+
+  .tree > li:last-child::after {
+    display: none;
+  }
+</style>
+
+
+<div class="panel panel-default panel-custom animated zoomIn" ng-class="{'panel-custom-fullScreen':panelFullScreen}">
+  <div class="panel-heading panel-custom panel-heading-custom2">
+    <h2 class="panel-title">Wbs Modify</h2>
+    <div class="box-icon pull-right">
+      <a class="btn btn-close btn-round btn-default" ng-click="umListModel.umAdd()" title="Add New Employee"><i class="glyphicon glyphicon-plus "></i></a>
+      <a class="btn btn-close btn-round btn-default" ng-click="panelFullScreen = !panelFullScreen"><i class="glyphicon" ng-class="{'glyphicon-resize-full':!panelFullScreen,'glyphicon-resize-small':panelFullScreen}" ></i></a>
+      <a class="btn btn-minimize btn-round btn-default" ng-click="isOpened = !isOpened"><i class="glyphicon" ng-class="{'glyphicon-chevron-up':!isOpened,'glyphicon-chevron-down':isOpened}" ></i></a>
+      <a class="btn btn-close btn-round btn-default" ng-click="umListModel.umReload();"><i class="glyphicon glyphicon-refresh fa-spin-hover"></i></a>
+    </div>
+    <div class="clearfix "></div>
+  </div>
+  <div class="panel-body " ng-show="!isOpened ">
+    <div class="row">
+      <div class="approveList">
+        <div class="col-sm-12">
+          <!--STO right  -->
+          <div class="col-sm-7" ng-class="{'full-width':appModel.tableFullWidth}">
+            <div class="panel panel-default animated zoomIn" ng-class="{'panel-custom-fullScreen':panelFullScreen}" ng-controller="panelCtrl">
+              <div class="panel-heading panel-custom panel-heading-custom2">
+                <h2 class="panel-title">Wbs List</h2>
+                <div class="box-icon pull-right">
+                  <a class="btn btn-close btn-round btn-default" ng-click="panelFullScreen = !panelFullScreen"><i class="glyphicon" ng-class="{'glyphicon-resize-full':!panelFullScreen,'glyphicon-resize-small':panelFullScreen}" ></i></a>
+                  <a class="btn btn-minimize btn-round btn-default"><i class="glyphicon" ng-class="{'glyphicon-chevron-up':!isOpened,'glyphicon-chevron-down':isOpened}" ng-click="isOpened = !isOpened"></i></a>
+                </div>
+                <div class="clearfix"></div>
+              </div>
+              <div class="panel-body" ng-show="!isOpened">
+
+                <select ng-model="wbsListModel.prj" chosen persistent-create-option="true" ng-change="wbsListModel.getPrjId(wbsListModel.prj.prjId)" ng-options="prjList.prjCode for prjList in wbsListModel.wbsPrjList track by prjList.prjId">
+                  <option value="">--select project--</option>
+                </select>
+
+                <div class="sub-pannel" ng-show="wbsListModel.selected">
+                  <!-- sto singleRow show    -->
+                  <form>
+
+                    <table class="table table table-hover">
+                      <thead>
+                        <tr>
+                          <td><b>Project Name</b></td>
+
+                          <td><b>Project Code</b></td>
+
+                          <td><b>Project Manager</b></td>
+                          <td><b>Programme Manager</b></td>
+                          <td><b>Project visibility</b></td>
+
+                          <td><b>Action</b></td>
+                        </tr>
+                      </thead>
+
+                      <tbody>
+                        <tr ng-repeat="prj in wbsListModel.wbsPrjInfo |limitTo: 1">
+                          <td>{{prj.prjName}}</td>
+                          <td>{{prj.prjCode}}</td>
+                          <td>{{prj.prjMgr}}</td>
+                          <td>{{prj.pgmMgr}}</td>
+                          <td>{{prj.visibleToAll}}</td>
+                          <td>
+                            <button class="btn btn-xs colored-bg" ng-click="wbsListModel.editVisibility(prj)" type="button">
+                              <i class="fa fa-edit"></i>
+                            </button>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+
+                  </form>
+                  <!-- eno singleRow show -->
+
+                  <!--sto vAccordion  -->
+
+                  <!-- <v-accordion class="vAccordion--default" multiple>
+                    <v-pane expanded>
+                      <v-pane-header>
+                        Pane header #1
+                      </v-pane-header>
+
+                      <v-pane-content>
+                        Pane content #1
+                      </v-pane-content>
+                    </v-pane>
+
+                    <v-pane disabled>
+                      <v-pane-header>
+                        Pane header #2
+                      </v-pane-header>
+
+                      <v-pane-content>
+                        Pane content #2
+                      </v-pane-content>
+                    </v-pane>
+                  </v-accordion> -->
+
+
+
+                  <!-- <div class="panel">
+
+                        <div class="panel-body">
+                            <div id="FlatTree" class="tree tree-plus-minus">
+                                <div class="tree-folder" style="display:none;">
+                                    <div class="tree-folder-header">
+                                        <i class="fa fa-folder"></i>
+                                        <div class="tree-folder-name"></div>
+                                    </div>
+                                    <div class="tree-folder-content"></div>
+                                    <div class="tree-loader" style="display: none;"></div>
+                                </div>
+                                <div class="tree-item" style="display:none;">
+                                    <i class="tree-dot"></i>
+                                    <div class="tree-item-name"></div>
+                                </div>
+                            <div class="tree-folder" style="display: block;">
+                                    <div class="tree-folder-header">
+                                        <i class="fa fa-folder-open"></i>
+                                        <div class="tree-folder-name">Dashboard</div>
+                                    </div>
+                                    <div class="tree-folder-content"><div class="tree-folder" style="display: block;">
+                                    <div class="tree-folder-header">
+                                        <i class="fa fa-folder"></i>
+                                        <div class="tree-folder-name">Dashboard</div>
+                                    </div>
+                                    <div class="tree-folder-content"></div>
+                                    <div class="tree-loader" style="display: none;"><img src="images/input-spinner.gif"></div>
+                                </div><div class="tree-folder" style="display: block;">
+                                    <div class="tree-folder-header">
+                                        <i class="fa fa-folder"></i>
+                                        <div class="tree-folder-name">Elements</div>
+                                    </div>
+                                    <div class="tree-folder-content"></div>
+                                    <div class="tree-loader" style="display: none;"><img src="images/input-spinner.gif"></div>
+                                </div><div class="tree-item" style="display: block;">
+                                    <i class="tree-dot"></i>
+                                    <div class="tree-item-name">View Category</div>
+                                </div><div class="tree-item" style="display: block;">
+                                    <i class="tree-dot"></i>
+                                    <div class="tree-item-name">Testing</div>
+                                </div></div>
+                                    <div class="tree-loader" style="display: none;"><img src="images/input-spinner.gif"></div>
+                                </div><div class="tree-folder" style="display: block;">
+                                    <div class="tree-folder-header">
+                                        <i class="fa fa-folder"></i>
+                                        <div class="tree-folder-name">Elements</div>
+                                    </div>
+                                    <div class="tree-folder-content"></div>
+                                    <div class="tree-loader" style="display: none;"><img src="images/input-spinner.gif"></div>
+                                </div><div class="tree-item" style="display: block;">
+                                    <i class="tree-dot"></i>
+                                    <div class="tree-item-name">View Category</div>
+                                </div><div class="tree-item" style="display: block;">
+                                    <i class="tree-dot"></i>
+                                    <div class="tree-item-name">Testing</div>
+                                </div></div>
+                        </div>
+                    </div> -->
+
+
+
+
+
+
+
+
+                  <!-- eno vAccordion -->
+
+
+
+
+
+                  <!-- <table>
+                    <tr>
+                      <td style="vertical-align:top">
+                        <button ng-click="my_tree.expand_all()" class="btn btn-default btn-sm">Expand All</button>
+                        <button ng-click="my_tree.collapse_all()" class="btn btn-default btn-sm">Collapse All</button>
+                        <hr>
+                        <button ng-click="try_adding_a_branch()" class="btn btn-default btn-sm">Add Branch</button>
+                      </td>
+                      <td style="vertical-align:top">
+                        <div style="width:250px;margin-left:100px;background:whitesmoke;border:1px solid lightgray;border-radius:5px;">
+                          <span ng-if="doing_async">...loading...</span>
+                          <abn-tree tree-data="my_data" tree-control="my_tree" ng-click="wbsListModel.my_tree_handler(branch)" expand-level="2" initial-selection="Granny Smith"></abn-tree>
+                        </div>
+                      </td>
+                      <td style="padding:20px;vertical-align:top;">
+                        <div style="width:300px" class="alert alert-warning">{{output}}</div>
+                      </td>
+                    </tr>
+                  </table> -->
+
+                  <!-- <div title="wbs tree">
+                    <ul>
+                      <ul>
+                        <li class="colored" ng-click="wbsListModel.isCollapsed = !wbsListModel.isCollapsed" <i ng-class="{'fa fa-plus': wbsListModel.isCollapsed, 'fa fa-minus': !wbsListModel.isCollapsed}">
+                          </i>
+                          Phase
+                        </li>
+                        <li collapse="wbsListModel.isCollapsed">
+                          Phase info
+                        </li>
+                        <ul class="colored" ng-click="wbsListModel.isCollapsed = !wbsListModel.isCollapsed" <i ng-class="{'fa fa-plus': wbsListModel.isCollapsed, 'fa fa-minus': !wbsListModel.isCollapsed}"></i>>
+                          <li collapse="wbsListModel.isCollapsed" >
+
+                          </li>
+                        </ul>
+                          <li>
+                          </li>
+                        </ul>
+
+                      </ul>
+                    </ul>
+
+
+                  </div> -->
+                  <!--sto treeeeeeeeeeeeeeeeeeee -->
+                  <div class="tree-str">
+
+                    <ul class="tree">
+
+                      <li>
+                        <div class="colored" ng-click="wbsListModel.isCollapsedFirst = !wbsListModel.isCollapsedFirst">
+                          <i ng-class="{'fa fa-plus': wbsListModel.isCollapsedFirst, 'fa fa-minus': !wbsListModel.isCollapsedFirst}"></i> Phase
+
+                        </div>
+                        <ul>
+                          <li collapse="wbsListModel.isCollapsedFirst">phase 1</li>
+                          <li collapse="wbsListModel.isCollapsedFirst">phase 2</li>
+                          <li collapse="wbsListModel.isCollapsedFirst">phase 3</li>
+                          <li>
+                            <div class="colored" ng-click="wbsListModel.isCollapsedSecond = !wbsListModel.isCollapsedSecond">
+                              <i ng-class="{'fa fa-plus': wbsListModel.isCollapsedSecond, 'fa fa-minus': !wbsListModel.isCollapsedSecond}"></i> Activity
+
+                            </div>
+                            <li collapse="wbsListModel.isCollapsedSecond">Act1
+                            </li>
+                            <li collapse="wbsListModel.isCollapsedSecond">Act2
+                            </li>
+                            <li collapse="wbsListModel.isCollapsedSecond">Act3
+                            </li>
+                          </li>
+
+
+
+                          <ul>
+                            <div class="colored" ng-click="wbsListModel.isCollapsedThird = !wbsListModel.isCollapsedThird">
+                              <i ng-class="{'fa fa-plus': wbsListModel.isCollapsedThird, 'fa fa-minus': !wbsListModel.isCollapsedThird}"></i> Task
+
+                            </div>
+                            <li collapse="wbsListModel.isCollapsedThird">task1</li>
+                            <li collapse="wbsListModel.isCollapsedThird">task1</li>
+
+                          </ul>
+                      </li>
+                      </ul>
+                    </ul>
+                  </div>
+
+
+
+
+
+                  <!--eno treeeeeeeeeeeeeeeeeeee  -->
+
+                   <div id="FlatTree4" class="tree tree-solid-line">
+                    <div class="tree-folder" style="display:none;">
+                      <div class="tree-folder-header">
+                        <i class="fa fa-folder"></i>
+                        <div class="tree-folder-name"></div>
+                      </div>
+                      <div class="tree-folder-content"></div>
+                      <div class="tree-loader" style="display: none;"></div>
+                    </div>
+                    <div class="tree-item" style="display:none;">
+                      <i class="tree-dot"></i>
+                      <div class="tree-item-name"></div>
+                    </div>
+                    <div class="tree-folder" style="display: block;">
+                      <div class="tree-folder-header">
+                        <i class="fa fa-folder-open"></i>
+                        <div class="tree-folder-name">Dashboard
+                          <div class="tree-actions"><i class="fa fa-plus"></i><i class="fa fa-trash-o"></i><i class="fa fa-refresh"></i></div>
+                        </div>
+                      </div>
+                      <div style="display: block;" class="tree-folder-content">
+                        <div class="tree-folder" style="display: block;">
+                          <div class="tree-folder-header">
+                            <i class="fa fa-folder"></i>
+                            <div class="tree-folder-name" ng-click="wbsListModel.isCollapsed = !wbsListModel.isCollapsed">Dashboard
+                              <div class="tree-actions"><i class="fa fa-plus"></i><i class="fa fa-trash-o"></i><i class="fa fa-refresh"></i></div>
+                            </div>
+                          </div>
+                          <div style="display: none;" class="tree-folder-content" collapse="wbsListModel.isCollapsed">
+                            <div class="tree-folder" style="display: block;">
+                              <div class="tree-folder-header">
+                                <i class="fa fa-folder"></i>
+                                <div class="tree-folder-name">Dashboard
+                                  <div class="tree-actions"><i class="fa fa-plus"></i><i class="fa fa-trash-o"></i><i class="fa fa-refresh"></i></div>
+                                </div>
+                              </div>
+                              <div class="tree-folder-content"></div>
+                              <div class="tree-loader" style="display: none;">
+                                <img src="images/input-spinner.gif">
+                              </div>
+                            </div>
+                            <div class="tree-folder" style="display: block;">
+                              <div class="tree-folder-header">
+                                <i class="fa fa-folder"></i>
+                                <div class="tree-folder-name">View Category
+                                  <div class="tree-actions"><i class="fa fa-plus"></i><i class="fa fa-trash-o"></i><i class="fa fa-refresh"></i></div>
+                                </div>
+                              </div>
+                              <div class="tree-folder-content"></div>
+                              <div class="tree-loader" style="display: none;">
+                                <img src="images/input-spinner.gif">
+                              </div>
+                            </div>
+                            <div class="tree-item" style="display: block;">
+                              <i class="tree-dot"></i>
+                              <div class="tree-item-name"><i class="fa fa-user"></i> User
+                                <div class="tree-actions"><i class="fa fa-plus"></i><i class="fa fa-trash-o"></i><i class="fa fa-refresh"></i></div>
+                                <div class="tree-actions"><i class="fa fa-plus"></i><i class="fa fa-trash-o"></i><i class="fa fa-refresh"></i></div>
+                              </div>
+                            </div>
+                            <div class="tree-item" style="display: block;">
+                              <i class="tree-dot"></i>
+                              <div class="tree-item-name"><i class="fa fa-calendar"></i> Events
+                                <div class="tree-actions"><i class="fa fa-plus"></i><i class="fa fa-trash-o"></i><i class="fa fa-refresh"></i></div>
+                              </div>
+                            </div>
+                            <div class="tree-item" style="display: block;">
+                              <i class="tree-dot"></i>
+                              <div class="tree-item-name"><i class="fa  fa-gear "></i> Works
+                                <div class="tree-actions"><i class="fa fa-plus"></i><i class="fa fa-trash-o"></i><i class="fa fa-refresh"></i></div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="tree-loader" style="display: none;">
+                            <img src="images/input-spinner.gif">
+                          </div>
+                        </div>
+                        <div class="tree-folder" style="display: block;">
+                          <div class="tree-folder-header">
+                            <i class="fa fa-folder"></i>
+                            <div class="tree-folder-name">View Category
+                              <div class="tree-actions"><i class="fa fa-plus"></i><i class="fa fa-trash-o"></i><i class="fa fa-refresh"></i></div>
+                            </div>
+                          </div>
+                          <div class="tree-folder-content"></div>
+                          <div class="tree-loader" style="display: none;">
+                            <img src="images/input-spinner.gif">
+                          </div>
+                        </div>
+                        <div class="tree-item" style="display: block;">
+                          <i class="tree-dot"></i>
+                          <div class="tree-item-name"><i class="fa fa-user"></i> User
+                            <div class="tree-actions"><i class="fa fa-plus"></i><i class="fa fa-trash-o"></i><i class="fa fa-refresh"></i></div>
+                            <div class="tree-actions"><i class="fa fa-plus"></i><i class="fa fa-trash-o"></i><i class="fa fa-refresh"></i></div>
+                          </div>
+                        </div>
+                        <div class="tree-item" style="display: block;">
+                          <i class="tree-dot"></i>
+                          <div class="tree-item-name"><i class="fa fa-calendar"></i> Events
+                            <div class="tree-actions"><i class="fa fa-plus"></i><i class="fa fa-trash-o"></i><i class="fa fa-refresh"></i></div>
+                          </div>
+                        </div>
+                        <div class="tree-item" style="display: block;">
+                          <i class="tree-dot"></i>
+                          <div class="tree-item-name"><i class="fa  fa-gear "></i> Works
+                            <div class="tree-actions"><i class="fa fa-plus"></i><i class="fa fa-trash-o"></i><i class="fa fa-refresh"></i></div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="tree-loader" style="display: none;">
+                        <img src="images/input-spinner.gif">
+                      </div>
+                    </div>
+                  </div>
+
+
+
+
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <!--ENO right  -->
+          <!--STO left  -->
+
+          <div class="col-sm-5" ng-class="{'full-width':appModel.tableFullWidth}">
+            <div class="panel panel-default animated zoomIn" ng-class="{'panel-custom-fullScreen':panelFullScreen}" ng-controller="panelCtrl">
+              <div class="panel-heading panel-custom panel-heading-custom2">
+                <h2 class="panel-title">{{wbsListModel.title}}</h2>
+                <div class="box-icon pull-right">
+                  <a class="btn btn-close btn-round btn-default" ng-click="panelFullScreen = !panelFullScreen"><i class="glyphicon" ng-class="{'glyphicon-resize-full':!panelFullScreen,'glyphicon-resize-small':panelFullScreen}" ></i></a>
+                  <a class="btn btn-minimize btn-round btn-default"><i class="glyphicon" ng-class="{'glyphicon-chevron-up':!isOpened,'glyphicon-chevron-down':isOpened}" ng-click="isOpened = !isOpened"></i></a>
+                </div>
+                <div class="clearfix"></div>
+              </div>
+              <div class="panel-body " ng-show="!isOpened">
+                <!--sto status  -->
+                <div title="status" ng-show="wbsListModel.status">
+
+
+                  <div class="status">
+                    <h5><b>visible to all</b></h5>
+                    <div class="panel panel-default">
+                      <div class="panel-body">
+                        <label class="radio-inline">
+                          <input type="radio" name="status" ng-model="wbsListModel.usrRes.status" value="y"> Yes
+                        </label>
+
+                        <label class="radio-inline">
+                          <input type="radio" name="status" ng-model="wbsListModel.usrRes.status" value="n"> No
+                        </label>
+                        <div class="pull-right">
+                          <button class="btn btn-xs colored-bg" type="submit" ng-click="wbsListModel.statusUpdate(wbsListModel.usrRes)">
+                            Update <i class="fa fa-arrow-circle-right"></i>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+                <!--eno status  -->
+              </div>
+            </div>
+          </div>
+          <!--ENO left  -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

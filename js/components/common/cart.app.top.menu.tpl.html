@@ -1,0 +1,49 @@
+<div class="header-section sticky-header">
+
+	<div class="logo pull-left">
+		<a class="navbar-brand logo-desktop" ui-sref="home">
+			<img src="images/logo.png" style="width:38%">
+			<h1 class="Cart-title colored hidden-xs">Cartwheel</h1>
+		</a>
+	</div>
+
+	<!--toggle button start-->
+	<a class="hidden-xs hidden-sm toggle-btn colored menu-collapsed" collapse-sidebar>
+		<!--<i class="fa fa-indent"></i>-->
+		<i class="fa fa-dedent"></i>
+	</a>
+	<!--toggle button end-->
+
+
+	<div class="menu-right hidden-xs hidden-sm">
+		<div class="user-panel-top">
+			<div class="profile_details_left">
+				<li class="login-btn pointer" ng-click="appModel.displayNotifications()">
+					<a class="header-btn">
+						<i class="fa fa-bell fa-lg"></i>
+						<h6 class="badge badge-sm up bg-danger colored-bg">{{appModel.sectiondata.notifi_count}}</h6>
+					</a>
+				</li>
+			</div>
+			<div class="profile_details">
+				<li class="dropdown" dropdown="">
+					<a aria-expanded="false" aria-haspopup="true" href="" class="dropdown-toggle clear" dropdown-toggle="">
+						<span class="hidden-sm hidden-md colored">{{coreModel.userData.empFname}} {{coreModel.userData.empLname}}</span> <b class="caret"></b>
+						<span> <ng-letter-avatar data="{{coreModel.userData.empFname}}{{coreModel.userData.empLname}}"  fontWeight="600" shape="round" avatarborder="true" width="30" height="30" fontSize="14"></ng-letter-avatar></span>
+					</a>
+					<!-- dropdown -->
+					<ul class="dropdown-menu drp-mnu animated zoomIn">
+						<li> <a href="#"><i class="fa fa-cog"></i> Settings</a> </li>
+						<li> <a href="#"><i class="fa fa-user"></i>Profile</a> </li>
+						<li> <a href="#" ng-click="appModel.logoutUser()"><i class="fa fa-sign-out"></i> Logout</a> </li>
+					</ul>
+					<!-- / dropdown -->
+				</li>
+			</div>
+			<div class="clearfix"></div>
+		</div>
+	</div>
+</div>
+<!--Cart app top Navidation bar included in js\components\common\cart.app.home.tpl.html-->
+
+<!--EDO top nav-->

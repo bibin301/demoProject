@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<style>
+
+</style>
+
+<div class="panel panel-default animated zoomIn" ng-class="{'panel-custom-fullScreen':panelFullScreen}">
+    <div class="panel-heading panel-custom panel-heading-custom2">
+        <h2 class="panel-title">Manage Tickets</h2>
+        <div class="box-icon pull-right">
+            <a class="btn btn-close btn-round btn-default" ng-click="hdkAdminCategoryModel.title = 'Create New';hdkAdminCategoryModel.response = '';"><i class="glyphicon glyphicon-plus"></i></a>
+            <a class="btn btn-close btn-round btn-default" ng-click="panelFullScreen = !panelFullScreen"><i class="glyphicon" ng-class="{'glyphicon-resize-full':!panelFullScreen,'glyphicon-resize-small':panelFullScreen}" ></i></a>
+            <a class="btn btn-minimize btn-round btn-default"><i class="glyphicon" ng-class="{'glyphicon-chevron-up':!isOpened,'glyphicon-chevron-down':isOpened}" ng-click="isOpened = !isOpened"></i></a>
+            <a class="btn btn-close btn-round btn-default" ng-click="hdkAdminCategoryModel.loadCategory();"><i class="glyphicon glyphicon-refresh fa-spin-hover"></i></a>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="panel-body " ng-show="!isOpened">
+
+        <div class="row">
+            <div class="col-md-5" ng-class="{'full-width':appModel.tableFullWidth}">
+                <div class="panel panel-default animated zoomIn" ng-class="{'panel-custom-fullScreen':panelFullScreen}" ng-controller="panelCtrl">
+                    <div class="panel-heading panel-custom panel-heading-custom2">
+                        <h2 class="panel-title">Manage Tickets</h2>
+                        <div class="box-icon pull-right">
+                            <a class="btn btn-close btn-round btn-default" ng-click="panelFullScreen = !panelFullScreen"><i class="glyphicon" ng-class="{'glyphicon-resize-full':!panelFullScreen,'glyphicon-resize-small':panelFullScreen}" ></i></a>
+                            <a class="btn btn-minimize btn-round btn-default"><i class="glyphicon" ng-class="{'glyphicon-chevron-up':!isOpened,'glyphicon-chevron-down':isOpened}" ng-click="isOpened = !isOpened"></i></a>
+                            <a class="btn btn-close btn-round btn-default" ng-click="hdkAdminCategoryModel.loadCategory();"><i class="glyphicon glyphicon-refresh fa-spin-hover"></i></a>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="panel-body " ng-show="!isOpened">
+                        <table class="display table table-bordered table-striped" datatable="ng" id="dynamic-table custom_table">
+                            <thead>
+                                <tr>
+                                    <th>Category</th>
+                                    <th>Manager</th>
+                                    <th>Owner</th>
+                                    <th>Comments</th>
+                                    <th>Actions</th>
+
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="cat in hdkAdminCategoryModel.categories" >
+                                    <td>{{cat.depName}}</td>
+                                    <td>{{cat.mgrName}}</td>
+                                    <td>{{cat.ownName}}</td>
+                                    <td ng-bind-html-unsafe="cat.cmt"></td>
+                                    <td>
+                                        <button  class="btn btn-xs colored-bg" ng-click="hdkAdminCategoryModel.editCat(cat)" type="button">
+                                            <i class="fa fa-edit" ></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-md-7" ng-class="{'full-width':appModel.tableFullWidth}">
+
+
+                <div class="panel panel-default animated zoomIn" ng-class="{'panel-custom-fullScreen':panelFullScreen}" ng-if="hdkAdminCategoryModel.title" ng-controller="panelCtrl">
+                    <div class="panel-heading panel-custom panel-heading-custom2">
+                        <h2 class="panel-title">{{hdkAdminCategoryModel.title}} </h2>
+                        <div class="box-icon pull-right">
+                            <a class="btn btn-close btn-round btn-default" ng-click="panelFullScreen = !panelFullScreen"><i class="glyphicon" ng-class="{'glyphicon-resize-full':!panelFullScreen,'glyphicon-resize-small':panelFullScreen}" ></i></a>
+                            <a class="btn btn-minimize btn-round btn-default" ng-click="isOpened = !isOpened"><i class="glyphicon" ng-class="{'glyphicon-chevron-up':!isOpened,'glyphicon-chevron-down':isOpened}" ></i></a>
+                            <a class="btn btn-close btn-round btn-default" ng-click="hdkAdminCategoryModel.loadCategory();"><i class="glyphicon glyphicon-refresh fa-spin-hover"></i></a>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="panel-body " ng-show="!isOpened">
+                        <form name="hdkAdminCategoryModel.userForm" novalidate>
+
+                            <div class="row">
+                                <div class="col-md-1">
+                                    <label class="Model-title">Category</label>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="form-group">
+                                        <input class="form-control underline" name="catname" ng-model="hdkAdminCategoryModel.response.name" type="text" placeholder="category" required>
+                                        <div class="has-error" ng-show="(hdkAdminCategoryModel.userForm.catname.$error.required && hdkAdminCategoryModel.userForm.catname.$touched) || (hdkAdminCategoryModel.userForm.$submitted && hdkAdminCategoryModel.userForm.catname.$error.required)">category is required </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="Model-title">Location </label>
+                                        <select chosen
+                                                persistent-create-option="true"
+                                                ng-model="hdkAdminCategoryModel.response.locid"
+                                                placeholder-text-multiple="'Choose Location'"
+                                                ng-options="location.id as location.locName for location in hdkAdminCategoryModel.catLocations track by location.id"
+                                                name="Loc"
+                                                required>
+                                            <option value=""></option>
+                                        </select>
+                                        <div class="has-error" ng-show="(hdkAdminCategoryModel.userForm.Loc.$error.required && hdkAdminCategoryModel.userForm.Loc.$touched) || (hdkAdminCategoryModel.userForm.$submitted && hdkAdminCategoryModel.userForm.Loc.$error.required)">location is required</div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="Model-title">Manager </label>
+                                        <select name="Manager" chosen
+                                                persistent-create-option="true"
+                                                ng-model="hdkAdminCategoryModel.response.managerid"
+                                                placeholder-text-multiple="'Choose Manager'"
+                                                ng-options="user.id as user.empName for user in hdkAdminCategoryModel.catUsers track by user.id"
+                                                required>
+                                            <option value=""></option>
+                                        </select>
+
+                                        <div class="has-error" ng-show="(hdkAdminCategoryModel.userForm.Manager.$error.required && hdkAdminCategoryModel.userForm.Manager.$touched) || (hdkAdminCategoryModel.userForm.$submitted && hdkAdminCategoryModel.userForm.Manager.$error.required)">manager is required</div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="Model-title">Owner </label>
+
+                                        <select name="Owner" chosen
+                                                persistent-create-option="true"
+                                                ng-model="hdkAdminCategoryModel.response.ownerid"
+                                                placeholder-text-multiple="'Choose Manager'"
+                                                ng-options="user.id as user.empName for user in hdkAdminCategoryModel.catUsers track by user.id"
+                                                required>
+                                            <option value=""></option>
+                                        </select>
+
+                                        <div class="has-error" ng-show="(hdkAdminCategoryModel.userForm.Owner.$error.required && hdkAdminCategoryModel.userForm.Owner.$touched) || (hdkAdminCategoryModel.userForm.$submitted && hdkAdminCategoryModel.userForm.Owner.$error.required)">owner is required</div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-8">
+                                        <label class="Model-title"> Comments
+                                        </label>
+                                        <textarea class="form-border" ng-model="hdkAdminCategoryModel.response.comment" ui-tinymce="appModel.tinymceOptions" name="cmt" required></textarea>
+                                        <div class="has-error" ng-show="(hdkAdminCategoryModel.userForm.$submitted && hdkAdminCategoryModel.response.comment.length < 35)">comment is required</div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="form-actions pull-right">
+                                <button type="submit" class="btn colored-bg" ng-click="hdkAdminCategoryModel.createCat(hdkAdminCategoryModel.response)">{{hdkAdminCategoryModel.title}}<i class="fa fa-arrow-circle-right"></i></button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

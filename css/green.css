@@ -1,0 +1,126 @@
+/*red theme*/
+
+.pageloader i {
+  font-size: 2.5em;
+  color: #789637;
+}
+.user-dropdown li a:hover {
+  color: #789637;
+  opacity: 0.5;
+}
+
+.carousel-control, .user-dropdown li a {
+  cursor: pointer;
+  color: #789637;
+}
+.carousel-control:hover, .colored, #event-container:hover .events, .login-btn a:hover, .departments:hover .dept-icon, #goTop:hover, a, .profile-tools > ul > li, .toggle-icon i, .left-menu-wrapper li a, .navbar-default .navbar-nav > li > a:hover{
+  color: #789637;
+}
+.colored-bg.colored-bg.colored-bg, .login-heading.login-heading.login-heading, .login-submit, .nav:after, .timeline-badge,.left-side-collapsed .custom-nav > li.nav-hover > a,
+.left-side-collapsed .custom-nav > li.nav-hover.active > a ,.custom-nav > li.active > a,
+.custom-nav > li.active > a:hover,
+.custom-nav > li.active > a:focus,.act a i,.custom-nav .sub-menu-list > li > a:hover,
+.custom-nav .sub-menu-list > li > a:active,
+.custom-nav .sub-menu-list > li > a:focus,
+.sub-menu-2 li:hover,.custom-nav > li > a:hover,
+.custom-nav > li > a:active,
+.left-side-collapsed .custom-nav li a span {
+  background-color: #789637;
+  color: #fff;
+}
+
+.custom-nav > li.nav-active > a {
+    background-color:#353f4f;
+    color:#789637;
+}
+
+.breadcrumb-arrow li a {
+    background-color: #789637;
+    border: 1px solid #789637;
+}
+
+.breadcrumb-arrow li a::before {
+    border-left-color: #789637;
+}
+
+.breadcrumb-arrow li a::after {
+    border-left: 11px solid #102769;
+
+}
+
+.left-side-collapsed .custom-nav li.nav-hover.active a span, .left-side-collapsed .custom-nav ul a:hover {
+    background:#ADFC2C;
+    color: #fff;
+}
+
+.title-top {
+  border-bottom: 2px solid #789637;
+}
+.menu-active {
+  border-top: 5px solid #789637;
+}
+.menu-active.menu-active.menu-active a {
+  color: #789637 !important;
+}
+
+/*Side Nav*/
+
+.dash-active {
+  border-left: 4px solid #789637;
+}
+
+/*EDO Side Nav */
+
+.icon-bg {
+  background-color: #789637;
+  border: 1px solid #789637;
+  color: #FFF;
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button.current, .dataTables_wrapper .dataTables_paginate .paginate_button:hover, .ribbon span,.fa-angle-left:hover, .fa-angle-right:hover {
+  background: #789637;
+}
+.vertical-timeline-content:hover {
+  background-color: #789637;
+  transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0s;
+  color: #FFF;
+  z-index: 10;
+}
+.pannel-bottom div {
+  border-left: 1px solid #789637;
+  border-top: 1px solid #789637;
+}
+.event-bg {
+  background-color: #00CEFF;
+}
+
+
+
+
+
+.colored-bg-model {
+  background-color: #DEEADF;
+}
+
+/*.underline,.underline-mName,.underline-mName:focus,.form-border,.mce-panel{
+  border-color: #789637;
+}*/
+.underline:focus ,.underline-mName:focus ,.form-border:focus ,.mce-panel:focus{
+  border-color: #68ba2f;
+}
+/*for cancel button*/
+
+.colored-bg-cancel {
+  background-color: #B5D76E;
+  color: #fff;
+}
+
+/*for cancel button*/
+/*new style*/
+
+/* style for template hover*/
+div.colored-border:hover {
+  border: 1px solid #789637;
+  opacity: 0.7;
+  filter: alpha(opacity=40);
+}
+/* style for template hover*/

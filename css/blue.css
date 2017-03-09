@@ -1,0 +1,138 @@
+/*red theme*/
+
+.pageloader i {
+  font-size: 2.5em;
+  color: #5A73B9;
+}
+.user-dropdown li a:hover {
+  color: #5A73B9;
+  opacity: 0.5;
+}
+.banner-container:hover #scrolldown i {
+  color: #fff !important;
+}
+.carousel-control, .user-dropdown li a {
+  cursor: pointer;
+  color: #5A73B9;
+}
+.carousel-control:hover, .colored, #event-container:hover .events, .login-btn a:hover, .departments:hover .dept-icon, #goTop:hover, a, .profile-tools > ul > li, .toggle-icon i, .left-menu-wrapper li a, .navbar-default .navbar-nav > li > a:hover{
+  color: #5A73B9;
+}
+.colored-bg.colored-bg.colored-bg, .login-heading.login-heading.login-heading, .login-submit, .nav:after, .timeline-badge,.left-side-collapsed .custom-nav > li.nav-hover > a,
+.left-side-collapsed .custom-nav > li.nav-hover.active > a ,.custom-nav > li.active > a,
+.custom-nav > li.active > a:hover,
+.custom-nav > li.active > a:focus,.act a i,.custom-nav .sub-menu-list > li > a:hover,
+.custom-nav .sub-menu-list > li > a:active,
+.custom-nav .sub-menu-list > li > a:focus,
+.sub-menu-2 li:hover,.custom-nav > li > a:hover,
+.custom-nav > li > a:active,
+.left-side-collapsed .custom-nav li a span {
+  background-color: #5A73B9;
+  color: #fff;
+}
+
+.custom-nav > li.nav-active > a {
+    background-color:#353f4f;
+    color:#5A73B9;
+}
+
+.breadcrumb-arrow li a {
+    background-color: #5A73B9;
+    border: 1px solid #5A73B9;
+}
+
+.breadcrumb-arrow li a::before {
+    border-left-color: #5A73B9;
+}
+
+.breadcrumb-arrow li a::after {
+    border-left: 11px solid #102769;
+
+}
+
+
+.left-side-collapsed .custom-nav li.nav-hover.active a span, .left-side-collapsed .custom-nav ul a:hover {
+    background:#00CEFF;
+    color: #fff;
+}
+.title-top {
+  border-bottom: 2px solid #5A73B9;
+}
+.menu-active {
+  border-top: 5px solid #5A73B9;
+}
+.menu-active.menu-active.menu-active a {
+  color: #5A73B9 !important;
+}
+
+/*Side Nav*/
+
+.dash-active {
+  border-left: 4px solid #5A73B9;
+}
+
+/*EDO Side Nav */
+
+.icon-bg {
+  background-color: #5A73B9;
+  border: 1px solid #5A73B9;
+  color: #FFF;
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button.current, .dataTables_wrapper .dataTables_paginate .paginate_button:hover, .ribbon span, .fa-angle-left:hover, .fa-angle-right:hover {
+  background: #5A73B9;
+}
+.vertical-timeline-content:hover {
+  background-color: #5A73B9;
+  transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0s;
+  color: #FFF;
+  z-index: 10;
+}
+.pannel-bottom div {
+  border-left: 1px solid #5a73b9;
+  border-top: 1px solid #5a73b9;
+}
+.event-bg {
+  background-color: #00CEFF;
+}
+
+
+
+/*new style*/
+
+.colored-bg-model {
+  background-color: #DEE8FF;
+}
+/*.underline,.underline-mName,.underline-mName:focus,.form-border,.mce-panel{
+  border-color: #872891;
+}*/
+.underline:focus ,.underline-mName:focus ,.form-border:focus,.mce-panel:focus{
+  border-color: #198aff;
+
+}
+
+
+input.edit:focus, input.list:focus {outline: 1px solid #ffcc33; background-color: #fff;}
+textarea:focus {
+outline: 3px double #ffcc33;
+background-color: #fff;
+}
+/*for cancel button*/
+
+.colored-bg-cancel {
+  background-color: #7F98ED;
+  color: #fff;
+}
+
+/*for cancel button*/
+
+
+/*new style*/
+
+/* style for template hover*/
+
+div.colored-border:hover{
+  border:1px solid #5A73B9;
+  opacity: 0.7;
+   filter:alpha(opacity=40);
+  }
+/* style for template hover*/

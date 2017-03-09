@@ -1,0 +1,264 @@
+<!--
+*
+* Dashboard page "js/components/dashboard/dashboard.html"
+* After Login application templates are handle through this page
+* 2nd level ui-view after index page
+*
+*
+-->
+<style>
+    .card-bottom-tags {
+        position: absolute;
+        width: 100%;
+        bottom: 0;
+        left: 0;
+        font-size:14px;
+    }
+    .card-bottom-tags i {
+        margin-left: 10px;
+    }
+</style>
+<link charset="utf-8" href="css/card.css" media="screen" rel="stylesheet" title="no title">
+
+<div class="panel panel-default visible-md visible-lg" ng-class="{'panel-custom-fullScreen':panelFullScreen}">
+    <div class="panel-custom panel-heading panel-heading-custom2">
+        <h2 class="panel-title">Dashboard</h2>
+        <div class="box-icon pull-right">
+            <a class="btn btn-close btn-round btn-default" ng-click="panelFullScreen = !panelFullScreen"><i class="glyphicon" ng-class="{'glyphicon-resize-full':!panelFullScreen,'glyphicon-resize-small':panelFullScreen}" ></i></a>
+            <a class="btn btn-minimize btn-round btn-default"><i class="glyphicon" ng-class="{'glyphicon-chevron-up':!isOpened,'glyphicon-chevron-down':isOpened}" ng-click="isOpened = !isOpened"></i></a>
+            <a class="btn btn-close btn-round btn-default"  ng-click="dashModel.loadData();"><i class="glyphicon glyphicon-refresh fa-spin-hover"></i></a>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <!--visible only medium device-->
+    <div class="panel-body " ng-show="!isOpened">
+        <div class="dash-wrapper">
+            {{projects}}
+            <!--Panel  Start-->
+            <div class="content col-md-12" ng-repeat="project in dashModel.projects track by $index">
+                <div class="status-content" ng-class="{'status-content-height':stage_$index}">
+                    <div class="status-inner">
+                        <div class="box expand colored-bg pointer" ng-click="stage_$index = !stage_$index">
+                            <i class="fa exapnd-icon" ng-class="{'fa-plus':!stage_$index, 'fa-minus':stage_$index}"></i>
+                            <i class="info-count badge">{{dashModel.arrayCount(project.data)}}</i>
+                            <!--To display the number of project notification-->
+                            <span>{{project.stagename}}</span>
+                            <div class="clearfix"></div>
+                        </div>
+                        <!--App 1-->		
+                        <div class="clearfix"></div>
+                        <div class="col-sm-4 col-md-4 app-wrapper animate-show" ng-init="appArray = app.data" ng-class="{'app-wrapper-expand':expandApp_$index}" ng-repeat="app in project.data track by $index" ng-show="stage_$index">
+                            <h5 class="card-group-title colored-bg data-content-expand pointer"> <i class="fa pointer" ng-class="{'fa-plus':expandApp_$index,'fa-minus':!expandApp_$index}" ng-click="expandApp_$index = !expandApp_$index" ></i> <i class="info-count badge card-notification">{{dashModel.arrayCount(app.data)}}</i>  {{app.appname}} </h5>
+                            <div class="container-fluid card-container" ng-controller="PagenationCtrl">
+                                <div class="row">
+                                    <div class="col-md-12 card-container-inner">
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <select class="col-md-12 selectpicker" ng-model="pageModel.itemsPerPage">
+                                                        <option value="5">5</option>
+                                                        <option value="15">15</option>
+                                                        <option value="25">25</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <!--                                                    <pager total-items=4 ng-model="currentPage"></pager>-->
+                                                    <button class="btn btn-xs" ng-click="pageModel.currentPage = pageModel.currentPage - 1" ng-disabled="pageModel.currentPage == 0">
+                                                        <i class="fa fa-chevron-left"></i>
+                                                    </button>
+                                                    {{pageModel.currentPage + 1}}/{{pageModel.totalPage}}
+                                                    <button class="btn btn-xs" ng-click="pageModel.currentPage = pageModel.currentPage + 1" ng-disabled="pageModel.currentPage >= pageModel.dataLength / pageModel.itemsPerPage - 1">
+                                                        <i class="fa fa-chevron-right"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div class="cards">
+                                                <div class="col-md-12">
+                                                    <div class="card_scroll">
+                                                        <div card-height class="card-upper">
+                                                            <div class="card-wrapper pointer"  ng-click="pageModel.alertData(task, $index)" ng-repeat="task in app.data| cardFilter:sortCard |pagination : pageModel.currentPage * pageModel.itemsPerPage |myLimitTo : pageModel.itemsPerPage track by $index" 
+                                                                 ng-class="{'viewed-card selected-card': (pageModel.currentCard == $index || pageModel.viewed.$index),'viewed-card': pageModel.viewed[$index]}">
+                                                                <div class="panel panel-default">
+                                                                    <div class="panel-heading">{{task.id}} {{pageModel.viewed.$index}} </div>
+                                                                    <div class="panel-body">
+                                                                        {{task.Emp_Short}}
+                                                                        {{task.flag}}
+
+                                                                    </div>
+                                                                    <div class="card-bottom-tags">
+                                                                        <i class="fa fa-cog" title="Tag-{{task.id}}"></i>            
+                                                                        <i class="fa fa-camera" title="{{task.flag}}"></i>
+                                                                        <i class="badge">{{task.Emp_Short}}</i>
+                                                                    </div>
+                                                                </div> 
+                                                            </div>
+                                                            <div class="clearfix"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="clearfix"></div>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-6" >
+                                            <input type="text" placeholder="Search for cards" ng-model="sortCard" ng-change="pageModel.numberOfPages()">
+                                            <div class="panel-flip animated zoomInLeft" ng-if="stickyCard" ng-dblclick="dashModel.cardModal()">
+
+                                                <div class="front card-flip" ng-class="{'panle-fliped-front':pageModel.panelFliped}">
+                                                    <button class="btn btn-xs colored-bg  close" data-toggle="modal" type="button" ng-click="pageModel.panelFliped = !pageModel.panelFliped">
+                                                        <i  class="fa fa-repeat fa-flip-horizontal fa-spin"></i>
+                                                    </button>
+                                                    <div class="single-card">
+                                                        <form class="form-inline">
+                                                            <div class="card-heading colored-bg">
+                                                                <div class="col-md-8 row">
+                                                                    {{stickyCard.name}}- {{stickyCard.id}}
+                                                                </div>
+                                                                <div class="col-md-4 pull-right">
+                                                                    <button class="btn btn-xs colored-bg" data-toggle="modal" type="button">
+                                                                        <i class="fa fa-edit"></i>
+                                                                    </button>
+
+                                                                </div>
+
+                                                                <div class="clearfix"></div>
+                                                            </div>
+
+                                                            <div class="card-body">
+                                                                <div class="form-group">
+                                                                    <label class="col-sm-4 control-label colored">End-Date</label>
+                                                                    <div class="col-sm-6">
+                                                                        20-08-2016
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-sm-4 control-label colored">End-Date</label>
+                                                                    <div class="col-sm-6">
+                                                                        20-08-2016
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-sm-4 control-label colored">Desc</label>
+                                                                    <div class="col-sm-6">
+                                                                        {{stickyCard.name}}
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-sm-4 control-label colored">Desc</label>
+                                                                    <div class="col-sm-6">
+                                                                        {{stickyCard.name}}
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-sm-4 control-label colored">Desc</label>
+                                                                    <div class="col-sm-6">
+                                                                        {{stickyCard.name}}
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group pull-right">
+                                                                    <i class="fa fa-exclamation-circle fa-2x"></i>
+                                                                    <i class="fa fa-flag fa-2x"></i>
+                                                                    <i class="info-count badge">{{stickyCard.Emp_Short}}</i>
+                                                                </div>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                                <div class="back card-flip" ng-class="{'panle-fliped-back':pageModel.panelFliped}">
+                                                    <button class="btn btn-xs colored-bg  close" data-toggle="modal" type="button" ng-click="pageModel.panelFliped = !pageModel.panelFliped">
+                                                        <i  class="fa fa-repeat fa-flip-horizontal fa-spin"></i>
+                                                    </button>
+                                                    <div class="single-card">
+                                                        <form class="form-inline">
+                                                            <div class="card-heading colored-bg">
+                                                                <div class="col-md-8 row">
+                                                                    {{stickyCard.name}}- {{stickyCard.id}}
+                                                                </div>
+                                                                <div class="col-md-4 pull-right">
+                                                                    <button class="btn btn-xs colored-bg" data-toggle="modal" type="button">
+                                                                        <i class="fa fa-edit"></i>
+                                                                    </button>
+
+
+                                                                </div>
+                                                                <div class="clearfix"></div>
+                                                            </div>
+
+                                                            <div class="card-body">
+                                                                <div class="form-group">
+                                                                    <label class="col-sm-4 control-label colored">End-Date</label>
+                                                                    <div class="col-sm-6">
+                                                                        20-08-2016
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-sm-4 control-label colored">Desc</label>
+                                                                    <div class="col-sm-6">
+                                                                        <div class="c100 p23 small">
+                                                                            <span>23%</span>
+                                                                            <div class="slice">
+                                                                                <div class="bar"></div>
+                                                                                <div class="fill"></div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-sm-4 control-label colored">Desc</label>
+                                                                    <div class="col-sm-6">
+                                                                        {{stickyCard.name}}
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="form-group pull-right">
+                                                                    <i class="fa fa-exclamation-circle fa-2x"></i>
+                                                                    <i class="fa fa-flag fa-2x"></i>
+                                                                    <i class="info-count badge">{{stickyCard.Emp_Short}}</i>
+                                                                </div>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                    <div class="inner-panel-flip">
+                                                        data<br>
+                                                        data<br>
+                                                        data<br>
+                                                        data<br>
+                                                        data<br>
+                                                        data<br>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="visible-xs visible-sm cards_sm">
+    <accordion  ng-repeat="project in dashModel.projects track by $index">
+        <div class="colored-bg alert pointer"><b>{{project.stagename}}</b></div>
+        <accordion-group ng-repeat="app in project.data track by $index">
+            <accordion-heading>
+                {{app.appname}} <i class="pull-right glyphicon" style="float:right !important;"ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+            </accordion-heading>
+            <div class="cards_sm">
+                <ul ng-repeat="task in app.data">
+                    <li><a ng-click="dashModel.openMobileModalDesc(task)">{{task.Emp_Short}}-{{task.name}} <i class="fa fa-exclamation-circle fa-2x"></i>
+                            <i class="fa fa-flag fa-2x"></i></a></li>
+                </ul>
+            </div>
+        </accordion-group>
+    </accordion>
+</div>

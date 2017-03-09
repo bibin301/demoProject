@@ -1,0 +1,26 @@
+<div class="hidden-xs hidden-sm">
+<!--js/components/home.timeline-->
+<div class="inner timeline-title">
+    <span>
+        <img src="images/logo.png">
+    </span>
+    <h2 class="as-history">Cartwheel History</h2>
+
+    <div class="vertical-container light-timeline center-orientation" id="vertical-timeline">
+        <div class="vertical-timeline-block" ng-repeat="data in homeModel.sectiondata.timeline">
+            <div class="vertical-timeline-icon timeline-badge">
+                <i class="fa fa-briefcase"></i>
+            </div>
+
+            <div class="vertical-timeline-content">
+<!--<h2>Meeting</h2>-->
+                <p>{{data.history}}</p>
+                <span class="vertical-date colored">
+                    <span class="timeline-day">{{data.historyDay}}</span>
+                    <strong>{{data.historyDate}}</strong>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

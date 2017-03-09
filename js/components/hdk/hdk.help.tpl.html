@@ -1,0 +1,145 @@
+<style>
+  .custom-nav-help {
+    position: fixed;
+    z-index: 10;
+    /*width: 86%;*/
+  }
+
+  .navbar-right {
+    right: 3%;
+  }
+
+  .hdkHelpsection-small {
+    margin-top: 23%;
+  }
+</style>
+<div class="panel panel-default animated zoomIn" ng-class="{'panel-custom-fullScreen':panelFullScreen}">
+  <div class="panel-heading panel-custom panel-heading-custom2">
+    <h2 class="panel-title">Help Desk Help
+    </h2>
+    <div class="box-icon pull-right">
+      <a class="btn btn-close btn-round btn-default" ng-click="panelFullScreen = !panelFullScreen"><i class="glyphicon" ng-class="{'glyphicon-resize-full':!panelFullScreen,'glyphicon-resize-small':panelFullScreen}" ></i></a>
+
+    </div>
+    <div class="clearfix"></div>
+  </div>
+  <!--visible only medium device-->
+  <div class="panel-body " ng-show="!isOpened">
+
+    <!-- MENU (STATIC ON TOP -->
+    <nav class="navbar navbar-default navbar-right custom-nav-help" id="menu" role="navigation">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="header-inner">
+        <div class="navbar-header">
+          <button class="navbar-toggle colored-bg" ng-click="navCollapsed = !navCollapsed" ng-init="navCollapsed = true" type="button">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" ng-class="!navCollapsed && 'in'">
+          <ul class="nav navbar-nav navbar-right topMenuHeight">
+            <li class="login-btn events">
+              <a ng-click="appModel.gotoSection('hdk_section1')"> What is Help desk?</a>
+            </li>
+            <li class="login-btn">
+              <a ng-click="appModel.gotoSection('hdk_section2')">Create new ticket</a>
+            </li>
+            <li class="login-btn">
+              <a ng-click="appModel.gotoSection('hdk_section3')">View/Update Tickets</a>
+            </li>
+            <li class="login-btn">
+              <a ng-click="appModel.gotoSection('hdk_section4')">Categories</a>
+            </li>
+            <li class="login-btn">
+              <a ng-click="appModel.gotoSection('hdk_section5')">Area</a>
+            </li>
+          </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+      </div>
+    </nav>
+    <div class="content-wrapper">
+      <div class="col-md-10">
+        <div class="tab-content">
+          <!--STO tap select one -->
+          <div class="tab-pane active text-style umHelpsection-1 visible-lg" id="hdk_section1">
+
+            <h4>What is Help Desk ?</h4>
+
+            <img ng-src="images/helpdesk/workflow-{{appModel.cartapp.config.theme}}.gif" class="img-responsive">
+            <hr>
+          </div>
+          <!--  for small device and medium device-->
+          <div class="tab-pane active text-style hdkHelpsection-small visible-xs visible-sm visible-md" id="um_section1">
+            <h4>What is Help Desk ?</h4>
+
+            <img ng-src="images/helpdesk/workflow-{{appModel.cartapp.config.theme}}.gif" class="img-responsive">
+            <hr>
+          </div>
+          <!--ENO tap select one -->
+
+
+          <!--STO tap select two -->
+          <div class="tab-pane active text-style umHelpsection-2 col-md-12" id="hdk_section2">
+            <h4>Create New Ticket</h4>
+            <div class="clearfix"></div>
+            <p>For creating new tickets click on "My Tickets" tab, ticket creation form appears, this can be used for creating the form.</p>
+            <ul>
+              <li><b>• Title: </b>Provide the brief description of the problem.</li>
+              <li><b>• Category: </b>Provide the appropriate category. This is broad functional classification like Sys Admin, Appraisal, Canteen, Leave, Travel ...</li>
+              <li><b>• Area: </b>Select Area Based on Category.</li>
+              <li><b>• Description: </b>Provide the detailed problem so that it could help the ticket-catgeory owner to understand the problem.</li>
+              <li>Click on "Create" button after adding all the required fields. Mail will be sent to the ticket-catgeory owner.</li>
+            </ul>
+            <p><b>NOTE:</b><p>
+            <ul>
+              <li class="list-space">1.Attachments are not supported</li>
+              <li class="list-space">2.QMS Forms and processes are still to be followed as required.</li>
+            </ul>
+            <hr>
+          </div>
+          <!--ENO tap select two -->
+
+          <!--STO tap select three -->
+          <div class="tab-pane active text-style umHelpsection-3 col-md-12" id="hdk_section3">
+            <h4>View / Update Tickets</h4>
+            <div class="clearfix"></div>
+            <p>Once you have tickets created, you will see them automatically listed in the table below.</p>
+            <ul>
+              <li>• Each row is a ticket which has been raised by you</li>
+              <li>• Each row indicates the brief description including current status and a link More link to see more details .</li>
+              <li>• Clicking on More link will show the Ticket tree as well as status of the selected ticket</li>
+              <li>• You can Close / Re-open any ticket which has been RESOLVED by the ticket-category owner.</li>
+            </ul>
+            <hr>
+          </div>
+          <!--ENO tap select three -->
+
+          <!--STO tap select four -->
+          <div class="tab-pane active text-style umHelpsection-4 col-md-12" id="hdk_section4">
+            <h4>Categories</h4>
+            <div class="clearfix"></div>
+            <p>Available list of categories to aid in selecting the correct categories are listed below:</p>
+            <hr>
+          </div>
+          <!--ENO tap select four -->
+
+          <!--STO tap select five -->
+          <div class="tab-pane active text-style umHelpsection-4 col-md-12" id="hdk_section5">
+            <h4>Area</h4>
+            <div class="clearfix"></div>
+            <p>Based on the selected category area’s are listed to aid in selecting the corrected area.</p>
+            <hr>
+          </div>
+          <!--ENO tap select five -->
+
+        </div>
+      </div>
+    </div>
+  </diV>
+</div>
+<!-- EDO Menu Bar -->

@@ -1,0 +1,385 @@
+<!--
+
+-->
+<style>
+    .wri-listPannel .panel {
+        padding: 5px;
+    }
+
+    .create-update {
+        margin-left: 10px;
+    }
+</style>
+<!-- sto section1  -->
+<div class="wri-List">
+    <div class="panel panel-default animated zoomIn" ng-class="{'panel-custom-fullScreen':panelFullScreen}">
+        <div class="panel-heading panel-custom panel-heading-custom2">
+            <h2 class="panel-title">Wri List</h2>
+            <div class="box-icon pull-right">
+                <a class="btn btn-close btn-round btn-default" ng-click="panelFullScreen = !panelFullScreen"><i class="glyphicon" ng-class="{'glyphicon-resize-full':!panelFullScreen,'glyphicon-resize-small':panelFullScreen}" ></i></a>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <!-- sto right -->
+                <div class="col-md-6" ng-class="{'full-width':appModel.tableFullWidth}">
+                    <div class="panel panel-default animated zoomIn" ng-class="{'panel-custom-fullScreen':panelFullScreen}" ng-controller="panelCtrl">
+                        <div class="panel-heading panel-custom panel-heading-custom2">
+                            <h2 class="panel-title">Wri List</h2>
+                            <div class="box-icon pull-right">
+                                <a class="btn btn-close btn-round btn-default" ng-click="panelFullScreen = !panelFullScreen"><i class="glyphicon" ng-class="{'glyphicon-resize-full':!panelFullScreen,'glyphicon-resize-small':panelFullScreen}" ></i></a>
+                                <a class="btn btn-minimize btn-round btn-default"><i class="glyphicon" ng-class="{'glyphicon-chevron-up':!isOpened,'glyphicon-chevron-down':isOpened}" ng-click="isOpened = !isOpened"></i></a>
+                                <a class="btn btn-close btn-round btn-default" ng-click="mmListModel.loadDept()"><i class="glyphicon glyphicon-refresh fa-spin-hover"></i></a>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="panel-body" ng-show="!isOpened">
+                            <table class="display table table-bordered table-striped" datatable="ng" id="dynamic-table custom_table">
+                                <thead>
+                                    <tr>
+                                        <th>Wri No </th>
+                                        <th>Project code</th>
+                                        <th>Project manager</th>
+                                        <th>Client</th>
+                                        <th>Location</th>
+                                        <th>Actual project start date</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="list in wriListModel.wriList">
+                                        <td title="{{list.wriNo}}">{{list.wriNo}} </td>
+                                        <td title="{{list.prjCode}}">{{list.prjCode}} </td>
+                                        <td title="{{list.prjMgrName}}">{{list.prjMgrName}} </td>
+                                        <td title="{{list.clientName}}">{{list.clientName}}</td>
+                                        <td>
+                                            <div class="inner-div" ng-bind-html="list.locName" title="{{list.locName}}"></div>
+                                        </td>
+                                        <td>{{list.startDate}} </td>
+                                        <td>{{list.prjStatus}} </td>
+                                        <td>
+                                            <button class="btn btn-xs colored-bg" data-toggle="modal" data-target=".bs-example-modal-lg" ng-click="wriListModel.wriListEdit(list)" type="button">
+                                                <i class="fa fa-edit"></i>
+                                            </button>
+                                            <span ng-if="list.prjDelete === 'y'">
+                                                <button class="btn btn-xs colored-bg" ng-click="wriListModel.wriListDelete(list)" type="button">
+                                                    <i class="glyphicon glyphicon-trash"></i>
+                                                </button>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- eno right -->
+                <!-- sto left -->
+
+                <div class="col-md-6" ng-class="{'full-width':appModel.tableFullWidth}">
+                    <div class="panel panel-default animated zoomIn" ng-class="{'panel-custom-fullScreen':panelFullScreen}" ng-controller="panelCtrl">
+                        <div class="panel-heading panel-custom panel-heading-custom2">
+                            <h2 class="panel-title">{{wriListModel.title}}</h2>
+                            <div class="box-icon pull-right">
+                                <a class="btn btn-close btn-round btn-default" ng-click="panelFullScreen = !panelFullScreen"><i class="glyphicon" ng-class="{'glyphicon-resize-full':!panelFullScreen,'glyphicon-resize-small':panelFullScreen}" ></i></a>
+                                <a class="btn btn-minimize btn-round btn-default"><i class="glyphicon" ng-class="{'glyphicon-chevron-up':!isOpened,'glyphicon-chevron-down':isOpened}" ng-click="isOpened = !isOpened"></i></a>
+                                <a class="btn btn-close btn-round btn-default" ng-click="mmListModel.loadDept()"><i class="glyphicon glyphicon-refresh fa-spin-hover"></i></a>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="panel-body" ng-show="!isOpened">
+
+                            <form class="form-horizontal" name="wriListModel.userForm" novalidate>
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 Model-title control-label">WRI Number</label>
+                                    <div class="col-sm-4">
+
+                                        <input type="text" class="form-control underline"  name="wriNO" ng-model="wriListModel.usrRes.wriNo" name="num" placeholder="WRI Number" required>
+                                        <div class="has-error" ng-show="(wriListModel.userForm.wriNO.$error.required && wriListModel.userForm.wriNO.$touched) || (wriListModel.userForm.$submitted && wriListModel.userForm.wriNO.$error.required)">wriNo is required </div>
+                                    </div>
+                                    <label class="col-sm-2 Model-title control-label ">WRI Contract Number</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control underline" onkeypress="return isNumber(event)" ng-model="wriListModel.usrRes.wriCNo" placeholder="WRI Contract Number">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 Model-title wri_add_header control-label">Project Location</label>
+                                    <div class="col-sm-4">
+                                        <select type="text" chosen persistent-create-option="true" ng-model="wriListModel.usrRes.prjLoc" class="form-control" ng-options="location.locName for location in wriListModel.Locations track by location.id">
+                                            <option value="">--select locations--</option>
+                                        </select>
+                                    </div>
+                                    <label class="col-sm-2 Project_applicable Model-title control-label">Client</label>
+                                    <div class="col-sm-4">
+                                        <select chosen persistent-create-option="true" ng-model="wriListModel.usrRes.client" type="text" class="form-control" name="client" ng-options="client.clientName for client in wriListModel.wriClients track by client.clientId" required>
+                                            <option value="">--select client--</option>
+                                        </select>
+                                        <div class="has-error" ng-show="(wriListModel.userForm.client.$error.required && wriListModel.userForm.client.$touched) || (wriListModel.userForm.$submitted && wriListModel.userForm.client.$error.required)">client is required </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2  Model-title wri_add_header control-label">Work List Number</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" ng-model="wriListModel.usrRes.wrkListNo" onkeypress="return isNumber(event)" class="form-control underline" placeholder="Work List Number">
+                                    </div>
+                                    <label class="col-sm-2 Model-title  control-label">Project code</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control underline" ng-model="wriListModel.usrRes.prjCode" placeholder="Project code" name="prjCode" required>
+                                        <div class="has-error" ng-show="(wriListModel.userForm.prjCode.$error.required && wriListModel.userForm.prjCode.$touched) || (wriListModel.userForm.$submitted && wriListModel.userForm.prjCode.$error.required)">project code is required </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 Model-title wri_add_header  control-label">Project title</label>
+                                    <div class="col-sm-10">
+                                        <input type="text"  name="prjTitle" class="form-control underline" ng-model="wriListModel.usrRes.prjTitle" placeholder="Project title" required>
+                                        <div class="has-error" ng-show="(wriListModel.userForm.prjTitle.$error.required && wriListModel.userForm.prjTitle.$touched) || (wriListModel.userForm.$submitted && wriListModel.userForm.prjTitle.$error.required)">project title is required </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 Model-title wri_add_header control-label">Project Type</label>
+                                    <div class="col-sm-4">
+                                        <select type="text" chosen persistent-create-option="true" ng-model="wriListModel.usrRes.prjtype" class="form-control" ng-options="prjType.prjTypeDesc for prjType in wriListModel.ProjectTypes">
+                                            <option value="">--select Project type--</option>
+                                        </select>
+                                    </div>
+                                    <label class="col-sm-2 Model-title  control-label">Project Area</label>
+                                    <div class="col-sm-4">
+                                        <select type="text" chosen persistent-create-option="true" ng-model="wriListModel.usrRes.prjarea" class="form-control" ng-options="prjArea.prjAreaDesc for prjArea in wriListModel.ProjectAreas">
+                                            <option value="">--select Project Area--</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 Model-title wri_add_header control-label">Project manager</label>
+                                    <div class="col-sm-4">
+                                        <select type="text" chosen persistent-create-option="true" name="mgr" ng-model="wriListModel.usrRes.prjMgr" class="form-control" ng-options="manager.empName for manager in wriListModel.Employees track by manager.id" required>
+                                            <option value="">--select Project manager--</option>
+                                        </select>
+                                        <div class="has-error" ng-show="(wriListModel.userForm.mgr.$error.required && wriListModel.userForm.mgr.$touched) || (wriListModel.userForm.$submitted && wriListModel.userForm.mgr.$error.required)">manager is required </div>
+                                    </div>
+                                    <label class="col-sm-2 Model-title  control-label">Programme manager</label>
+                                    <div class="col-sm-4">
+                                        <select type="text" chosen persistent-create-option="true" name="pgmMgr" ng-model="wriListModel.usrRes.pgmMgr" class="form-control" ng-options="pgmMgr.empName for pgmMgr in wriListModel.Employees track by pgmMgr.id" required>
+                                            <option value="">--select programme manager--</option>
+                                        </select>
+                                        <div class="has-error" ng-show="(wriListModel.userForm.pgmMgr.$error.required && wriListModel.userForm.pgmMgr.$touched) || (wriListModel.userForm.$submitted && wriListModel.userForm.pgmMgr.$error.required)">programme manager is required </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+
+                                    <label class="col-sm-2 wri_add_header Model-title control-label">Project status</label>
+                                    <div class="col-sm-4">
+
+                                        <select type="text" chosen persistent-create-option="true" ng-model="wriListModel.usrRes.prjSt" class="form-control" required>
+                                            <option value="">--select status--</option>
+                                            <option value="A">Active</option>
+                                            <option value="S">Closed</option>
+                                            <option value="C">Suspended</option>
+                                            <option value="R">Rejected</option>
+                                        </select>
+                                    </div>
+                                    <label class="col-sm-2 Model-title  control-label">Project overtime applicable</label>
+                                    <div class="col-sm-3">
+                                        <select type="text" chosen persistent-create-option="true" class="form-control"  ng-model="wriListModel.usrRes.overtime">
+                                            <option value="">--select applicable--</option>
+                                            <option value="y">Yes</option>
+                                            <option value="n">No</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label wri_add_header Model-title">Work Required</label>
+                                    <div class="col-sm-10">
+                                        <textarea class="form-border" ng-model="wriListModel.usrRes.cmt" ui-tinymce="appModel.tinymceOptions" name="cmt"></textarea>
+                                    </div>
+                                </div>
+                                <!--STO pannel-->
+                                <div class="wri-listPannel">
+                                    <div class="panel panel-default">
+                                        <p class="text-center Model-title"> Reporting required</p>
+
+                                        <div class="panel-body Report-info">
+                                            <div class="col-sm-12">
+                                                <div class="panel panel-default">
+                                                    <div class="panel-body">
+                                                        <h5 class="Model-title"> weekly (tick if required)</h5>
+                                                        <div>
+                                                            <div class="col-sm-3">
+                                                                <label class="checkbox-inline checkbox1">
+                                                                    <input type="checkbox" ng-model="wriListModel.usrRes.progress" ng-true-value="'y'" ng-false-value="'n'"> progress report
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-sm-3">
+                                                                <label class="checkbox-inline">
+                                                                    <input type="checkbox" ng-model="wriListModel.usrRes.effort" ng-true-value="'y'" ng-false-value="'n'"> Effort chart
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-sm-3">
+                                                                <label class="checkbox-inline">
+                                                                    <input type="checkbox" ng-model="wriListModel.usrRes.rChart" ng-true-value="'y'" ng-false-value="'n'"> Resource chart
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-sm-3">
+                                                                <label class="checkbox-inline">
+                                                                    <input type="checkbox" ng-model="wriListModel.usrRes.pChart" ng-true-value="'y'" ng-false-value="'n'"> progress chart
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <div>
+                                                            <div class="col-sm-3">
+                                                                <label class="checkbox-inline">
+                                                                    <input type="checkbox" ng-model="wriListModel.usrRes.shedule" ng-true-value="'y'" ng-false-value="'n'">Schedule variance
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-sm-3">
+                                                                <label class="checkbox-inline">
+                                                                    <input type="checkbox" ng-model="wriListModel.usrRes.per" ng-true-value="'y'" ng-false-value="'n'">SQA periodic report
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-sm-3">
+                                                                <label class="checkbox-inline">
+                                                                    <input type="checkbox" ng-model="wriListModel.usrRes.risk" ng-true-value="'y'" ng-false-value="'n'"> Risk log
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-sm-3">
+                                                                <label class="checkbox-inline">
+                                                                    <input type="checkbox" ng-model="wriListModel.usrRes.act" ng-true-value="'y'" ng-false-value="'n'"> Issues & Actions log
+                                                                </label>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <div class="panel panel-default">
+                                                    <div class="panel-body month_info">
+                                                        <h5 class="Model-title"> Monthly (tick if required)</h5>
+                                                        <div>
+                                                            <div class="col-sm-3">
+                                                                <label class="checkbox-inline">
+                                                                    <input type="checkbox" ng-model="wriListModel.usrRes.prjList" ng-true-value="'y'" ng-false-value="'n'">Project list
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-sm-3">
+                                                                <label class="checkbox-inline">
+                                                                    <input type="checkbox" ng-model="wriListModel.usrRes.sum" ng-true-value="'y'" ng-false-value="'n'">Project summery report
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-sm-3">
+                                                                <label class="checkbox-inline">
+                                                                    <input type="checkbox" ng-model="wriListModel.usrRes.staff" ng-true-value="'y'" ng-false-value="'n'">Staff allocation forecast
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 Model-title wri_add_header control-label">Planned start date</label>
+                                            <div class="col-sm-4">
+                                                <input id="datepicker" date-picker ng-model="wriListModel.usrRes.sDate" type="text" class="form-control underline" />
+
+
+                                            </div>
+                                            <label class="col-sm-2 Model-title  control-label">Planned finish date</label>
+                                            <div class="col-sm-4">
+                                                <input id="datepicker" date-picker ng-model="wriListModel.usrRes.fDate" type="text" class="form-control underline" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 Model-title wri_add_header control-label">Actual start date</label>
+                                            <div class="col-sm-4">
+                                                <input id="datepicker" date-picker ng-model="wriListModel.usrRes.asd" type="text" class="form-control underline" />
+                                            </div>
+                                            <label class="col-sm-2 Model-title  control-label">Issued date</label>
+                                            <div class="col-sm-4">
+                                                <input id="datepicker" date-picker ng-model="wriListModel.usrRes.IsDate" type="text" class="form-control underline" />
+                                            </div>
+                                        </div>
+
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 Model-title wri_add_header control-label"> Issued by</label>
+                                            <div class="col-sm-4">
+                                                <select type="text" chosen persistent-create-option="true" ng-model="wriListModel.usrRes.isBy" class="form-control" ng-options="manager.empName for manager in wriListModel.Employees track by manager.id ">
+                                                    <option value="">--select name--</option>
+                                                </select>
+
+                                            </div>
+                                            <label class="col-sm-2 Model-title  control-label">Accepted by</label>
+                                            <div class="col-sm-4">
+                                                <select type="text" chosen persistent-create-option="true" ng-model="wriListModel.usrRes.acceptBy" class="form-control" ng-options="manager.empName for manager in wriListModel.Employees track by manager.id ">
+                                                    <option value="">--select name--</option>
+                                                </select>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 Model-title wri_add_header control-label">Accepted date</label>
+                                            <div class="col-sm-4">
+                                                <input id="datepicker" date-picker ng-model="wriListModel.usrRes.accept" type="text" class="form-control underline" />
+                                            </div>
+                                            <label class="col-sm-2 Model-title  control-label">Currency</label>
+                                            <div class="col-sm-4">
+                                                <select ng-model="wriListModel.usrRes.cur" chosen persistent-create-option="true" type="text" class="form-control" ng-options="currency.currencyName for currency in wriListModel.currencyDetials">
+                                                    <option value="">--select Currency--</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 Model-title wri_add_header control-label">Contract type</label>
+                                            <div class="col-sm-4">
+                                                <select type="text" chosen persistent-create-option="true" class="form-control" ng-model="wriListModel.usrRes.cType">
+                                                    <option value="">--select contract type--</option>
+                                                    <option value="FP">FP</option>
+                                                    <option value="TM">TM</option>
+                                                    <option value="TH">TH</option>
+                                                    <option value="O">Others</option>
+                                                </select>
+                                            </div>
+                                            <label class="col-sm-2 Model-title  control-label">Initial estimate(in man hours)</label>
+                                            <div class="col-sm-4">
+                                                <select chosen persistent-create-option="true" ng-model="wriListModel.usrRes.estimate" type="text" class="form-control" ng-options="currency.currencyName for currency in wriListModel.currencyDetials">
+                                                    <option value="">--select Currency--</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label wri_add_header Model-title">Comments</label>
+                                            <div class="col-sm-10">
+                                                <textarea ng-model="wriListModel.usrRes.comment" ui-tinymce="appModel.tinymceOptions" name="comment"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--ENO pannel-->
+                                    <div class="text-right">
+
+                                        <button type="submit"  ng-click="wriListModel.wriListUpdate(wriListModel.usrRes)" class="btn colored-bg">{{wriListModel.btn}}</button>
+
+
+                                    </div>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!-- eno left -->
+        </div>
+    </div>
+
+</div>
+</div>

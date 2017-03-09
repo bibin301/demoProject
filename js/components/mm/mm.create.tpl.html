@@ -1,0 +1,263 @@
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!-- page content -->
+
+
+<tabset class="tab-animation tab-container tab-wizard" justified="true" set-ng-animate="true" >
+
+    <tab active="mmListModel.steps.mmListModel.step1">
+
+        <tab-heading>
+            Department - {{mmListModel.isAuthorized.create && mmListModel.isAuthorized.edit}}
+        </tab-heading>
+        <form name="mmListModel.step1" role="form" novalidate class="form-validation">
+            <div class="row">
+                <div class="form-group col-md-12">
+                    <label for="department">Department </label>    
+                    <select name="department" chosen 
+                            persistent-create-option="true"
+                            ng-model="mmListModel.create.deptId"
+                            ng-options="dept.id as dept.name for dept in mmListModel.deptList"
+                            required>
+                        <option value=""></option>
+                    </select>
+                    <p class="help-block">
+                        <span ng-show="mmListModel.step1.department.$invalid && !mmListModel.step1.department.$pristine">Department is required.</span>
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-12">
+                    <label for="title">Title: </label>
+                    <input type="text" name="title" class="form-control" ng-model="mmListModel.create.title" 
+                           typeahead="title.title for title in mmListModel.titles | filter:$viewValue | limitTo:8" autocomplete="off" ng-blur="mmListModel.checkTitle(mmListModel.create.title)" required>
+                    <p class="help-block">
+                        <span ng-show="mmListModel.step1.title.$invalid && !mmListModel.step1.title.$pristine">Title is required.</span>
+                        <span ng-show="mmListModel.tittleError" class="error">Title Name Already exist.</span>
+
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-12">
+                    <label for="username">Author </label>
+                    <input type="text" class="form-control underline"  value="{{coreModel.userData.empFname + ' ' + coreModel.userData.empLname}}" disabled>
+                    <p class="help-block">
+                        <span ng-show="mmListModel.step1.name.$invalid && !mmListModel.step1.name.$pristine">Name is required.</span>
+                    </p>
+                </div>
+            </div>
+            <button type="submit" ng-disabled="mmListModel.step1.$invalid" class="btn btn-default" ng-click="mmListModel.steps.mmListModel.step2 = true">Next</button>
+        </form>
+
+    </tab>
+
+    <tab active="mmListModel.steps.mmListModel.step2" disabled="mmListModel.step1.$invalid">
+
+        <tab-heading>
+            Venue
+            <!--          <span class="badge badge-default pull-right wizard-mmListModel.step">2</span>-->
+        </tab-heading>
+
+        <form name="mmListModel.step2" role="form" novalidate>
+
+            <div class="row">
+                <div class="form-group col-md-12">
+                    <label for="street">Venue</label> 
+                    <select name="venue" chosen 
+                            persistent-create-option="true"
+                            ng-model="mmListModel.create.mmVenue"
+                            ng-options="v.venue as v.venue for v in mmListModel.venues"
+                            required>
+                        <option value=""></option>
+                    </select>
+                    <p class="help-block">
+                        <span ng-show="mmListModel.step2.venue.$invalid && !mmListModel.step2.venue.$pristine">venue is required.</span>
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label for="date">Date </label>
+                    <input type="text" name="date" id="date" class="form-control underline" ng-model="mmListModel.create.mmDate" placeholder="Enter date" date-picker required>
+                    <p class="help-block">
+                        <span ng-show="mmListModel.step2.date.$invalid && !mmListModel.step2.date.$pristine">Date is required.</span>
+                    </p>
+                </div>
+                <div class="col-md-6 form-group">
+                    <div class="form-group">
+
+                        <label for="agenda">Agenda </label>
+                        <input type="text" name="agenda" id="agenda" class="form-control underline" ng-model="mmListModel.create.mmAgenda" placeholder="Enter Agenda" required autocomplete="off">
+                        <p class="help-block">
+                            <span ng-show="mmListModel.step2.agenda.$invalid && !mmListModel.step2.agenda.$pristine">Agenda is required.</span>
+                        </p>
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="time">Start Time </label>
+
+                    <timepicker name="time" ng-model="mmListModel.create.mmStarttime" hour-step="1" minute-step="5" show-meridian=true required></timepicker>
+                    <p class="help-block">
+                        <span ng-show="mmListModel.step2.time.$invalid && !mmListModel.step2.time.$pristine">Time is required.</span>
+                    </p>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="time">End Time </label>
+
+                    <timepicker name="mmEndtime" ng-model="mmListModel.create.mmEndtime" hour-step="1" minute-step="5" show-meridian=true></timepicker>
+                    <p class="help-block">
+                        <span ng-show="mmListModel.step2.mmEndtime.$invalid && !mmListModel.step2.mmEndtime.$pristine">Time is required.</span>
+                    </p>
+                </div>
+
+
+            </div>
+            <div class="row">
+
+            </div>
+            <button type="submit" class="btn btn-default" ng-click="mmListModel.steps.mmListModel.step1 = true">Previous</button>
+            <button type="submit" ng-disabled="mmListModel.step2.$invalid" class="btn btn-default pull-right" ng-click="mmListModel.steps.mmListModel.step3 = true;mmListModel.showAction = true">Next</button>
+        </form>
+    </tab>
+    <tab active="mmListModel.steps.mmListModel.step3" disabled="mmListModel.step2.$invalid">
+        <tab-heading ng-click="mmListModel.showAction = true">
+            Attendies  
+        </tab-heading>
+        <form name="mmListModel.step3" role="form" novalidate>
+            <div class="row">
+                <div class="form-group">
+                    <h4 class="custom-font"><strong>Attendies</strong>(Assystem Employees)</h4>
+                    <select name="attendees" chosen multiple
+                            persistent-create-option="true"
+                            ng-model="mmListModel.create.mmAttendee"
+                            placeholder-text-multiple="'Choose Attendies'"
+                            ng-options="v.id as v.name for v in mmListModel.empList"
+                            ng-change="mmListModel.removeDistributorList(mmListModel.create.attList)">
+                        <option value=""></option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group">
+                    <h4 class="custom-font"><strong>Additional Attendies</strong>(Non-Assystem Employees)</h4>
+                    <select name="attendees" chosen multiple
+                            persistent-create-option="true"
+                            placeholder-text-multiple="'Choose Additional Attendies'"
+                            ng-model="mmListModel.create.mmAdditionalAttendee"
+                            ng-options="v.id as v.name for v in mmListModel.extAttList">
+                        <option value=""></option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group">
+                    <h4 class="custom-font"><strong>Distributors</strong>(Assystem Employees)</h4>
+
+                    <select name="attendees" chosen multiple
+                            persistent-create-option="true"
+                            placeholder-text-multiple="'Choose Distributors'"
+                            ng-model="mmListModel.create.mmDistribution"
+                            ng-options="v.id as v.name for v in mmListModel.empList">
+                        <option value=""></option>
+                    </select>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-default" ng-click="mmListModel.steps.mmListModel.step2 = true">Previous</button>
+            <button type="submit" ng-disabled="mmListModel.step3.$invalid" class="btn btn-default pull-right" ng-click="mmListModel.steps.mmListModel.step4 = true;mmListModel.showActionBtn = true">Next</button>
+
+        </form>
+    </tab>
+    <!--disabled="mmListModel.step3.$invalid"-->
+    <tab active="mmListModel.steps.mmListModel.step4" disabled="mmListModel.step2.$invalid">
+
+        <tab-heading ng-click="mmListModel.showActionBtn = true">
+            Description
+        </tab-heading>
+        <form name="mmListModel.step4" role="form" novalidate>
+
+            <div class="row">
+                <div class="form-group col-md-12">
+                    <label for="email">Minutes </label>
+                    <textarea ng-model="mmListModel.create.mmDesc" ui-tinymce="appModel.tinymceOptions"></textarea>
+                </div>
+                <div class="form-group col-md-12">
+                    <label for="phone">Any Other business </label>
+                    <textarea ng-model="mmListModel.create.anyOtherBusiness" ui-tinymce="appModel.tinymceOptions"></textarea>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-default" ng-click="mmListModel.steps.mmListModel.step3 = true">Previous</button>
+        </form>
+    </tab>
+</tabset>
+<div class="col-md-12" ng-if="mmListModel.showAction">
+    <table class="display table table-bordered table-striped" id="dynamic-table custom_table">
+        <thead>
+            <tr>
+                <th>Action</th>
+                <th>Action Taken</th>
+                <th>Target Date</th>
+                <th>Owner</th>
+                <th>Status</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr  ng-repeat="action in mmListModel.mmActions">
+                <td><textarea ng-model="action.actDesc"></textarea></td>
+                <td><textarea ng-model="action.actTaken"></textarea></td>
+
+
+                <td>{{action.dueDate}} <br> revised to <br>
+                    <input type="text" date-picker class="underline" placeholder="YYYY-MM-DD" ng-model="action.revDueDate">
+                </td>
+                <td>
+                    <select name="attendees" chosen
+                            persistent-create-option="true"
+                            placeholder-text="'Owner'"
+                            ng-model="action.assignedTo"
+                            ng-options="v.id as v.name for v in mmListModel.empList"
+                            disabled>
+                        <option value=""></option>
+                    </select>
+
+                </td>
+                <td>
+                    <button  class="btn btn-xs colored-bg" ng-if="action.actTaken" ng-click="mmListModel.timelineModal(action.actTaken)" type="button">
+                        <i class="fa fa-eye" ></i>
+                    </button>
+                </td>
+
+            </tr>
+            <tr ng-if="mmListModel.create.mmLocked == 'n' || !mmListModel.create.mmLocked">
+                <td><textarea ng-model="mmListModel.create.desc"></textarea> </td>
+                <td><input type="text" date-picker class="underline" ng-model="mmListModel.create.actDueDate"></td>
+                <td class="actionTd">
+                    <select name="attendees" chosen 
+                            persistent-create-option="true"
+                            ng-model="mmListModel.create.assignee"
+                            ng-options="v.id as v.name for v in mmListModel.empList"
+                            >
+                        <option value=""></option>
+                    </select>
+                </td>
+
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="pull-right" ng-if="mmListModel.isAuthorized.create && mmListModel.isAuthorized.edit">
+        <span class="button-checkbox">
+            <button type="button" class="btn colored-bg " data-color="primary" ng-if="mmListModel.showActionBtn" ng-click="mmListModel.createMeeting(mmListModel.create, 'send')">
+                Send <i class="fa fa-arrow-circle-right"></i></button>
+
+        </span>
+        <span class="button-checkbox">
+            <button type="button" class="btn colored-bg" data-color="primary" ng-disabled="mmListModel.step2.$invalid" ng-click="mmListModel.createMeeting(mmListModel.create, 'save')">
+                Save<i class="fa fa-arrow-circle-right"></i></button>
+        </span>
+    </div>
+</div>

@@ -1,0 +1,12 @@
+<div>
+    <div class="panel-heading">
+        <h2 class="text-center colored">
+            <strong>OOPS! You are not authorised</strong>
+        </h2>
+        <button class="close" ng-click="loginModel.closeModalDialog()" type="button">x</button>
+    </div>
+	<span class="colored" ng-show="invalid">
+        {{loginModel.msgText}}
+    </span>
+	<img id="image-gallery-image" class="img-responsive" ng-src="{{cartAppObj.noAccessImg}}">
+</div>

@@ -1,0 +1,54 @@
+<!--Home page/Landing page for Cartwheel
+  - This has the following components:
+     1. Top static menu (with toaster)
+	 2. Sliders (provides brief of company strengths)
+	 3. NewJoinees, Funadda Events and Birthday buddies
+	 4. Key apps of Cartwheel
+	 5. Departments in Assystem
+	 6. Stories / New events
+	 7. Cartwheel timeline
+	 8. Footer section
+blocks-->
+
+<div class="fadeOut pageloader" data-ng-init="homeModel.loadData()" data-ng-show="!(homeModel.status.loadComplete)">
+	<i class="fa fa-circle-o-notch fa-spin"></i>
+</div>
+	<div class="banner-container" id="top">
+		<!-- Home Page Slider -->
+		<div class="banner-wrapper">
+			<div ng-include="homeModel.template.slider"></div>
+		</div>
+		<!-- EDO Menu Bar -->
+		<div ng-include="homeModel.template.menu"></div>
+	</div>
+
+	<!-- Section: Cartwheel Applications -->
+	<div class="event-container col-md-11" id="event-container" style="margin:0px auto;float:none;" ng-if="homeModel.isLogged()">
+		<div ng-include="homeModel.template.events"></div>
+	</div>
+
+	<!-- Section: Cartwheel Applications -->
+	<div class="as-service visible-lg" id="applications">
+		<div ng-include="homeModel.template.apps"></div>
+	</div>
+
+	<!-- Section: Department -->
+	<div class="as-dept visible-lg" id="departments" ng-if="homeModel.isLogged()">
+		<div ng-include="homeModel.template.dept"></div>
+	</div>
+
+	<!-- Section: Stories -->
+	<div class="newsline visible-lg" id="stories" ng-if="homeModel.isLogged()">
+		<div ng-include="homeModel.template.stories"></div>
+	</div>
+
+	<!-- Section: Timeline Slider -->
+	<div class="timeline-wrapper visible-lg" id="timeline">
+		<div ng-include="homeModel.template.timeline"></div>
+	</div>
+
+	<!--Section: About cart page -->
+	<div id="about-cart" ng-include="homeModel.template.about"></div>
+
+	<!--Footer Controller for copyrights-->
+	<div class="hidden-xs" id="footer-cart" ng-include="homeModel.template.footer"></div>

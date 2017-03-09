@@ -1,0 +1,184 @@
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<div class="panel panel-default animated zoomIn" ng-class="{'panel-custom-fullScreen':panelFullScreen}">
+  <div class="panel-heading panel-custom panel-heading-custom2">
+    <h2 class="panel-title">HelpDesk Admin Area </h2>
+    <div class="box-icon pull-right">
+      <a class="btn btn-close btn-round btn-default" ng-click="panelFullScreen = !panelFullScreen"><i class="glyphicon" ng-class="{'glyphicon-resize-full':!panelFullScreen,'glyphicon-resize-small':panelFullScreen}" ></i></a>
+      <a class="btn btn-minimize btn-round btn-default"><i class="glyphicon" ng-class="{'glyphicon-chevron-up':!isOpened,'glyphicon-chevron-down':isOpened}" ng-click="isOpened = !isOpened"></i></a>
+      <a class="btn btn-close btn-round btn-default" ng-click="hdkAdminAreaModel.loadArea()"><i class="glyphicon glyphicon-refresh fa-spin-hover"></i></a>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+  <div class="panel-body " ng-show="!isOpened">
+    <div class="row">
+      <div class="col-md-6" ng-class="{'full-width':appModel.tableFullWidth}">
+        <div class="panel panel-default animated zoomIn" ng-class="{'panel-custom-fullScreen':panelFullScreen}" ng-controller="panelCtrl">
+          <div class="panel-heading panel-custom panel-heading-custom2">
+            <h2 class="panel-title">Area List </h2>
+            <div class="box-icon pull-right">
+              <a class="btn btn-close btn-round btn-default" ng-click="panelFullScreen = !panelFullScreen"><i class="glyphicon" ng-class="{'glyphicon-resize-full':!panelFullScreen,'glyphicon-resize-small':panelFullScreen}" ></i></a>
+              <a class="btn btn-minimize btn-round btn-default" ng-click="isOpened = !isOpened"><i class="glyphicon" ng-class="{'glyphicon-chevron-up':!isOpened,'glyphicon-chevron-down':isOpened}"></i></a>
+              <a class="btn btn-close btn-round btn-default" ng-click="hdkAdminAreaModel.loadList()"><i class="glyphicon glyphicon-refresh fa-spin-hover"></i></a>
+            </div>
+            <div class="clearfix"></div>
+          </div>
+          <div class="panel-body " ng-show="!isOpened" ng-controller="PagenationCtrl">
+            <div class="dataTables_wrapper no-footer" id="dynamic-table custom_table_wrapper">
+              <div id="dynamic-table custom_table_length" class="dataTables_length">
+                <label>Show
+                  <select class="" aria-controls="dynamic-table custom_table" ng-model="pageModel.itemsPerPage">
+                    <option value="10">10</option>
+                    <option value="25">25</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                  </select> entries</label>
+              </div>
+              <div class="dataTables_filter" id="dynamic-table custom_table_filter">
+                <label>Search:
+                  <input aria-controls="dynamic-table custom_table" ng-model="sortCard" ng-change="pageModel.numberOfPages()" type="search">
+                </label>
+              </div>
+              <table class="display table table-bordered table-striped" id="dynamic-table custom_table">
+                <thead>
+                  <tr>
+                    <th>*</th>
+                    <th>Category</th>
+                    <th>Location</th>
+                    <th>Manager</th>
+                    <th>Owner</th>
+                    <th>Comments</th>
+                    <th>Add Area</th>
+                  </tr>
+                </thead>
+                <tbody ng-repeat="area in hdkAdminAreaModel.areaList
+                                                                    | cardFilter:sortCard |pagination : pageModel.currentPage * pageModel.itemsPerPage |myLimitTo : pageModel.itemsPerPage track by $index" ng-init="pageModel.dataLengthCount(hdkAdminAreaModel.areaList)">
+                  <tr>
+                    <td ng-click="$index_val = !$index_val"><i class="fa colored pointer" ng-class="{'fa-plus-circle':!$index_val,'fa-minus-circle':$index_val}"></i></td>
+                    <td>{{area.depName}} </td>
+                    <td>{{area.locName}}</td>
+                    <td>{{area.mgrName}}</td>
+                    <td>{{area.ownName}}</td>
+                    <td>
+                      <div class="inner-div" title="{{area.cmt}}" ng-bind-html-unsafe="area.cmt"></div>
+                    </td>
+                    <td title="Add New Area">
+                      <button ng-if="list.createNew != 'No'" class="btn btn-xs colored-bg" data-toggle="modal" data-target=".bs-example-modal-lg" ng-click="hdkAdminAreaModel.editArea(area.depId, 'add', area.depName)" type="button">
+                        <i class="fa fa-plus-square"></i>
+                      </button>
+                    </td>
+                  </tr>
+                  <tr ng-repeat="list in area.sub" ng-show="$index_val">
+                    <td colspan="2" class="row-line"> {{$index + 1}}</td>
+                    <td>{{ list.catName}}</td>
+                    <td>{{ list.areaMgrName}}</td>
+                    <td>{{list.areaOwnName}}</td>
+                    <td colspan="2" class="row-line" title="Edit Category">
+                      <button ng-if="list.createNew != 'No'" class="btn btn-xs colored-bg" data-toggle="modal" data-target=".bs-example-modal-lg" ng-click="hdkAdminAreaModel.editArea(area.depId, 'edit', area.depName, list)" type="button">
+                        <i class="fa fa-edit"></i>
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="col-md-6">
+              <!--                                                    <pager total-items=4 ng-model="currentPage"></pager>-->
+              <button class="btn btn-xs" ng-click="pageModel.currentPage = pageModel.currentPage - 1" ng-disabled="pageModel.currentPage == 0">
+                <i class="fa fa-chevron-left"></i>
+              </button>
+              {{pageModel.currentPage + 1}}/{{pageModel.totalPage}}
+              <button class="btn btn-xs" ng-click="pageModel.currentPage = pageModel.currentPage + 1" ng-disabled="pageModel.currentPage >= pageModel.dataLength / pageModel.itemsPerPage - 1">
+                <i class="fa fa-chevron-right"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6" ng-if="hdkAdminAreaModel.response.departmentid" ng-class="{'full-width':appModel.tableFullWidth}">
+        <div class="panel panel-default animated zoomIn" ng-class="{'panel-custom-fullScreen':panelFullScreen}" ng-controller="panelCtrl">
+          <div class="panel-heading panel-custom panel-heading-custom2">
+            <h2 class="panel-title">{{hdkAdminAreaModel.title}} Area</h2>
+            <div class="box-icon pull-right">
+              <a class="btn btn-close btn-round btn-default" ng-click="panelFullScreen = !panelFullScreen"><i class="glyphicon" ng-class="{'glyphicon-resize-full':!panelFullScreen,'glyphicon-resize-small':panelFullScreen}"></i></a>
+              <a class="btn btn-minimize btn-round btn-default" ng-click="isOpened = !isOpened"><i class="glyphicon" ng-class="{'glyphicon-chevron-up':!isOpened,'glyphicon-chevron-down':isOpened}"></i></a>
+              <a class="btn btn-close btn-round btn-default" ng-click="hdkAdminAreaModel.loadDept()"><i class="glyphicon glyphicon-refresh fa-spin-hover"></i></a>
+            </div>
+            <div class="clearfix"></div>
+          </div>
+          <div class="panel-body " ng-show="!isOpened">
+            <form name="userForm" novalidate>
+              <div class="row">
+                <div class="col-md-1">
+                  <label class="Model-title">Category</label>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <input class="form-control underline" name="catname" ng-model="hdkAdminAreaModel.response.department" type="text" placeholder="category" disabled>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-10">
+                  <label class="Model-title">Area Name</label>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <input class="form-control underline" name="Area" ng-model="hdkAdminAreaModel.response.name" type="text" placeholder="Area" required>
+                    <div class="has-error pull-right" ng-show="(userForm.Area.$error.required && userForm.Area.$touched) || (userForm.$submitted && userForm.Area.$error.required)">Area is required </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="Model-title">Location </label>
+                    <select chosen persistent-create-option="true" ng-model="hdkAdminAreaModel.response.locid" placeholder-text-multiple="'Choose Location'" ng-options="location.id as location.locName for location in hdkAdminAreaModel.locations" name="location" required>
+                      <option value=""></option>
+                    </select>
+                    <div class="has-error" ng-show="(userForm.Loc.$error.required && userForm.Loc.$touched) || (userForm.$submitted && userForm.Loc.$error.required)">location is required</div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="Model-title">Manager </label>
+                    <select chosen persistent-create-option="true" ng-model="hdkAdminAreaModel.response.managerid" placeholder-text-multiple="'Choose Location'" ng-options="user.id as user.empName for user in hdkAdminAreaModel.users" name="location" required>
+                      <option value=""></option>
+                    </select>
+                    <div class="has-error" ng-show="(userForm.Manager.$error.required && userForm.Manager.$touched) || (userForm.$submitted && userForm.Manager.$error.required)">manager is required</div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="Model-title">Owner </label>
+                    <select chosen persistent-create-option="true" ng-model="hdkAdminAreaModel.response.ownerid" placeholder-text-multiple="'Choose Location'" ng-options="user.id as user.empName for user in hdkAdminAreaModel.users" name="location" required>
+                      <option value=""></option>
+                    </select>
+                    <div class="has-error" ng-show="(userForm.Owner.$error.required && userForm.Owner.$touched) || (userForm.$submitted && userForm.Owner.$error.required)">owner is required</div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="Model-title">SLA Days </label>
+                    <select chosen persistent-create-option="true" ng-model="hdkAdminAreaModel.response.sladays" placeholder-text-multiple="'Choose SLA Days'" ng-options="value.name as value.name for value in hdkAdminAreaModel.SLA" name="location" required>
+                      <option value=""></option>
+                    </select>
+                    <div class="has-error" ng-show="(userForm.Owner.$error.required && userForm.Owner.$touched) || (userForm.$submitted && userForm.Owner.$error.required)">owner is required</div>
+                  </div>
+                </div>
+
+                <div class="form-group form-actions pull-right">
+                  <button type="submit" class="btn colored-bg" ng-click="hdkAdminAreaModel.updateArea(hdkAdminAreaModel.response)">{{hdkAdminAreaModel.title}}<i class="fa fa-arrow-circle-right"></i></button>
+                </div>
+              </div>
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,16 @@
+<!--js/components/home.Stories-->
+<div class="inner news-wrapper">
+  <div class="title-top"></div>
+  <h2>Top Stories of Our Company</h2>
+  <carousel interval="cartapp.config.newsInterval">
+    <!-- Slider Image ng-repeat -->
+    <slide active="newss.active" ng-click="homeModel.showModalStories(news)" ng-repeat="news in homeModel.sectiondata.news">
+      <div class="news-para-wrapper">
+        <p class="news-para">{{news.story}}
+          <a class="text-muted pointer">...</a>
+        </p>
+      </div>
+
+    </slide>
+  </carousel>
+</div>

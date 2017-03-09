@@ -1,0 +1,18 @@
+<!--STO visible to only large device-->
+<div class="inner dept-wrapper">
+  <div class="title-top"></div>
+  <h2>Departments</h2>
+  <!--<div class="dept-box">-->
+  <div class="col-xs-4 departments fadeInDown pointer" ng-click="homeModel.showModalDept(dept)" ng-repeat="dept in homeModel.sectiondata.departments">
+
+    <!--<div class="dept-content-box">-->
+    <a class="dept-icon">
+      <i class="fa" ng-class="{{'dept.iconName'}}"></i>
+    </a>
+    <h3>{{dept.deptName}}</h3>
+    <p>{{dept.deptDesc}}</p>
+    <!--  </div>-->
+  </div>
+  <div class="clearfix"></div>
+</div>
+<!-- EDO dept-box -->

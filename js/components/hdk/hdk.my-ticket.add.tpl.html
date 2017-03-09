@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<div class="hd-add-form">
+    <form name="hdkMyTktModel.createForm" class="form-horizontal" ng-submit="hdkMyTktModel.creatTkt(hdkMyTktModel.newTkt)" novalidate="">
+
+
+        <div class="row">
+            <div class="form-group col-md-12">
+                <label class="col-sm-1 control-label Model-title">Title</label>
+                <input class="form-control underline" name="Title" ng-model="hdkMyTktModel.newTkt.title" type="text" pattern="" required>
+                <div class="has-error" ng-show="(hdkMyTktModel.createForm.Title.$error.required && hdkMyTktModel.createForm.Title.$touched) || (hdkMyTktModel.createForm.$submitted && hdkMyTktModel.createForm.Title.$error.required)">title is required</div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6" ng-class="{'full-width':appModel.tableFullWidth}">
+                <div class="form-group">
+                    <label class="col-sm-1 control-label Model-title">Category</label>
+                    <select name="Category"
+                            chosen
+                            persistent-create-option="true"
+                            ng-model="hdkMyTktModel.newTkt.categoryid"
+                            ng-options="option.catId as option.catName for option in hdkMyTktModel.tktDetails.category"
+                            required>
+                        <option value=""></option>
+                    </select>
+
+                    <div class="has-error" ng-show="(hdkMyTktModel.createForm.Category.$error.required && hdkMyTktModel.createForm.Category.$touched) || (hdkMyTktModel.createForm.$submitted && hdkMyTktModel.createForm.Category.$error.required)">category is required</div>
+
+                </div>
+            </div>
+            <div class="col-md-6" ng-class="{'full-width':appModel.tableFullWidth}">
+                <div class="form-group">
+                    <label class="col-sm-1 control-label Model-title area-title">Area </label>
+                    <select id="AreaSelect"
+                            name="Area"
+                            ng-disabled="!hdkMyTktModel.newTkt.categoryid"
+                            chosen
+                            persistent-create-option="true"
+                            ng-model="hdkMyTktModel.newTkt.areaid"
+                            ng-options="option.areaId as option.areaName for option in hdkMyTktModel.tktDetails.area| secondDropdown:hdkMyTktModel.newTkt.categoryid"
+                            required>
+                        <option value=""></option>
+                    </select>
+                    <div class="has-error" ng-show="(hdkMyTktModel.createForm.Area.$error.required && hdkMyTktModel.createForm.Area.$touched) || (hdkMyTktModel.createForm.$submitted && hdkMyTktModel.createForm.Area.$error.required)">area is required</div>
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <label class="col-sm-1 control-label Model-title">Comments</label>
+            <div class="form-group col-md-12">
+
+                <textarea class="form-border" ng-model="hdkMyTktModel.newTkt.description" ui-tinymce="appModel.tinymceOptions" name="cmt"></textarea>
+                <div class="has-error" ng-show="(hdkMyTktModel.createForm.$submitted && hdkMyTktModel.newTkt.description.length < 35)">comment is required</div>
+            </div>
+        </div>
+        <div class="text-right">
+            <button type="submit" class="btn colored-bg">Create</button>
+
+        </div>
+
+    </form>
+</div>

@@ -1,0 +1,212 @@
+<!--
+ * User Management List Page : um.list.tpl.html
+ * controller : um.list.controller.js : umListCtrl
+-->
+<style>
+  .testinfo {
+    width: 10px;
+  }
+
+  .button-align {
+    padding: 10px;
+  }
+
+  .approval {
+    background-color: #789637;
+  }
+
+  .reject {
+    background-color: #E12D2D;
+  }
+
+  .top-table {
+    margin-top: 10px;
+  }
+
+  .green {
+    color: green;
+  }
+
+  .blue {
+    color: blue;
+  }
+</style>
+
+
+
+
+<div class="panel panel-default panel-custom animated zoomIn" ng-class="{'panel-custom-fullScreen':panelFullScreen}">
+  <div class="panel-heading panel-custom panel-heading-custom2">
+    <h2 class="panel-title">TimeLog Approval</h2>
+    <div class="box-icon pull-right">
+      <a class="btn btn-close btn-round btn-default" ng-click="umListModel.umAdd()" title="Add New Employee"><i class="glyphicon glyphicon-plus "></i></a>
+      <a class="btn btn-close btn-round btn-default" ng-click="panelFullScreen = !panelFullScreen"><i class="glyphicon" ng-class="{'glyphicon-resize-full':!panelFullScreen,'glyphicon-resize-small':panelFullScreen}" ></i></a>
+      <a class="btn btn-minimize btn-round btn-default" ng-click="isOpened = !isOpened"><i class="glyphicon" ng-class="{'glyphicon-chevron-up':!isOpened,'glyphicon-chevron-down':isOpened}" ></i></a>
+      <a class="btn btn-close btn-round btn-default" ng-click="umListModel.umReload();"><i class="glyphicon glyphicon-refresh fa-spin-hover"></i></a>
+    </div>
+    <div class="clearfix "></div>
+  </div>
+  <div class="panel-body " ng-show="!isOpened ">
+    <div class="row">
+      <div class="">
+        <div class="col-sm-12">
+          <!--STO right  -->
+          <div class="col-sm-3" ng-class="{'full-width':appModel.tableFullWidth}">
+
+            <div class="panel panel-default animated zoomIn" ng-class="{'panel-custom-fullScreen':panelFullScreen}" ng-controller="panelCtrl">
+              <div class="panel-heading panel-custom panel-heading-custom2">
+                <h2 class="panel-title">ApprovalList
+                </h2>
+                <div class="box-icon pull-right">
+                  <a class="btn btn-close btn-round btn-default" ng-click="panelFullScreen = !panelFullScreen"><i class="glyphicon" ng-class="{'glyphicon-resize-full':!panelFullScreen,'glyphicon-resize-small':panelFullScreen}" ></i></a>
+                  <a class="btn btn-minimize btn-round btn-default"><i class="glyphicon" ng-class="{'glyphicon-chevron-up':!isOpened,'glyphicon-chevron-down':isOpened}" ng-click="isOpened = !isOpened"></i></a>
+
+                </div>
+                <div class="clearfix"></div>
+              </div>
+              <div class="panel-body " ng-show="!isOpened">
+                <div class="table-responsive um-table" style="overflow-x:auto ">
+                  <table class="display table table-bordered table-striped " datatable="ng " id="dynamic-table custom_table ">
+                    <thead>
+                      <tr>
+                        <th>Week</th>
+                        <th>Employee</th>
+                        <th style="width:80px;">Select</th>
+                      </tr>
+                    </thead>
+
+                    <tbody>
+                      <tr ng-repeat="list in approvalModel.approvalList">
+                        <td title="{{list.startDate}} {{list.endDate}}">{{list.startDate}} {{list.endDate}}</td>
+                        <td title="{{list.empName}}">{{list.empName}}</td>
+                        <th>
+                          <input name="checkbox" type="checkbox" ng-click="approvalModel.editData(list)" ng-checked="approvalModel.weekRecords.indexOf(list) > -1" value="{{list.id}}" type="checkbox">
+                        </th>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--ENO right  -->
+          <!--STO left  -->
+
+          <div class="col-sm-9" ng-class="{'full-width':appModel.tableFullWidth}">
+            <div class="panel panel-default animated zoomIn" ng-class="{'panel-custom-fullScreen':panelFullScreen}">
+              <div class="panel-heading panel-custom panel-heading-custom2">
+                <div class="box-icon pull-right">
+                  <a class="btn btn-close btn-round btn-default" ng-click="panelFullScreen = !panelFullScreen"><i class="glyphicon" ng-class="{'glyphicon-resize-full':!panelFullScreen,'glyphicon-resize-small':panelFullScreen}" ></i></a>
+                  <a class="btn btn-minimize btn-round btn-default"><i class="glyphicon" ng-class="{'glyphicon-chevron-up':!approvalModel.tableShow,'glyphicon-chevron-down':approvalModel.tableShow}" ng-click="approvalModel.tableShow = !approvalModel.tableShow"></i></a>
+                </div>
+                <div class="clearfix"></div>
+              </div>
+              <div class="panel-body" ng-show="approvalModel.tableShow">
+
+                <div>
+                  <!-- ng-show="approvalModel.showInformation" -->
+                  <div ng-repeat="weekInfo in approvalModel.weekRecords">
+                    <div class="col-sm-12" ng-class="{'full-width':appModel.tableFullWidth}">
+                      <div class="panel panel-default animated zoomIn">
+
+                        <div ng-class="{'approval' :weekInfo.sta == 'A' , 'reject' :weekInfo.sta == 'R'}">
+                          <h2 class="panel-title">Week Info {{weekInfo.startDate}} - {{weekInfo.endDate}} - {{weekInfo.empName}}</h2>
+                          <div class="box-icon pull-right">
+                            <a class="btn btn-minimize btn-round btn-default"><i class="glyphicon" ng-class="{'glyphicon-chevron-up':!weekInfo.tableShow,'glyphicon-chevron-down':weekInfo.tableShow}" ng-click="weekInfo.tableShow = !weekInfo.tableShow"></i></a>
+                          </div>
+                          <div class="clearfix"></div>
+                        </div>
+                        <!-- <div class="panel-body" ng-show="!isOpened"> -->
+                        <div ng-show="weekInfo.tableShow">
+                          <table class="table  top-table table-responsive">
+                            <thead>
+                              <tr>
+                                <th>#</th>
+                                <th>Project</th>
+                                <th>Phase</th>
+                                <th>Activity</th>
+                                <th>Task</th>
+                                <th>Mon</th>
+                                <th>Tus</th>
+                                <th>Wed</th>
+                                <th>Thu</th>
+                                <th>Fri</th>
+                                <th>Sat</th>
+                                <th>Sun</th>
+                                <th>Total</th>
+                                <th>Comments</th>
+                                <th>Status</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr ng-repeat="weekRec in weekInfo.weekRecord" ng-class="{'approval': weekRec.cmtData.usrStatus=='A', 'reject': weekRec.cmtData.usrStatus=='R'}">
+                                <td>{{$index +1}}</td>
+                                <td title="{{weekRec.prjName}}">{{weekRec.phatData[0]}}</td>
+                                <td title="{{weekRec.phsName}}">{{weekRec.phatData[1]}}</td>
+                                <td title="{{weekRec.actName}}">{{weekRec.phatData[2]}}</td>
+                                <td title="{{weekRec.tskName}}">{{weekRec.phatData[3]}}</td>
+                                <td>{{weekRec.weekReportHours[0]}}</td>
+                                <td>{{weekRec.weekReportHours[1]}}</td>
+                                <td>{{weekRec.weekReportHours[2]}}</td>
+                                <td>{{weekRec.weekReportHours[3]}}</td>
+                                <td>{{weekRec.weekReportHours[4]}}</td>
+                                <td>{{weekRec.weekReportHours[5]}}</td>
+                                <td>{{weekRec.weekReportHours[6]}}</td>
+                                <td>{{weekRec.cmtData.sHours}}</td>
+                                <td title="{{weekRec.cmtData.cmtTxt}}">{{weekRec.cmtData.cmtTxt}}</td>
+                                <td ng-if="weekRec.cmtData.usrStatus=='A'">Approved </td>
+                                <td ng-if="weekRec.cmtData.usrStatus=='R'">Rejected </td>
+                              </tr>
+                            </tbody>
+                          </table>
+
+                          <form class="form-horizontal col-md-12" novalidate="" ng-show="!weekInfo.status">
+                            <div class="panel panel-default">
+                              <div class="panel-body">
+                                <div class="pannel col-md-12">
+                                  <div class="col-sm-3">
+
+                                    <label class="radio">
+                                      <input type="radio" name="status" ng-model="weekInfo.sta" value="A"> Approve
+                                    </label>
+
+                                    <label class="radio">
+                                      <input type="radio" name="status" ng-model="weekInfo.sta" value="R"> Reject
+                                    </label>
+
+                                  </div>
+
+                                  <div class="col-sm-9">
+                                    <label>Comments</label>
+                                    <textarea class="form-border" ng-model="weekInfo.desc" ui-tinymce="appModel.tinymceOptions" name="cmt"></textarea>
+                                  </div>
+
+                                </div>
+                              </div>
+                            </div>
+                          </form>
+
+                        </div>
+                      </div>
+                    </div>
+
+                    <!--comments section  -->
+
+                  </div>
+                </div>
+                <div class="pull-right button-align">
+                  <button type="submit" class="btn colored-bg" ng-click="approvalModel.update()">
+                    Submit <i class="fa fa-arrow-circle-right"></i></button>
+                </div>
+              </div>
+
+            </div>
+            <!--ENO left  -->
+          </div>
+          <!--check data  -->
+          <!--ENO left  -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
